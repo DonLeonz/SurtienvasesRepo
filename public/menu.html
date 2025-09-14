@@ -1,122 +1,794 @@
 <!DOCTYPE html>
 <html lang="es">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Coffee Shop SPA</title>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Chocolate - Coffee Shop</title>
 
-    <!-- UIKit -->
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/uikit@3.17.10/dist/css/uikit.min.css" />
-    <script src="https://cdn.jsdelivr.net/npm/uikit@3.17.10/dist/js/uikit.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/uikit@3.17.10/dist/js/uikit-icons.min.js"></script>
+    <!-- UIKit CSS -->
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/uikit/3.19.4/css/uikit.min.css"
+    />
 
-    <!-- Estilos propios -->
-    <style>
-        body {
-            margin: 0;
-            background: #1e1e1e;
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-        }
-        .first-child-adjustment:first-child {
-            margin-top: 0 !important;
-        }
-    </style>
-</head>
-<body>
+    <!-- Custom CSS Files - USANDO TUS ESTILOS EXACTOS -->
+    <link rel="stylesheet" href="../assets/css/index.css" />
+    <link rel="stylesheet" href="../assets/css/blog.css" />
 
-    <!-- ========== HEADER & NAV ========== -->
-    <header>
-        <nav class="uk-navbar-container" style="background-color: #2f2c2c;" uk-navbar>
+    <!-- UIKit JS -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/uikit/3.19.4/js/uikit.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/uikit/3.19.4/js/uikit-icons.min.js"></script>
+  </head>
+  <body>
+    <!-- Navbar - EXACTO AL ORIGINAL -->
+    <div
+      uk-sticky="sel-target: .uk-navbar-container; cls-active: uk-navbar-sticky"
+    >
+      <nav class="uk-navbar-container uk-navbar-transparent">
+        <div class="uk-container uk-width-1-1 background-opaque">
+          <div uk-navbar="mode: click" class="uk-flex">
+            <!-- Navbar Left -->
             <div class="uk-navbar-left">
-                <a class="uk-navbar-item uk-logo" href="index.html">
-                    <img src="assets/img/coffe-user-logo.svg" alt="Logo" style="height:40px;">
+              <div class="uk-navbar-item uk-light">
+                <a class="uk-flex uk-link-heading" href="/">
+                  <img src="../assets/img/coffe-user-logo.svg" alt="Logo" />
+                  <button
+                    class="uk-margin-left uk-text-capitalize uk-text-left uk-text-small uk-button uk-button-link"
+                  >
+                    <strong
+                      >Chocolate<br /><span id="current-user"
+                        >Invitado</span
+                      ></strong
+                    >
+                  </button>
                 </a>
-                <ul class="uk-navbar-nav">
-                    <li><a href="index.html">Inicio</a></li>
-                    <li><a href="nosotros.html">Nosotros</a></li>
-                    <li><a href="recomendado.html">Recomendado</a></li>
-                    <li><a href="contacto.html">Contáctanos</a></li>
-                </ul>
+              </div>
             </div>
-        </nav>
-    </header>
 
-    <!-- ========== CONTENIDO PRINCIPAL ========== -->
-    <main id="contenido">
-        <section id="menu" class="uk-section uk-section-muted">
-  <div class="uk-container">
-    <h2 class="uk-heading-line uk-text-center"><span>Menú de Cafés</span></h2>
+            <!-- Navbar Center -->
+            <div class="uk-navbar-center uk-visible@l">
+              <div class="uk-navbar-item uk-dark">
+                <a
+                  class="uk-button uk-button-secondary uk-border-rounded"
+                  href="api.html"
+                >
+                  API
+                </a>
+              </div>
+              <div class="uk-navbar-item uk-light">
+                <a
+                  class="uk-text-capitalize uk-button uk-button-text uk-light"
+                  href="menu.html"
+                >
+                  Menú
+                </a>
+              </div>
+              <div class="uk-navbar-item uk-light">
+                <a
+                  class="uk-text-capitalize uk-button uk-button-text"
+                  href="recomendado.html"
+                >
+                  Recomendado
+                </a>
+              </div>
+              <div class="uk-navbar-item uk-light">
+                <a
+                  class="uk-text-capitalize uk-button uk-button-text uk-light"
+                  href="blog.html"
+                >
+                  Blog
+                </a>
+              </div>
+              <div class="uk-navbar-item uk-light">
+                <a
+                  class="uk-text-capitalize uk-button uk-button-text uk-light"
+                  href="nosotros.html"
+                >
+                  Nosotros
+                </a>
+              </div>
+            </div>
 
-    <div class="uk-child-width-1-3@m uk-grid-small uk-grid-match" uk-grid>
-      <!-- Item Espresso Sencillo -->
-      <div>
-        <div class="uk-card uk-card-default uk-card-hover uk-card-body">
-          <img src="assets/img/menu/espresso.jpg" alt="Espresso" class="uk-border-rounded">
-          <h3 class="uk-card-title">Espresso Sencillo - $5.200</h3>
-          <p>La esencia pura del café en su forma más concentrada.</p>
-          <ul class="uk-list uk-list-bullet">
-            <li>Origen: Colombia</li>
-            <li>Tostado Medio</li>
-            <li>Perfil: Fuerte y Audaz</li>
-          </ul>
-          <p><strong>Recomendación:</strong> Perfecto para empezar el día con energía.</p>
+            <!-- Navbar Right -->
+            <div class="uk-navbar-right uk-visible@l">
+              <div class="uk-navbar-item uk-light">
+                <button
+                  id="auth-btn"
+                  class="uk-text-capitalize uk-text-normal uk-button uk-button-secondary uk-border-rounded"
+                  onclick="toggleAuth()"
+                >
+                  Iniciar Sesión
+                </button>
+              </div>
+              <div class="uk-navbar-item uk-dark">
+                <a
+                  class="uk-text-capitalize uk-button uk-button-secondary uk-border-rounded"
+                  href="#"
+                >
+                  Registrarse
+                </a>
+              </div>
+            </div>
+
+            <!-- Mobile Menu Toggle -->
+            <div class="uk-hidden@l uk-navbar-right">
+              <a
+                class="uk-navbar-toggle"
+                uk-navbar-toggle-icon="true"
+                uk-toggle="target: #burger-menu"
+              ></a>
+
+              <div id="burger-menu" uk-offcanvas="overlay: true; flip: true">
+                <div class="uk-offcanvas-bar">
+                  <button
+                    class="uk-offcanvas-close"
+                    type="button"
+                    uk-close="true"
+                  ></button>
+
+                  <div
+                    class="uk-flex uk-flex-column uk-grid-row-small uk-margin-medium-top"
+                    uk-grid="true"
+                  >
+                    <div class="uk-flex-left">
+                      <a
+                        class="uk-button uk-button-secondary uk-border-rounded"
+                        href="api.html"
+                      >
+                        <strong>API</strong>
+                      </a>
+                    </div>
+                    <div class="uk-flex-left uk-margin-small-left">
+                      <a
+                        class="uk-text-capitalize uk-button uk-button-text uk-light"
+                        href="menu.html"
+                      >
+                        Menú
+                      </a>
+                    </div>
+                    <div class="uk-flex-left uk-margin-small-left">
+                      <a
+                        class="uk-text-capitalize uk-button uk-button-text"
+                        href="recomendado.html"
+                      >
+                        Recomendado
+                      </a>
+                    </div>
+                    <div class="uk-flex-left uk-margin-small-left">
+                      <a
+                        class="uk-text-capitalize uk-button uk-button-text uk-light"
+                        href="blog.html"
+                      >
+                        Blog
+                      </a>
+                    </div>
+                    <div class="uk-flex-left uk-margin-small-left">
+                      <a
+                        class="uk-text-capitalize uk-button uk-button-text uk-light"
+                        href="nosotros.html"
+                      >
+                        Nosotros
+                      </a>
+                    </div>
+                    <hr class="uk-divider-icon" />
+                    <div class="uk-light">
+                      <button
+                        id="mobile-auth-btn"
+                        class="uk-text-capitalize uk-text-normal uk-button uk-button-secondary uk-border-rounded uk-width-1-1"
+                        onclick="toggleAuth()"
+                      >
+                        Iniciar Sesión
+                      </button>
+                    </div>
+                    <div class="uk-dark">
+                      <a
+                        class="uk-text-capitalize uk-text-normal uk-button uk-button-secondary uk-border-rounded uk-width-1-1"
+                        href="#"
+                      >
+                        Registrarse
+                      </a>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
         </div>
-      </div>
+      </nav>
+    </div>
 
-      <!-- Item Americano -->
-      <div>
-        <div class="uk-card uk-card-default uk-card-hover uk-card-body">
-          <img src="assets/img/menu/americano.jpg" alt="Americano" class="uk-border-rounded">
-          <h3 class="uk-card-title">Americano - $6.000</h3>
-          <p>Café suave y diluido para quienes prefieren un sabor menos intenso.</p>
-          <ul class="uk-list uk-list-bullet">
-            <li>Origen: Colombia</li>
-            <li>Tostado Medio</li>
-            <li>Perfil: Suave y Balanceado</li>
-          </ul>
-          <p><strong>Recomendación:</strong> Ideal para una conversación larga.</p>
-        </div>
-      </div>
+    <!-- Login Modal - EXACTO AL ORIGINAL -->
+    <div id="login-modal" class="uk-modal blog-login-display">
+      <div class="uk-modal-dialog uk-modal-body blog-login-container">
+        <button
+          class="uk-modal-close-default color-text-black"
+          type="button"
+          onclick="closeModal()"
+          uk-close
+        ></button>
+        <h2 class="uk-modal-title color-text-black" id="modal-title">
+          Iniciar Sesión
+        </h2>
 
-      <!-- Item Cappuccino -->
-      <div>
-        <div class="uk-card uk-card-default uk-card-hover uk-card-body">
-          <img src="assets/img/menu/cappuccino.jpg" alt="Cappuccino" class="uk-border-rounded">
-          <h3 class="uk-card-title">Cappuccino - $9.000</h3>
-          <p>Espresso, leche vaporizada y espuma equilibrados.</p>
-          <ul class="uk-list uk-list-bullet">
-            <li>Origen: Italia</li>
-            <li>Tostado Medio</li>
-            <li>Perfil: Saborizado y Espumoso</li>
-          </ul>
-          <p><strong>Recomendación:</strong> Clásico para cualquier hora del día.</p>
-        </div>
+        <form class="uk-form-stacked" onsubmit="handleAuth(event)">
+          <div class="uk-margin">
+            <label class="uk-form-label color-text-black">Usuario</label>
+            <input
+              id="modal-username"
+              class="uk-input blog-login-input"
+              type="text"
+              required
+            />
+          </div>
+          <div class="uk-margin">
+            <label class="uk-form-label color-text-black">Contraseña</label>
+            <input
+              id="modal-password"
+              class="uk-input blog-login-input"
+              type="password"
+              required
+            />
+          </div>
+
+          <div class="uk-flex uk-flex-between">
+            <button
+              class="uk-button uk-button-primary blog-container-round"
+              type="submit"
+              id="auth-submit-btn"
+            >
+              Iniciar Sesión
+            </button>
+            <button
+              class="uk-button uk-button-link"
+              type="button"
+              onclick="toggleAuthMode()"
+            >
+              ¿No tienes cuenta?
+            </button>
+          </div>
+        </form>
       </div>
     </div>
-  </div>
-</section>
 
+    <!-- Main Content -->
+    <main
+      class="first-child-adjustment uk-section uk-background-secondary uk-light uk-padding-small"
+      style="background: linear-gradient(to bottom, #1e1e1e, #2c2c2c)"
+    >
+      <div class="uk-container uk-container-xlarge uk-padding-small uk-light">
+        <!-- Encabezado -->
+        <div class="uk-text-center uk-margin-large-bottom">
+          <h2
+            class="uk-heading-small uk-text-uppercase"
+            style="letter-spacing: 3px; font-weight: 300; margin-bottom: 10px"
+          >
+            <span
+              class="uk-display-inline-block uk-padding-small"
+              style="
+                border-bottom: 2px solid rgba(212, 167, 98, 0.7);
+                color: #f5f5f5;
+              "
+            >
+              Nuestro Menú
+            </span>
+          </h2>
+          <p class="uk-text-lead" style="color: #d4a762">
+            Descubre la excelencia en cada taza
+          </p>
+        </div>
+
+        <!-- Grid de productos -->
+        <div
+          id="coffee-menu"
+          class="uk-grid-small uk-child-width-1-3@m uk-child-width-1-2@s uk-child-width-1-1@s"
+          uk-grid
+          uk-height-match="target: > div > .uk-card"
+          style="margin-top: 20px"
+        >
+          <!-- Los productos se insertarán aquí dinámicamente -->
+        </div>
+      </div>
     </main>
 
-    <!-- ========== FOOTER ========== -->
-    <footer class="uk-section uk-section-small" style="background-color: #2f2c2c; width: 100%; z-index: 10;">
-        <div class="uk-container">
-            <div class="uk-flex uk-flex-between uk-flex-middle uk-grid-small" uk-grid>
-                <div>
-                    <img src="assets/img/coffe-user-logo.svg" alt="Logo" />
+    <script>
+      // Datos de café - EXACTOS AL coffeeItems.jsx
+      const coffeeItems = [
+        {
+          id: 1,
+          title: "Espresso Sencillo",
+          price: "$5.200",
+          origin: "Colombia",
+          roastLevel: "Tostado Medio",
+          flavorProfile: "Fuerte y Audaz",
+          description: "La esencia pura del café en su forma más concentrada.",
+          img: "../assets/img/menu/espresso.jpg",
+          isPopular: false,
+          recommendation:
+            "Perfecto para empezar el día con energía. Nuestro espresso premium tiene un balance perfecto entre acidez y cuerpo.",
+          benefits: [
+            "Despierta tus sentidos",
+            "Alto contenido de antioxidantes",
+            "Aroma intenso",
+          ],
+          ingredients: ["Café espresso", "Agua caliente"],
+          preparation:
+            "Preparado con una máquina de espresso aplicando presión para extraer el café concentrado.",
+        },
+        {
+          id: 2,
+          title: "Americano",
+          price: "$6.000",
+          origin: "Colombia",
+          roastLevel: "Tostado Medio",
+          flavorProfile: "Suave y Balanceado",
+          description:
+            "Café suave y diluido para quienes prefieren un sabor menos intenso.",
+          img: "../assets/img/menu/americano.jpg",
+          isPopular: false,
+          recommendation:
+            "Una opción ligera y prolongada ideal para una conversación larga.",
+          benefits: [
+            "Hidratación prolongada",
+            "Bajo en calorías",
+            "Sabor suave",
+          ],
+          ingredients: ["Café espresso", "Agua caliente adicional"],
+          preparation: "Agrega agua caliente al espresso para diluirlo.",
+        },
+        {
+          id: 3,
+          title: "Macchiato",
+          price: "$7.000",
+          origin: "Italia",
+          roastLevel: "Tostado Medio",
+          flavorProfile: "Cremoso y Rico",
+          description: "Espresso con un toque de leche vaporizada.",
+          img: "../assets/img/menu/macchiato.jpg",
+          isPopular: false,
+          recommendation:
+            "Ideal si te gusta el espresso con un pequeño giro cremoso.",
+          benefits: [
+            "Equilibrio entre fuerte y suave",
+            "Menor acidez",
+            "Aroma suave",
+          ],
+          ingredients: ["Espresso", "Espuma de leche"],
+          preparation:
+            "Servido con una pequeña cantidad de leche vaporizada sobre el espresso.",
+        },
+        {
+          id: 4,
+          title: "Espresso Doble",
+          price: "$6.500",
+          origin: "Colombia",
+          roastLevel: "Tostado Oscuro",
+          flavorProfile: "Intenso y Robusto",
+          description: "El doble de energía en una taza intensa.",
+          img: "../assets/img/menu/expresso-doble.jpg",
+          isPopular: true,
+          recommendation: "Para días exigentes o amantes del sabor fuerte.",
+          benefits: [
+            "Energía prolongada",
+            "Sabor intenso",
+            "Alta concentración de antioxidantes",
+          ],
+          ingredients: ["Doble dosis de café molido", "Agua"],
+          preparation:
+            "Mismo proceso que un espresso simple, pero con el doble de café.",
+        },
+        {
+          id: 5,
+          title: "Campesino",
+          price: "$8.000",
+          origin: "Colombia",
+          roastLevel: "Tostado Medio",
+          flavorProfile: "Especiado y Dulce",
+          description: "Receta tradicional colombiana con panela y canela.",
+          img: "../assets/img/menu/campesino.jpg",
+          isPopular: false,
+          recommendation: "Un sabor típico y reconfortante de las montañas.",
+          benefits: [
+            "Energía natural",
+            "Dulzor tradicional",
+            "Mejora la digestión",
+          ],
+          ingredients: ["Café filtrado", "Panela", "Canela"],
+          preparation:
+            "El café se prepara con panela derretida y un toque de canela.",
+        },
+        {
+          id: 6,
+          title: "Irlandés",
+          price: "$12.000",
+          origin: "Irlanda",
+          roastLevel: "Tostado Oscuro",
+          flavorProfile: "Alcohólico y Cremoso",
+          description: "Café con un toque de whisky y crema batida.",
+          img: "../assets/img/menu/irlandes.jpg",
+          isPopular: true,
+          recommendation:
+            "Perfecto para las tardes frías o para cerrar el día.",
+          benefits: ["Relajante", "Sabor profundo", "Textura cremosa"],
+          ingredients: ["Café fuerte", "Whisky", "Crema batida"],
+          preparation:
+            "Se mezcla el café con whisky y se cubre con crema batida.",
+        },
+        {
+          id: 7,
+          title: "Bombón",
+          price: "$9.000",
+          origin: "España",
+          roastLevel: "Tostado Medio",
+          flavorProfile: "Dulce y Cremoso",
+          description: "Café con leche condensada. Dulce y cremoso.",
+          img: "../assets/img/menu/bombon.jpg",
+          isPopular: false,
+          recommendation: "Un postre en forma de café.",
+          benefits: [
+            "Alto en energía",
+            "Textura sedosa",
+            "Ideal como digestivo",
+          ],
+          ingredients: ["Café espresso", "Leche condensada"],
+          preparation: "Se sirve el café sobre una base de leche condensada.",
+        },
+        {
+          id: 8,
+          title: "Carajillo",
+          price: "$10.000",
+          origin: "España",
+          roastLevel: "Tostado Oscuro",
+          flavorProfile: "Fuerte y con Alcohol",
+          description: "Mezcla de café y licor fuerte, usualmente brandy.",
+          img: "../assets/img/menu/carajillo.jpg",
+          isPopular: false,
+          recommendation:
+            "Perfecto para cerrar una buena comida con intensidad.",
+          benefits: [
+            "Digestivo",
+            "Combina energía y relajación",
+            "Sabor único",
+          ],
+          ingredients: ["Café espresso", "Brandy o licor"],
+          preparation:
+            "Se mezcla el café caliente con el licor justo antes de servir.",
+        },
+        {
+          id: 9,
+          title: "Cappuccino",
+          price: "$9.000",
+          origin: "Italia",
+          roastLevel: "Tostado Medio",
+          flavorProfile: "Saborizado y Espumoso",
+          description: "Espresso, leche vaporizada y espuma equilibrados.",
+          img: "../assets/img/menu/cappuccino.jpg",
+          isPopular: true,
+          recommendation: "La opción clásica para cualquier hora del día.",
+          benefits: [
+            "Espuma suave",
+            "Sabor equilibrado",
+            "Ideal para acompañar postres",
+          ],
+          ingredients: ["Espresso", "Leche vaporizada", "Espuma de leche"],
+          preparation: "Se sirve con partes iguales de café, leche y espuma.",
+        },
+        {
+          id: 10,
+          title: "Mocaccino",
+          price: "$15.000",
+          origin: "Mezcla Especial",
+          roastLevel: "Tostado Medio",
+          flavorProfile: "Chocolateado y Dulce",
+          description: "El matrimonio perfecto entre café y chocolate.",
+          img: "../assets/img/menu/mocaccino.jpg",
+          isPopular: true,
+          recommendation:
+            "Nuestro dulce recomendado para hoy. La combinación perfecta para los amantes del chocolate.",
+          benefits: [
+            "Balance perfecto café-chocolate",
+            "Textura cremosa",
+            "Endulzado natural",
+          ],
+          ingredients: ["Café espresso", "Chocolate", "Leche vaporizada"],
+          preparation:
+            "Se mezcla el café con chocolate y se añade leche vaporizada.",
+        },
+      ];
+
+      // Función para renderizar el menú - ESTRUCTURA EXACTA AL JSX
+      function renderMenu() {
+        const container = document.getElementById("coffee-menu");
+        container.innerHTML = "";
+
+        coffeeItems.forEach((item, index) => {
+          const menuItem = document.createElement("div");
+          menuItem.innerHTML = `
+            <div class="uk-card uk-card-default uk-card-hover uk-flex uk-flex-column uk-height-1-1"
+                 style="background-color: #2c2c2c; border: 1px solid rgba(212, 167, 98, 0.1); border-radius: 8px; padding: 15px;">
+
+                <div class="uk-flex uk-flex-middle uk-flex-wrap uk-child-width-expand@m uk-grid-small" uk-grid>
+                    <!-- Imagen -->
+                    <div class="uk-flex uk-flex-center uk-width-1-3@s uk-width-1-4@m">
+                        <div class="uk-border-circle uk-overflow-hidden"
+                             style="width: 100px; height: 100px; min-width: 80px; border: 2px solid #d4a762; box-shadow: 0 2px 4px rgba(0,0,0,0.2);">
+                            <img src="${item.img}" alt="${
+            item.title
+          }" class="uk-cover"
+                                 style="width: 100%; height: 100%; object-fit: cover; object-position: center;" />
+                        </div>
+                    </div>
+
+                    <!-- Información básica -->
+                    <div style="flex-grow: 1;">
+                        <div class="uk-flex uk-flex-between uk-flex-middle">
+                            <h3 class="uk-card-title uk-margin-remove-bottom"
+                                style="color: #f5f5f5; font-size: 1.2rem;">
+                                ${item.title}
+                            </h3>
+                            <span class="uk-label"
+                                  style="background-color: rgba(212, 167, 98, 0.9); color: #2c1608; padding: 3px 10px; border-radius: 12px; font-weight: bold; font-size: 0.9rem;">
+                                ${item.price}
+                            </span>
+                        </div>
+
+                        <div class="uk-margin-small-top">
+                            <span class="uk-badge"
+                                  style="background-color: rgba(94, 43, 22, 0.7); color: #f5f5f5; font-size: 0.7rem; padding: 2px 8px; margin-right: 8px;">
+                                ${item.origin}
+                            </span>
+                            ${
+                              item.isPopular
+                                ? `
+                                <span class="uk-badge"
+                                      style="background-color: rgba(165, 42, 42, 0.7); color: white; font-size: 0.7rem; padding: 2px 8px;">
+                                    ★ Bestseller
+                                </span>
+                            `
+                                : ""
+                            }
+                        </div>
+
+                        <p class="uk-margin-small-top"
+                           style="color: rgba(245, 245, 245, 0.8); font-size: 0.85rem; line-height: 1.5;">
+                            ${item.description}
+                        </p>
+                    </div>
                 </div>
-                <div class="uk-text-top">
-                    <span class="uk-text-small uk-text-muted">Síguenos</span>
-                    <div class="uk-margin-small-top">
-                        <a href="https://www.x.com" class="uk-icon-button" uk-icon="icon: x" target="_blank"></a>
-                        <a href="https://www.instagram.com" class="uk-icon-button uk-margin-small-left" uk-icon="icon: instagram" target="_blank"></a>
-                        <a href="https://www.youtube.com" class="uk-icon-button uk-margin-small-left" uk-icon="icon: youtube" target="_blank"></a>
-                        <a href="https://www.linkedin.com" class="uk-icon-button uk-margin-small-left" uk-icon="icon: linkedin" target="_blank"></a>
+
+                <!-- Botón para abrir modal -->
+                <div class="uk-text-center uk-padding-small">
+                    <button class="uk-button uk-button-default"
+                            style="color: #d4a762; background-color: transparent; border: 1px solid rgba(212, 167, 98, 0.5); border-radius: 6px; padding: 3px 15px; font-size: 0.85rem; transition: all 0.3s;"
+                            onclick="openMenuModal(${index})">
+                        Ver más detalles
+                    </button>
+                </div>
+            </div>
+
+            <!-- Modal para este producto - ESTRUCTURA EXACTA AL JSX -->
+            <div id="modal-${index}" class="uk-modal-container uk-modal" uk-modal>
+                <div class="uk-modal-dialog uk-modal-body uk-light"
+                     style="background-color: #2c2c2c; border-radius: 8px;">
+
+                    <button class="uk-modal-close-default" type="button" uk-close style="color: #d4a762;"></button>
+
+                    <div class="uk-grid-collapse" uk-grid>
+                        <!-- Columna de imagen en modal -->
+                        <div class="uk-width-1-3@m uk-width-1-1@s">
+                            <div class="uk-padding uk-flex uk-flex-center">
+                                <div class="uk-border-circle uk-overflow-hidden"
+                                     style="width: 300px; height: 300px; border: 3px solid #d4a762; box-shadow: 0 4px 8px rgba(0,0,0,0.3);">
+                                    <img src="${item.img}" alt="${
+            item.title
+          }" class="uk-cover"
+                                         style="width: 100%; height: 100%; object-fit: cover; object-position: center;" />
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Columna de contenido en modal -->
+                        <div class="uk-width-2-3@m uk-width-1-1@s uk-padding-large">
+                            <h2 class="uk-modal-title"
+                                style="color: #d4a762; border-bottom: 1px solid rgba(212, 167, 98, 0.3); padding-bottom: 10px;">
+                                ${item.title}
+                            </h2>
+
+                            <div class="uk-margin-medium-top">
+                                <h3 style="color: #f5f5f5; font-size: 1.2rem; margin-bottom: 15px;">
+                                    Ingredientes:
+                                </h3>
+                                <ul class="uk-list uk-list-bullet" style="color: rgba(245, 245, 245, 0.8);">
+                                    ${(item.ingredients || [])
+                                      .map((ing) => `<li>${ing}</li>`)
+                                      .join("")}
+                                </ul>
+                            </div>
+
+                            <div class="uk-margin-medium-top">
+                                <h3 style="color: #f5f5f5; font-size: 1.2rem; margin-bottom: 15px;">
+                                    Preparación:
+                                </h3>
+                                <p style="color: rgba(245, 245, 245, 0.8); line-height: 1.6;">
+                                    ${
+                                      item.preparation ||
+                                      "Información no disponible."
+                                    }
+                                </p>
+                            </div>
+
+                            <div class="uk-margin-medium-top">
+                                <div class="uk-grid-small" uk-grid>
+                                    <div>
+                                        <span class="uk-label"
+                                              style="background-color: rgba(212, 167, 98, 0.15); color: #d4a762; font-size: 0.9rem; padding: 5px 10px;">
+                                            Tostado: ${item.roastLevel}
+                                        </span>
+                                    </div>
+                                    <div>
+                                        <span class="uk-label"
+                                              style="background-color: rgba(212, 167, 98, 0.15); color: #d4a762; font-size: 0.9rem; padding: 5px 10px;">
+                                            Sabor: ${item.flavorProfile}
+                                        </span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
+        `;
+          container.appendChild(menuItem);
+        });
+      }
+
+      // Función para abrir modal del menú
+      function openMenuModal(index) {
+        UIkit.modal(document.getElementById(`modal-${index}`)).show();
+      }
+
+      // Event Listeners
+      document.addEventListener("DOMContentLoaded", function () {
+        renderMenu();
+      });
+    </script>
+
+    <!-- Footer - EXACTO AL ORIGINAL -->
+    <footer
+      class="uk-section uk-section-small"
+      style="background-color: #2f2c2c; width: 100%; z-index: 10"
+    >
+      <div class="uk-container">
+        <div
+          class="uk-flex uk-flex-between uk-flex-middle uk-grid-small"
+          uk-grid=""
+        >
+          <div>
+            <img src="../assets/img/coffe-user-logo.svg" alt="Logo" />
+          </div>
+          <div class="uk-text-top">
+            <span class="uk-text-small uk-text-muted">Síguenos</span>
+            <div class="uk-margin-small-top">
+              <a
+                href="https://www.x.com"
+                class="uk-icon-button"
+                uk-icon="icon: x"
+                target="_blank"
+              ></a>
+              <a
+                href="https://www.instagram.com"
+                class="uk-icon-button uk-margin-small-left"
+                uk-icon="icon: instagram"
+                target="_blank"
+              ></a>
+              <a
+                href="https://www.youtube.com"
+                class="uk-icon-button uk-margin-small-left"
+                uk-icon="icon: youtube"
+                target="_blank"
+              ></a>
+              <a
+                href="https://www.linkedin.com"
+                class="uk-icon-button uk-margin-small-left"
+                uk-icon="icon: linkedin"
+                target="_blank"
+              ></a>
+            </div>
+          </div>
         </div>
+      </div>
     </footer>
 
-</body>
+    <script>
+      // Estado global exactamente como el AuthContext
+      let currentUser = null;
+      let isRegistering = false;
+
+      // Función para manejar autenticación (login/logout)
+      function toggleAuth() {
+        if (currentUser) {
+          logout();
+        } else {
+          showModal();
+        }
+      }
+
+      // Función para mostrar el modal
+      function showModal() {
+        document.getElementById("login-modal").classList.add("uk-open");
+      }
+
+      // Función para cerrar el modal
+      function closeModal() {
+        document.getElementById("login-modal").classList.remove("uk-open");
+        // Reset form
+        document.getElementById("modal-username").value = "";
+        document.getElementById("modal-password").value = "";
+      }
+
+      // Función para alternar entre login y registro
+      function toggleAuthMode() {
+        isRegistering = !isRegistering;
+        const title = document.getElementById("modal-title");
+        const submitBtn = document.getElementById("auth-submit-btn");
+        const toggleBtn = document.querySelector(".uk-button-link");
+
+        if (isRegistering) {
+          title.textContent = "Registrarse";
+          submitBtn.textContent = "Registrarse";
+          toggleBtn.textContent = "¿Ya tienes cuenta?";
+        } else {
+          title.textContent = "Iniciar Sesión";
+          submitBtn.textContent = "Iniciar Sesión";
+          toggleBtn.textContent = "¿No tienes cuenta?";
+        }
+      }
+
+      // Función para manejar el envío del formulario
+      function handleAuth(event) {
+        event.preventDefault();
+        const username = document.getElementById("modal-username").value.trim();
+        const password = document.getElementById("modal-password").value.trim();
+
+        if (!username || !password) return;
+
+        // Simular login/registro (como en el original)
+        login(username);
+        closeModal();
+      }
+
+      // Función para login
+      function login(username) {
+        currentUser = username;
+        updateAuthState();
+      }
+
+      // Función para logout
+      function logout() {
+        currentUser = null;
+        updateAuthState();
+      }
+
+      // Función para actualizar el estado de la UI
+      function updateAuthState() {
+        const authBtn = document.getElementById("auth-btn");
+        const mobileAuthBtn = document.getElementById("mobile-auth-btn");
+        const currentUserSpan = document.getElementById("current-user");
+
+        if (currentUser) {
+          authBtn.textContent = "Cerrar Sesión";
+          mobileAuthBtn.textContent = "Cerrar Sesión";
+          currentUserSpan.textContent = currentUser;
+        } else {
+          authBtn.textContent = "Iniciar Sesión";
+          mobileAuthBtn.textContent = "Iniciar Sesión";
+          currentUserSpan.textContent = "Invitado";
+        }
+      }
+
+      // Inicializar cuando se carga la página
+      document.addEventListener("DOMContentLoaded", function () {
+        updateAuthState();
+      });
+    </script>
+  </body>
 </html>
