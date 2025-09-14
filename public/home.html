@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Coffee Shop SPA</title>
+
+    <!-- UIKit -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/uikit@3.17.10/dist/css/uikit.min.css" />
+    <script src="https://cdn.jsdelivr.net/npm/uikit@3.17.10/dist/js/uikit.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/uikit@3.17.10/dist/js/uikit-icons.min.js"></script>
+
+    <!-- Estilos propios -->
+    <style>
+        body {
+            margin: 0;
+            background: #1e1e1e;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        .first-child-adjustment:first-child {
+            margin-top: 0 !important;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- ========== HEADER & NAV ========== -->
+    <header>
+        <nav class="uk-navbar-container" style="background-color: #2f2c2c;" uk-navbar>
+            <div class="uk-navbar-left">
+                <a class="uk-navbar-item uk-logo" href="index.html">
+                    <img src="assets/img/coffe-user-logo.svg" alt="Logo" style="height:40px;">
+                </a>
+                <ul class="uk-navbar-nav">
+                    <li><a href="index.html">Inicio</a></li>
+                    <li><a href="nosotros.html">Nosotros</a></li>
+                    <li><a href="recomendado.html">Recomendado</a></li>
+                    <li><a href="contacto.html">Contáctanos</a></li>
+                </ul>
+            </div>
+        </nav>
+    </header>
+
+    <!-- ========== CONTENIDO PRINCIPAL ========== -->
+    <main id="contenido">
+        <section class="uk-background-cover uk-height-viewport uk-light first-child-adjustment uk-flex uk-position-relative"
+    style="background-image: url('assets/img/coffe-soft-header.svg');">
+    <div class="uk-container uk-margin-large-top uk-height-1-1">
+        <div class="uk-position-center-right uk-position-medium" style="max-width: 50%; padding: 20px;">
+            <h1 class="uk-heading-large">Coffe Shop SPA</h1>
+            <div class="uk-overlay uk-overlay-primary uk-padding-small">
+                <p>
+                    Bienvenido a <strong>Nombre del Café</strong>, un lugar donde cada taza de café
+                    cuenta una historia. Aquí encontrarás la combinación perfecta de calidad,
+                    comodidad y calidez para hacer de tus mañanas algo especial.
+                </p>
+            </div>
+        </div>
+    </div>
+</section>
+
+    </main>
+
+    <!-- ========== FOOTER ========== -->
+    <footer class="uk-section uk-section-small" style="background-color: #2f2c2c; width: 100%; z-index: 10;">
+        <div class="uk-container">
+            <div class="uk-flex uk-flex-between uk-flex-middle uk-grid-small" uk-grid>
+                <div>
+                    <img src="assets/img/coffe-user-logo.svg" alt="Logo" />
+                </div>
+                <div class="uk-text-top">
+                    <span class="uk-text-small uk-text-muted">Síguenos</span>
+                    <div class="uk-margin-small-top">
+                        <a href="https://www.x.com" class="uk-icon-button" uk-icon="icon: x" target="_blank"></a>
+                        <a href="https://www.instagram.com" class="uk-icon-button uk-margin-small-left" uk-icon="icon: instagram" target="_blank"></a>
+                        <a href="https://www.youtube.com" class="uk-icon-button uk-margin-small-left" uk-icon="icon: youtube" target="_blank"></a>
+                        <a href="https://www.linkedin.com" class="uk-icon-button uk-margin-small-left" uk-icon="icon: linkedin" target="_blank"></a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+</body>
+</html>

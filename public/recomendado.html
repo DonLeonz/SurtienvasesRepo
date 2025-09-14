@@ -1,0 +1,249 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Coffee Shop SPA</title>
+
+    <!-- UIKit -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/uikit@3.17.10/dist/css/uikit.min.css" />
+    <script src="https://cdn.jsdelivr.net/npm/uikit@3.17.10/dist/js/uikit.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/uikit@3.17.10/dist/js/uikit-icons.min.js"></script>
+
+    <!-- Estilos propios -->
+    <style>
+        body {
+            margin: 0;
+            background: #1e1e1e;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        .first-child-adjustment:first-child {
+            margin-top: 0 !important;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- ========== HEADER & NAV ========== -->
+    <header>
+        <nav class="uk-navbar-container" style="background-color: #2f2c2c;" uk-navbar>
+            <div class="uk-navbar-left">
+                <a class="uk-navbar-item uk-logo" href="index.html">
+                    <img src="assets/img/coffe-user-logo.svg" alt="Logo" style="height:40px;">
+                </a>
+                <ul class="uk-navbar-nav">
+                    <li><a href="index.html">Inicio</a></li>
+                    <li><a href="nosotros.html">Nosotros</a></li>
+                    <li><a href="recomendado.html">Recomendado</a></li>
+                    <li><a href="contacto.html">Contáctanos</a></li>
+                </ul>
+            </div>
+        </nav>
+    </header>
+
+    <!-- ========== CONTENIDO PRINCIPAL ========== -->
+    <main id="contenido">
+        <section class="first-child-adjustment uk-section uk-background-secondary uk-light uk-padding-small">
+    <div class="uk-container uk-container-xlarge uk-light uk-background-secondary"
+        style="background: linear-gradient(to bottom, #1e1e1e, #2c2c2c);
+               background-color: #1e1e1e;
+               padding: 40px 0;
+               display: flex;
+               flex-direction: column;
+               align-items: center;">
+
+        <!-- TÍTULO -->
+        <h1 class="uk-heading-line uk-text-center">
+            <span style="color: #d4a762; font-size: 2rem; margin: 10px;">☕ Descubre el Sabor del Día</span>
+        </h1>
+
+        <!-- CARD PRODUCTO -->
+        <div class="uk-card uk-card-default uk-card-hover uk-grid-collapse uk-child-width-1-1@s uk-child-width-1-2@m"
+            uk-grid
+            style="background-color: #2c2c2c;
+                   border-radius: 12px;
+                   overflow: hidden;
+                   width: 100%;
+                   max-width: 960px;
+                   box-shadow: 0 8px 24px rgba(0,0,0,0.3);">
+
+            <!-- Imagen -->
+            <div class="uk-flex uk-flex-center uk-flex-middle uk-padding">
+                <img id="recomendado-img"
+                    src="assets/img/default-coffee.jpg"
+                    alt="Recomendación del día"
+                    style="width: 220px;
+                           height: 220px;
+                           object-fit: cover;
+                           border-radius: 50%;
+                           border: 4px solid #d4a762;">
+            </div>
+
+            <!-- Contenido -->
+            <div class="uk-padding uk-flex uk-flex-column uk-flex-between">
+                <div>
+                    <h3 class="uk-card-title" id="recomendado-title"
+                        style="color: #f5f5f5; margin-bottom: 10px;">
+                        Cargando recomendación...
+                    </h3>
+
+                    <div class="uk-margin-small">
+                        <span id="recomendado-price"
+                            class="uk-label"
+                            style="background-color: rgba(212, 167, 98, 0.9);
+                                   color: #2c1608;
+                                   font-size: 1rem;
+                                   padding: 6px 12px;">
+                            $ --
+                        </span>
+                        <span id="recomendado-popular"
+                            class="uk-label uk-margin-small-left"
+                            style="background-color: rgba(165, 42, 42, 0.7);
+                                   color: white; display: none;">
+                            Más Popular
+                        </span>
+                    </div>
+
+                    <p id="recomendado-desc"
+                        style="color: rgba(245, 245, 245, 0.85);
+                               font-size: 0.95rem;
+                               line-height: 1.6;">
+                        Seleccionando nuestra mejor recomendación para ti...
+                    </p>
+
+                    <div class="uk-margin-small">
+                        <strong style="color: #d4a762;">Categoría:</strong>
+                        <span id="recomendado-cat" style="color: #f5f5f5;">--</span>
+                    </div>
+                    <div class="uk-margin-small">
+                        <strong style="color: #d4a762;">Intensidad:</strong>
+                        <span id="recomendado-intensity" style="color: #f5f5f5;">--</span>
+                    </div>
+                    <div class="uk-margin-small">
+                        <strong style="color: #d4a762;">Tipo de grano:</strong>
+                        <span id="recomendado-grano" style="color: #f5f5f5;">--</span>
+                    </div>
+                    <div class="uk-margin-small">
+                        <strong style="color: #d4a762;">Proceso:</strong>
+                        <span id="recomendado-proceso" style="color: #f5f5f5;">--</span>
+                    </div>
+
+                    <div class="uk-margin-small">
+                        <span class="uk-badge"
+                              id="recomendado-origen"
+                              style="background-color: rgba(94, 43, 22, 0.7); color: #f5f5f5;">
+                            Origen: --
+                        </span>
+                    </div>
+                </div>
+
+                <div class="uk-margin-top">
+                    <p id="recomendado-recommendation"
+                       style="color: #d4a762;
+                              font-size: 0.9rem;
+                              font-style: italic;">
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- SCRIPT para elegir producto recomendado del día -->
+<script>
+    const coffeeItems = [
+        {
+            title: "Espresso Clásico",
+            img: "assets/img/coffee/espresso.jpg",
+            price: "$5.000",
+            description: "Intenso y aromático, perfecto para un impulso de energía.",
+            category: "Café Espresso",
+            intensity: "Alta",
+            beanType: "Arábica",
+            process: "Lavado",
+            origin: "Colombia",
+            isPopular: true,
+            recommendation: "Ideal para empezar la mañana con energía."
+        },
+        {
+            title: "Cappuccino Cremoso",
+            img: "assets/img/coffee/cappuccino.jpg",
+            price: "$6.500",
+            description: "Suave combinación de café, leche vaporizada y espuma.",
+            category: "Café con Leche",
+            intensity: "Media",
+            beanType: "Blend Arábica/Robusta",
+            process: "Natural",
+            origin: "Brasil",
+            isPopular: false,
+            recommendation: "Perfecto para la tarde acompañado de un postre."
+        },
+        {
+            title: "Latte Vainilla",
+            img: "assets/img/coffee/latte.jpg",
+            price: "$7.000",
+            description: "Café con leche y un toque de vainilla natural.",
+            category: "Especialidad",
+            intensity: "Suave",
+            beanType: "Arábica",
+            process: "Honey",
+            origin: "Costa Rica",
+            isPopular: false,
+            recommendation: "Recomendado para quienes disfrutan sabores dulces."
+        }
+    ];
+
+    function getDayOfYear() {
+        const now = new Date();
+        const start = new Date(now.getFullYear(), 0, 0);
+        const diff = now - start;
+        const oneDay = 1000 * 60 * 60 * 24;
+        return Math.floor(diff / oneDay);
+    }
+
+    function loadRecomendado() {
+        const producto = coffeeItems[getDayOfYear() % coffeeItems.length];
+
+        document.getElementById("recomendado-img").src = producto.img;
+        document.getElementById("recomendado-title").textContent = producto.title;
+        document.getElementById("recomendado-price").textContent = producto.price;
+        document.getElementById("recomendado-desc").textContent = producto.description;
+        document.getElementById("recomendado-cat").textContent = producto.category;
+        document.getElementById("recomendado-intensity").textContent = producto.intensity;
+        document.getElementById("recomendado-grano").textContent = producto.beanType;
+        document.getElementById("recomendado-proceso").textContent = producto.process;
+        document.getElementById("recomendado-origen").textContent = "Origen: " + producto.origin;
+        document.getElementById("recomendado-recommendation").textContent = producto.recommendation;
+
+        if (producto.isPopular) {
+            document.getElementById("recomendado-popular").style.display = "inline-block";
+        }
+    }
+
+    document.addEventListener("DOMContentLoaded", loadRecomendado);
+</script>
+
+    </main>
+
+    <!-- ========== FOOTER ========== -->
+    <footer class="uk-section uk-section-small" style="background-color: #2f2c2c; width: 100%; z-index: 10;">
+        <div class="uk-container">
+            <div class="uk-flex uk-flex-between uk-flex-middle uk-grid-small" uk-grid>
+                <div>
+                    <img src="assets/img/coffe-user-logo.svg" alt="Logo" />
+                </div>
+                <div class="uk-text-top">
+                    <span class="uk-text-small uk-text-muted">Síguenos</span>
+                    <div class="uk-margin-small-top">
+                        <a href="https://www.x.com" class="uk-icon-button" uk-icon="icon: x" target="_blank"></a>
+                        <a href="https://www.instagram.com" class="uk-icon-button uk-margin-small-left" uk-icon="icon: instagram" target="_blank"></a>
+                        <a href="https://www.youtube.com" class="uk-icon-button uk-margin-small-left" uk-icon="icon: youtube" target="_blank"></a>
+                        <a href="https://www.linkedin.com" class="uk-icon-button uk-margin-small-left" uk-icon="icon: linkedin" target="_blank"></a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+</body>
+</html>

@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Coffee Shop SPA</title>
+
+    <!-- UIKit -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/uikit@3.17.10/dist/css/uikit.min.css" />
+    <script src="https://cdn.jsdelivr.net/npm/uikit@3.17.10/dist/js/uikit.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/uikit@3.17.10/dist/js/uikit-icons.min.js"></script>
+
+    <!-- Estilos propios -->
+    <style>
+        body {
+            margin: 0;
+            background: #1e1e1e;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        .first-child-adjustment:first-child {
+            margin-top: 0 !important;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- ========== HEADER & NAV ========== -->
+    <header>
+        <nav class="uk-navbar-container" style="background-color: #2f2c2c;" uk-navbar>
+            <div class="uk-navbar-left">
+                <a class="uk-navbar-item uk-logo" href="index.html">
+                    <img src="assets/img/coffe-user-logo.svg" alt="Logo" style="height:40px;">
+                </a>
+                <ul class="uk-navbar-nav">
+                    <li><a href="index.html">Inicio</a></li>
+                    <li><a href="nosotros.html">Nosotros</a></li>
+                    <li><a href="recomendado.html">Recomendado</a></li>
+                    <li><a href="contacto.html">Contáctanos</a></li>
+                </ul>
+            </div>
+        </nav>
+    </header>
+
+    <!-- ========== CONTENIDO PRINCIPAL ========== -->
+    <main id="contenido">
+        <section id="menu" class="uk-section uk-section-muted">
+  <div class="uk-container">
+    <h2 class="uk-heading-line uk-text-center"><span>Menú de Cafés</span></h2>
+
+    <div class="uk-child-width-1-3@m uk-grid-small uk-grid-match" uk-grid>
+      <!-- Item Espresso Sencillo -->
+      <div>
+        <div class="uk-card uk-card-default uk-card-hover uk-card-body">
+          <img src="assets/img/menu/espresso.jpg" alt="Espresso" class="uk-border-rounded">
+          <h3 class="uk-card-title">Espresso Sencillo - $5.200</h3>
+          <p>La esencia pura del café en su forma más concentrada.</p>
+          <ul class="uk-list uk-list-bullet">
+            <li>Origen: Colombia</li>
+            <li>Tostado Medio</li>
+            <li>Perfil: Fuerte y Audaz</li>
+          </ul>
+          <p><strong>Recomendación:</strong> Perfecto para empezar el día con energía.</p>
+        </div>
+      </div>
+
+      <!-- Item Americano -->
+      <div>
+        <div class="uk-card uk-card-default uk-card-hover uk-card-body">
+          <img src="assets/img/menu/americano.jpg" alt="Americano" class="uk-border-rounded">
+          <h3 class="uk-card-title">Americano - $6.000</h3>
+          <p>Café suave y diluido para quienes prefieren un sabor menos intenso.</p>
+          <ul class="uk-list uk-list-bullet">
+            <li>Origen: Colombia</li>
+            <li>Tostado Medio</li>
+            <li>Perfil: Suave y Balanceado</li>
+          </ul>
+          <p><strong>Recomendación:</strong> Ideal para una conversación larga.</p>
+        </div>
+      </div>
+
+      <!-- Item Cappuccino -->
+      <div>
+        <div class="uk-card uk-card-default uk-card-hover uk-card-body">
+          <img src="assets/img/menu/cappuccino.jpg" alt="Cappuccino" class="uk-border-rounded">
+          <h3 class="uk-card-title">Cappuccino - $9.000</h3>
+          <p>Espresso, leche vaporizada y espuma equilibrados.</p>
+          <ul class="uk-list uk-list-bullet">
+            <li>Origen: Italia</li>
+            <li>Tostado Medio</li>
+            <li>Perfil: Saborizado y Espumoso</li>
+          </ul>
+          <p><strong>Recomendación:</strong> Clásico para cualquier hora del día.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+    </main>
+
+    <!-- ========== FOOTER ========== -->
+    <footer class="uk-section uk-section-small" style="background-color: #2f2c2c; width: 100%; z-index: 10;">
+        <div class="uk-container">
+            <div class="uk-flex uk-flex-between uk-flex-middle uk-grid-small" uk-grid>
+                <div>
+                    <img src="assets/img/coffe-user-logo.svg" alt="Logo" />
+                </div>
+                <div class="uk-text-top">
+                    <span class="uk-text-small uk-text-muted">Síguenos</span>
+                    <div class="uk-margin-small-top">
+                        <a href="https://www.x.com" class="uk-icon-button" uk-icon="icon: x" target="_blank"></a>
+                        <a href="https://www.instagram.com" class="uk-icon-button uk-margin-small-left" uk-icon="icon: instagram" target="_blank"></a>
+                        <a href="https://www.youtube.com" class="uk-icon-button uk-margin-small-left" uk-icon="icon: youtube" target="_blank"></a>
+                        <a href="https://www.linkedin.com" class="uk-icon-button uk-margin-small-left" uk-icon="icon: linkedin" target="_blank"></a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+</body>
+</html>

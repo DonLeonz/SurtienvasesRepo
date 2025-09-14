@@ -1,0 +1,622 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chocolate - Coffee Shop</title>
+    
+    <!-- UIKit CSS -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/uikit/3.19.4/css/uikit.min.css" />
+    
+    <!-- UIKit JS -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/uikit/3.19.4/js/uikit.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/uikit/3.19.4/js/uikit-icons.min.js"></script>
+    
+    <style>
+        .background-opaque {
+            background-color: rgba(0, 0, 0, 0.3);
+        }
+        
+        .uk-navbar-sticky {
+            background-color: rgba(0, 0, 0, 0.8) !important;
+        }
+
+        .coffe-logo {
+            width: 40px;
+            height: 40px;
+        }
+        
+        body {
+            margin: 0;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+        
+        .main-content {
+            flex: 1;
+            padding: 2rem 0;
+        }
+        
+        .navbar-brand-text {
+            color: white !important;
+            text-decoration: none !important;
+        }
+        
+        .navbar-brand-text:hover {
+            color: white !important;
+            text-decoration: none !important;
+        }
+        
+        .nav-link.active {
+            background-color: #1e87f0 !important;
+        }
+        
+        .hidden {
+            display: none !important;
+        }
+    </style>
+</head>
+<body>
+    <!-- Navbar -->
+    <div uk-sticky="sel-target: .uk-navbar-container; cls-active: uk-navbar-sticky">
+        <nav class="uk-navbar-container uk-navbar-transparent">
+            <div class="uk-container uk-width-1-1 background-opaque">
+                <div uk-navbar="mode: click" class="uk-flex">
+                    
+                    <!-- Navbar Left -->
+                    <div class="uk-navbar-left">
+                        <div class="uk-navbar-item uk-light">
+                            <a class="uk-flex uk-link-heading navbar-brand-text" href="/">
+                                <!-- Placeholder para el logo - reemplaza con tu SVG -->
+                                <svg class="coffe-logo" viewBox="0 0 24 24" fill="white" xmlns="http://www.w3.org/2000/svg">
+                                    <path d="M2 21h20v-2H2v2zm1.15-4.05L4 16.5l.85.45L5 17l1.25-.65c.74-.39 1.6-.59 2.47-.59s1.73.2 2.47.59L12 17l.81-.45c.74-.39 1.6-.59 2.47-.59s1.73.2 2.47.59L19 17l.15-.05L20 16.5l.85.45L22 17v2H2v-2l1.15-.55z"/>
+                                    <path d="M20 3H4v10c0 2.21 1.79 4 4 4h8c2.21 0 4-1.79 4-4V3zm-8 13c-1.66 0-3-1.34-3-3H9c-1.1 0-2-.9-2-2V5h10v6c0 1.1-.9 2-2 2h-1c0 1.66-1.34 3-3 3z"/>
+                                </svg>
+                                <button class="uk-margin-left uk-text-capitalize uk-text-left uk-text-small uk-button uk-button-link navbar-brand-text">
+                                    <strong>Chocolate<br><span id="current-user">Invitado</span></strong>
+                                </button>
+                            </a>
+                        </div>
+                    </div>
+                    
+                    <!-- Navbar Center -->
+                    <div class="uk-navbar-center uk-visible@l">
+                        <div class="uk-navbar-item uk-dark">
+                            <a class="uk-button uk-button-secondary uk-border-rounded nav-link" href="/api">
+                                API
+                            </a>
+                        </div>
+                        <div class="uk-navbar-item uk-light">
+                            <a class="uk-text-capitalize uk-button uk-button-text uk-light nav-link" href="/menu">
+                                Menú
+                            </a>
+                        </div>
+                        <div class="uk-navbar-item uk-light">
+                            <a class="uk-text-capitalize uk-button uk-button-text nav-link" href="/suggest">
+                                Recomendado
+                            </a>
+                        </div>
+                        <div class="uk-navbar-item uk-light">
+                            <a class="uk-text-capitalize uk-button uk-button-text uk-light nav-link" href="/blog">
+                                Blog
+                            </a>
+                        </div>
+                        <div class="uk-navbar-item uk-light">
+                            <a class="uk-text-capitalize uk-button uk-button-text uk-light nav-link" href="/about">
+                                Nosotros
+                            </a>
+                        </div>
+                    </div>
+                    
+                    <!-- Navbar Right -->
+                    <div class="uk-navbar-right uk-visible@l">
+                        <!-- Login/Logout Button -->
+                        <div class="uk-navbar-item uk-light">
+                            <button id="auth-btn" class="uk-text-capitalize uk-text-normal uk-button uk-button-secondary uk-border-rounded" onclick="toggleAuth()">
+                                Iniciar Sesión
+                            </button>
+                        </div>
+                        <div class="uk-navbar-item uk-dark">
+                            <a class="uk-text-capitalize uk-button uk-button-secondary uk-border-rounded" href="#">
+                                Registrarse
+                            </a>
+                        </div>
+                    </div>
+                    
+                    <!-- Mobile Menu Toggle -->
+                    <div class="uk-hidden@l uk-navbar-right">
+                        <a class="uk-navbar-toggle" uk-navbar-toggle-icon="true" uk-toggle="target: #burger-menu"></a>
+                        
+                        <!-- Off-canvas Mobile Menu -->
+                        <div id="burger-menu" uk-offcanvas="overlay: true; flip: true">
+                            <div class="uk-offcanvas-bar">
+                                <button class="uk-offcanvas-close" type="button" uk-close="true"></button>
+                                
+                                <div class="uk-flex uk-flex-column uk-grid-row-small uk-margin-medium-top" uk-grid="true">
+                                    <div class="uk-flex-left">
+                                        <a class="uk-button uk-button-secondary uk-border-rounded" href="/api">
+                                            <strong>API</strong>
+                                        </a>
+                                    </div>
+                                    <div class="uk-flex-left uk-margin-small-left">
+                                        <a class="uk-text-capitalize uk-button uk-button-text uk-light" href="/menu">
+                                            Menú
+                                        </a>
+                                    </div>
+                                    <div class="uk-flex-left uk-margin-small-left">
+                                        <a class="uk-text-capitalize uk-button uk-button-text" href="/suggest">
+                                            Recomendado
+                                        </a>
+                                    </div>
+                                    <div class="uk-flex-left uk-margin-small-left">
+                                        <a class="uk-text-capitalize uk-button uk-button-text uk-light" href="/blog">
+                                            Blog
+                                        </a>
+                                    </div>
+                                    <div class="uk-flex-left uk-margin-small-left">
+                                        <a class="uk-text-capitalize uk-button uk-button-text uk-light" href="/about">
+                                            Nosotros
+                                        </a>
+                                    </div>
+                                    <hr class="uk-divider-icon" />
+                                    <div class="uk-light">
+                                        <button id="mobile-auth-btn" class="uk-text-capitalize uk-text-normal uk-button uk-button-secondary uk-border-rounded uk-width-1-1" onclick="toggleAuth()">
+                                            Iniciar Sesión
+                                        </button>
+                                    </div>
+                                    <div class="uk-dark">
+                                        <a class="uk-text-capitalize uk-text-normal uk-button uk-button-secondary uk-border-rounded uk-width-1-1" href="#">
+                                            Registrarse
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </nav>
+    </div>
+
+    <!-- Login Modal -->
+    <div id="login-modal" class="uk-modal" uk-modal>
+        <div class="uk-modal-dialog uk-modal-body">
+            <h2 class="uk-modal-title">Iniciar Sesión</h2>
+            <form onsubmit="handleLogin(event)">
+                <div class="uk-margin">
+                    <label class="uk-form-label" for="username">Nombre de usuario:</label>
+                    <div class="uk-form-controls">
+                        <input class="uk-input" id="username" type="text" placeholder="Ingresa tu nombre de usuario" required>
+                    </div>
+                </div>
+                <div class="uk-margin">
+                    <button class="uk-button uk-button-primary uk-modal-close" type="submit">Iniciar Sesión</button>
+                    <button class="uk-button uk-button-default uk-modal-close uk-margin-small-left" type="button">Cancelar</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- Main Content -->
+<main class="main-content uk-section first-child-adjustment uk-dark blog-background">
+    <div class="uk-container uk-text-default">
+        <!-- Formulario para agregar nuevo blog -->
+        <div class="uk-card uk-card-default uk-card-body uk-margin-bottom blog-container-round color-text-black blog-form-spacing">
+            <h3 class="uk-card-title">Agregar nuevo blog</h3>
+            <form class="uk-grid-small" uk-grid id="blog-form">
+                <div class="uk-width-1-2@s">
+                    <input class="uk-input" type="text" id="blog-title" placeholder="Título del blog" required>
+                </div>
+                <div class="uk-width-1-2@s">
+                    <input class="uk-input" type="text" id="blog-author" placeholder="Autor" required>
+                </div>
+                <div class="uk-width-1-1">
+                    <textarea class="uk-textarea" rows="3" id="blog-excerpt" placeholder="Resumen o introducción" required></textarea>
+                </div>
+                <div class="uk-width-1-1">
+                    <input type="file" id="blog-image" accept="image/*">
+                </div>
+                <div class="uk-width-1-1">
+                    <button type="submit" class="uk-button uk-button-secondary blog-container-round">
+                        Publicar blog
+                    </button>
+                </div>
+            </form>
+        </div>
+
+        <!-- Container para mostrar blogs -->
+        <div id="blogs-container" class="uk-child-width-1-2@s" uk-grid="masonry: pack">
+            <!-- Los blogs se insertarán aquí dinámicamente -->
+        </div>
+    </div>
+
+    <!-- Modal de Login -->
+    <div id="login-modal" class="uk-modal" uk-modal>
+        <div class="uk-modal-dialog uk-modal-body">
+            <h2 class="uk-modal-title">Iniciar Sesión</h2>
+            <form id="login-form">
+                <div class="uk-margin">
+                    <label class="uk-form-label" for="login-username">Nombre de usuario:</label>
+                    <div class="uk-form-controls">
+                        <input class="uk-input" id="login-username" type="text" placeholder="Ingresa tu nombre de usuario" required>
+                    </div>
+                </div>
+                <div class="uk-margin">
+                    <button class="uk-button uk-button-primary uk-modal-close" type="submit">Iniciar Sesión</button>
+                    <button class="uk-button uk-button-default uk-modal-close uk-margin-small-left" type="button">Cancelar</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</main>
+
+<script>
+// Estado global para la funcionalidad del blog
+let currentUser = null;
+let blogsData = [
+    {
+        id: 1,
+        title: "5 Consejos para Mejorar tu Café Casero",
+        author: "Natalia Ruiz",
+        imageUrl: "../assets/img/blog/blog-example1.jpg",
+        avatarUrl: "../assets/img/avatars/default.jpg",
+        excerpt: "Descubre técnicas simples pero efectivas para preparar un mejor café en casa."
+    },
+    {
+        id: 2,
+        title: "Guía Básica de Fotografía para Principiantes", 
+        author: "Kaleth Narváez",
+        imageUrl: "../assets/img/blog/blog-example2.jpg",
+        avatarUrl: "../assets/img/avatars/default.jpg",
+        excerpt: "Aprende a sacar el máximo provecho de tu cámara desde el primer día."
+    }
+];
+
+let visibleComments = {};
+let commentInputs = {};
+let commentsByBlog = {};
+
+// Función para mostrar notificaciones
+function showNotification(message, status = 'primary') {
+    UIkit.notification({
+        message: message,
+        status: status,
+        pos: 'top-center'
+    });
+}
+
+// Función para manejar el login
+function handleLogin(event) {
+    event.preventDefault();
+    const username = document.getElementById('login-username').value.trim();
+    
+    if (username) {
+        currentUser = username;
+        updateAuthState();
+        showNotification('Sesión iniciada correctamente', 'success');
+        document.getElementById('login-username').value = '';
+    }
+}
+
+// Función para actualizar el estado de autenticación
+function updateAuthState() {
+    // Actualizar el navbar si existe
+    const currentUserSpan = document.getElementById('current-user');
+    const authBtn = document.getElementById('auth-btn');
+    const mobileAuthBtn = document.getElementById('mobile-auth-btn');
+    
+    if (currentUserSpan) {
+        currentUserSpan.textContent = currentUser || 'Invitado';
+    }
+    
+    if (authBtn) {
+        authBtn.textContent = currentUser ? 'Cerrar Sesión' : 'Iniciar Sesión';
+        authBtn.onclick = currentUser ? logout : (() => UIkit.modal('#login-modal').show());
+    }
+    
+    if (mobileAuthBtn) {
+        mobileAuthBtn.textContent = currentUser ? 'Cerrar Sesión' : 'Iniciar Sesión';
+        mobileAuthBtn.onclick = currentUser ? logout : (() => UIkit.modal('#login-modal').show());
+    }
+}
+
+// Función para cerrar sesión
+function logout() {
+    currentUser = null;
+    updateAuthState();
+    showNotification('Sesión cerrada', 'warning');
+}
+
+// Función para alternar visibilidad de comentarios
+function toggleComments(blogId) {
+    visibleComments[blogId] = !visibleComments[blogId];
+    renderBlogs();
+}
+
+// Función para manejar cambios en comentarios
+function handleCommentChange(blogId, value) {
+    commentInputs[blogId] = value;
+}
+
+// Función para enviar comentario
+function handleCommentSubmit(blogId) {
+    if (!currentUser) {
+        showNotification('Debes iniciar sesión para comentar.', 'warning');
+        UIkit.modal('#login-modal').show();
+        return;
+    }
+
+    const commentText = commentInputs[blogId];
+    if (!commentText || !commentText.trim()) {
+        showNotification('Escribe un comentario válido.', 'warning');
+        return;
+    }
+
+    const newComment = {
+        text: commentText.trim(),
+        author: currentUser,
+        timestamp: new Date().toLocaleString()
+    };
+
+    if (!commentsByBlog[blogId]) {
+        commentsByBlog[blogId] = [];
+    }
+    
+    commentsByBlog[blogId].push(newComment);
+    commentInputs[blogId] = '';
+    
+    showNotification('Comentario publicado.', 'success');
+    renderBlogs();
+}
+
+// Función para manejar envío de blog
+function handleBlogSubmit(event) {
+    event.preventDefault();
+    
+    if (!currentUser) {
+        showNotification('Debes iniciar sesión para publicar un blog.', 'warning');
+        UIkit.modal('#login-modal').show();
+        return;
+    }
+
+    const title = document.getElementById('blog-title').value.trim();
+    const author = document.getElementById('blog-author').value.trim();
+    const excerpt = document.getElementById('blog-excerpt').value.trim();
+    const imageFile = document.getElementById('blog-image').files[0];
+
+    if (!title || !author || !excerpt) {
+        showNotification('Todos los campos son obligatorios.', 'warning');
+        return;
+    }
+
+    const blogToAdd = {
+        id: Date.now(),
+        title: title,
+        author: currentUser,
+        excerpt: excerpt,
+        imageUrl: imageFile ? URL.createObjectURL(imageFile) : '../assets/img/blog/blogDefault.jpg',
+        avatarUrl: '../assets/img/avatars/default.jpg'
+    };
+
+    blogsData.unshift(blogToAdd);
+    
+    // Limpiar formulario
+    document.getElementById('blog-form').reset();
+    
+    showNotification('Blog publicado exitosamente.', 'success');
+    renderBlogs();
+}
+
+// Función para renderizar blogs
+function renderBlogs() {
+    const container = document.getElementById('blogs-container');
+    container.innerHTML = '';
+
+    blogsData.forEach(blog => {
+        const blogElement = document.createElement('div');
+        blogElement.innerHTML = `
+            <div class="uk-card uk-card-default uk-card-hover blog-container-round color-text-black">
+                <div class="uk-card-media-top blog-image-container">
+                    <button type="button" onclick="openImageModal(${blog.id})" 
+                            style="border: none; background: transparent; padding: 0; cursor: pointer;">
+                        <img src="${blog.imageUrl}" alt="${blog.title}" onerror="this.src='../assets/img/blog/blogDefault.jpg'">
+                    </button>
+
+                    <!-- Modal para imagen -->
+                    <div id="modal-media-image-${blog.id}" class="uk-flex-top" uk-modal="true">
+                        <div class="uk-modal-dialog uk-width-auto uk-margin-auto-vertical">
+                            <button class="uk-modal-close-outside" type="button" uk-close="true"></button>
+                            <img src="${blog.imageUrl}" alt="${blog.title}">
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="uk-card-body">
+                    <h3 class="uk-card-title">${blog.title}</h3>
+                    <p>${blog.excerpt}</p>
+                    <div class="uk-flex uk-flex-middle uk-margin-small-top">
+                        <img src="${blog.avatarUrl}" alt="${blog.author}" class="uk-border-circle" width="40" height="40">
+                        <span class="uk-margin-small-left">${blog.author}</span>
+                    </div>
+                    <button class="uk-button uk-button-secondary uk-margin-small-top blog-container-round"
+                            onclick="toggleComments(${blog.id})">
+                        ${visibleComments[blog.id] ? 'Cerrar comentarios' : 'Ver comentarios'}
+                    </button>
+
+                    ${visibleComments[blog.id] ? `
+                        <div class="uk-margin-top">
+                            <div class="uk-flex uk-flex-middle uk-margin">
+                                <img src="../assets/img/avatars/default.jpg" width="40" height="40" class="uk-border-circle" alt="Usuario">
+                                <span class="uk-margin-left">${currentUser || 'Invitado'}</span>
+                            </div>
+
+                            <textarea class="uk-textarea uk-placeholder blog-login-input" rows="3" 
+                                    placeholder="Escribe tu comentario..." 
+                                    id="comment-input-${blog.id}"
+                                    onchange="handleCommentChange(${blog.id}, this.value)"></textarea>
+
+                            <button class="uk-button uk-button-primary uk-margin-top blog-container-round"
+                                    onclick="handleCommentSubmit(${blog.id})">
+                                Comentar
+                            </button>
+
+                            ${renderComments(blog.id)}
+                        </div>
+                    ` : ''}
+                </div>
+            </div>
+        `;
+        container.appendChild(blogElement);
+    });
+}
+
+// Función para renderizar comentarios
+function renderComments(blogId) {
+    const comments = commentsByBlog[blogId] || [];
+    return comments.map((comment, index) => `
+        <article class="uk-comment uk-margin-top" key="${index}">
+            <header class="uk-comment-header uk-flex uk-flex-middle">
+                <img class="uk-comment-avatar uk-border-circle" src="../assets/img/avatars/default.jpg" 
+                     width="40" height="40" alt="${comment.author}">
+                <div class="uk-margin-small-left">
+                    <h4 class="uk-comment-title uk-margin-remove color-text-black">${comment.author}</h4>
+                    <ul class="uk-comment-meta uk-subnav uk-subnav-divider uk-margin-remove-top">
+                        <li><span class="color-text-black">Hace un momento</span></li>
+                    </ul>
+                </div>
+            </header>
+            <div class="uk-comment-body">
+                <p>${comment.text}</p>
+            </div>
+        </article>
+    `).join('');
+}
+
+// Función para abrir modal de imagen
+function openImageModal(blogId) {
+    const modal = UIkit.modal(document.getElementById(`modal-media-image-${blogId}`));
+    if (modal) modal.show();
+}
+
+// Event Listeners
+document.addEventListener('DOMContentLoaded', function() {
+    // Renderizar blogs iniciales
+    renderBlogs();
+    
+    // Event listener para el formulario de blog
+    document.getElementById('blog-form').addEventListener('submit', handleBlogSubmit);
+    
+    // Event listener para el formulario de login
+    document.getElementById('login-form').addEventListener('submit', handleLogin);
+    
+    // Sincronizar con el estado de autenticación del navbar si existe
+    const currentUserSpan = document.getElementById('current-user');
+    if (currentUserSpan && currentUserSpan.textContent !== 'Invitado') {
+        currentUser = currentUserSpan.textContent;
+    }
+});
+
+// Función global para manejar autenticación desde el navbar
+function toggleAuth() {
+    if (currentUser) {
+        logout();
+    } else {
+        UIkit.modal('#login-modal').show();
+    }
+}
+</script>
+
+    <!-- Footer -->
+    <footer class="uk-section uk-section-small" style="background-color: #2f2c2c; width: 100%; z-index: 10;">
+        <div class="uk-container">
+            <div class="uk-flex uk-flex-between uk-flex-middle uk-grid-small" uk-grid="">
+                <div>
+                    <!-- Logo del café -->
+                    <img src="../assets/img/coffe-user-logo.svg" alt="Chocolate Coffee Logo" class="coffe-logo" />
+                </div>
+                
+                <div class="uk-text-top">
+                    <span class="uk-text-small uk-text-muted">Síguenos</span>
+                    <div class="uk-margin-small-top">
+                        <a href="https://www.x.com" class="uk-icon-button" uk-icon="icon: x" target="_blank"></a>
+                        <a href="https://www.instagram.com" class="uk-icon-button uk-margin-small-left" uk-icon="icon: instagram" target="_blank"></a>
+                        <a href="https://www.youtube.com" class="uk-icon-button uk-margin-small-left" uk-icon="icon: youtube" target="_blank"></a>
+                        <a href="https://www.linkedin.com" class="uk-icon-button uk-margin-small-left" uk-icon="icon: linkedin" target="_blank"></a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Estado global para simular la autenticación
+        let currentUser = null;
+
+        // Función para manejar el login/logout
+        function toggleAuth() {
+            if (currentUser) {
+                // Logout
+                currentUser = null;
+                updateAuthState();
+            } else {
+                // Abrir modal de login
+                UIkit.modal('#login-modal').show();
+            }
+        }
+
+        // Función para manejar el envío del formulario de login
+        function handleLogin(event) {
+            event.preventDefault();
+            const username = document.getElementById('username').value.trim();
+            
+            if (username) {
+                currentUser = username;
+                updateAuthState();
+                document.getElementById('username').value = '';
+            }
+        }
+
+        // Función para actualizar la UI según el estado de autenticación
+        function updateAuthState() {
+            const authBtn = document.getElementById('auth-btn');
+            const mobileAuthBtn = document.getElementById('mobile-auth-btn');
+            const currentUserSpan = document.getElementById('current-user');
+
+            if (currentUser) {
+                // Usuario logueado
+                authBtn.textContent = 'Cerrar Sesión';
+                mobileAuthBtn.textContent = 'Cerrar Sesión';
+                currentUserSpan.textContent = currentUser;
+            } else {
+                // Usuario no logueado
+                authBtn.textContent = 'Iniciar Sesión';
+                mobileAuthBtn.textContent = 'Iniciar Sesión';
+                currentUserSpan.textContent = 'Invitado';
+            }
+        }
+
+        // Función para marcar el enlace activo
+        function setActiveLink() {
+            const currentPath = window.location.pathname;
+            const navLinks = document.querySelectorAll('.nav-link');
+            
+            navLinks.forEach(link => {
+                link.classList.remove('active');
+                if (link.getAttribute('href') === currentPath) {
+                    link.classList.add('active');
+                }
+            });
+        }
+
+        // Inicializar cuando se carga la página
+        document.addEventListener('DOMContentLoaded', function() {
+            updateAuthState();
+            setActiveLink();
+        });
+
+        // Actualizar enlaces activos cuando cambie la página (para SPAs futuras)
+        window.addEventListener('popstate', setActiveLink);
+    </script>
+</body>
+</html>

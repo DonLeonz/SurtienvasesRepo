@@ -1,0 +1,807 @@
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Chocolate - Coffee Shop</title>
+
+    <!-- UIKit CSS -->
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/uikit/3.19.4/css/uikit.min.css"
+    />
+
+    <!-- UIKit JS -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/uikit/3.19.4/js/uikit.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/uikit/3.19.4/js/uikit-icons.min.js"></script>
+
+    <style>
+      .background-opaque {
+        background-color: rgba(0, 0, 0, 0.3);
+      }
+
+      .uk-navbar-sticky {
+        background-color: rgba(0, 0, 0, 0.8) !important;
+      }
+
+      .coffe-logo {
+        width: 40px;
+        height: 40px;
+      }
+
+      body {
+        margin: 0;
+        min-height: 100vh;
+        display: flex;
+        flex-direction: column;
+      }
+
+      .main-content {
+        flex: 1;
+        padding: 2rem 0;
+      }
+
+      .navbar-brand-text {
+        color: white !important;
+        text-decoration: none !important;
+      }
+
+      .navbar-brand-text:hover {
+        color: white !important;
+        text-decoration: none !important;
+      }
+
+      .nav-link.active {
+        background-color: #1e87f0 !important;
+      }
+
+      .hidden {
+        display: none !important;
+      }
+    </style>
+  </head>
+  <body>
+    <!-- Navbar -->
+    <div
+      uk-sticky="sel-target: .uk-navbar-container; cls-active: uk-navbar-sticky"
+    >
+      <nav class="uk-navbar-container uk-navbar-transparent">
+        <div class="uk-container uk-width-1-1 background-opaque">
+          <div uk-navbar="mode: click" class="uk-flex">
+            <!-- Navbar Left -->
+            <div class="uk-navbar-left">
+              <div class="uk-navbar-item uk-light">
+                <a class="uk-flex uk-link-heading navbar-brand-text" href="/">
+                  <!-- Placeholder para el logo - reemplaza con tu SVG -->
+                  <svg
+                    class="coffe-logo"
+                    viewBox="0 0 24 24"
+                    fill="white"
+                    xmlns="http://www.w3.org/2000/svg"
+                  >
+                    <path
+                      d="M2 21h20v-2H2v2zm1.15-4.05L4 16.5l.85.45L5 17l1.25-.65c.74-.39 1.6-.59 2.47-.59s1.73.2 2.47.59L12 17l.81-.45c.74-.39 1.6-.59 2.47-.59s1.73.2 2.47.59L19 17l.15-.05L20 16.5l.85.45L22 17v2H2v-2l1.15-.55z"
+                    />
+                    <path
+                      d="M20 3H4v10c0 2.21 1.79 4 4 4h8c2.21 0 4-1.79 4-4V3zm-8 13c-1.66 0-3-1.34-3-3H9c-1.1 0-2-.9-2-2V5h10v6c0 1.1-.9 2-2 2h-1c0 1.66-1.34 3-3 3z"
+                    />
+                  </svg>
+                  <button
+                    class="uk-margin-left uk-text-capitalize uk-text-left uk-text-small uk-button uk-button-link navbar-brand-text"
+                  >
+                    <strong
+                      >Chocolate<br /><span id="current-user"
+                        >Invitado</span
+                      ></strong
+                    >
+                  </button>
+                </a>
+              </div>
+            </div>
+
+            <!-- Navbar Center -->
+            <div class="uk-navbar-center uk-visible@l">
+              <div class="uk-navbar-item uk-dark">
+                <a
+                  class="uk-button uk-button-secondary uk-border-rounded nav-link"
+                  href="/api"
+                >
+                  API
+                </a>
+              </div>
+              <div class="uk-navbar-item uk-light">
+                <a
+                  class="uk-text-capitalize uk-button uk-button-text uk-light nav-link"
+                  href="/menu"
+                >
+                  Menú
+                </a>
+              </div>
+              <div class="uk-navbar-item uk-light">
+                <a
+                  class="uk-text-capitalize uk-button uk-button-text nav-link"
+                  href="/suggest"
+                >
+                  Recomendado
+                </a>
+              </div>
+              <div class="uk-navbar-item uk-light">
+                <a
+                  class="uk-text-capitalize uk-button uk-button-text uk-light nav-link"
+                  href="/blog"
+                >
+                  Blog
+                </a>
+              </div>
+              <div class="uk-navbar-item uk-light">
+                <a
+                  class="uk-text-capitalize uk-button uk-button-text uk-light nav-link"
+                  href="/about"
+                >
+                  Nosotros
+                </a>
+              </div>
+            </div>
+
+            <!-- Navbar Right -->
+            <div class="uk-navbar-right uk-visible@l">
+              <!-- Login/Logout Button -->
+              <div class="uk-navbar-item uk-light">
+                <button
+                  id="auth-btn"
+                  class="uk-text-capitalize uk-text-normal uk-button uk-button-secondary uk-border-rounded"
+                  onclick="toggleAuth()"
+                >
+                  Iniciar Sesión
+                </button>
+              </div>
+              <div class="uk-navbar-item uk-dark">
+                <a
+                  class="uk-text-capitalize uk-button uk-button-secondary uk-border-rounded"
+                  href="#"
+                >
+                  Registrarse
+                </a>
+              </div>
+            </div>
+
+            <!-- Mobile Menu Toggle -->
+            <div class="uk-hidden@l uk-navbar-right">
+              <a
+                class="uk-navbar-toggle"
+                uk-navbar-toggle-icon="true"
+                uk-toggle="target: #burger-menu"
+              ></a>
+
+              <!-- Off-canvas Mobile Menu -->
+              <div id="burger-menu" uk-offcanvas="overlay: true; flip: true">
+                <div class="uk-offcanvas-bar">
+                  <button
+                    class="uk-offcanvas-close"
+                    type="button"
+                    uk-close="true"
+                  ></button>
+
+                  <div
+                    class="uk-flex uk-flex-column uk-grid-row-small uk-margin-medium-top"
+                    uk-grid="true"
+                  >
+                    <div class="uk-flex-left">
+                      <a
+                        class="uk-button uk-button-secondary uk-border-rounded"
+                        href="/api"
+                      >
+                        <strong>API</strong>
+                      </a>
+                    </div>
+                    <div class="uk-flex-left uk-margin-small-left">
+                      <a
+                        class="uk-text-capitalize uk-button uk-button-text uk-light"
+                        href="/menu"
+                      >
+                        Menú
+                      </a>
+                    </div>
+                    <div class="uk-flex-left uk-margin-small-left">
+                      <a
+                        class="uk-text-capitalize uk-button uk-button-text"
+                        href="/suggest"
+                      >
+                        Recomendado
+                      </a>
+                    </div>
+                    <div class="uk-flex-left uk-margin-small-left">
+                      <a
+                        class="uk-text-capitalize uk-button uk-button-text uk-light"
+                        href="/blog"
+                      >
+                        Blog
+                      </a>
+                    </div>
+                    <div class="uk-flex-left uk-margin-small-left">
+                      <a
+                        class="uk-text-capitalize uk-button uk-button-text uk-light"
+                        href="/about"
+                      >
+                        Nosotros
+                      </a>
+                    </div>
+                    <hr class="uk-divider-icon" />
+                    <div class="uk-light">
+                      <button
+                        id="mobile-auth-btn"
+                        class="uk-text-capitalize uk-text-normal uk-button uk-button-secondary uk-border-rounded uk-width-1-1"
+                        onclick="toggleAuth()"
+                      >
+                        Iniciar Sesión
+                      </button>
+                    </div>
+                    <div class="uk-dark">
+                      <a
+                        class="uk-text-capitalize uk-text-normal uk-button uk-button-secondary uk-border-rounded uk-width-1-1"
+                        href="#"
+                      >
+                        Registrarse
+                      </a>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </nav>
+    </div>
+
+    <!-- Login Modal -->
+    <div id="login-modal" class="uk-modal" uk-modal>
+      <div class="uk-modal-dialog uk-modal-body">
+        <h2 class="uk-modal-title">Iniciar Sesión</h2>
+        <form onsubmit="handleLogin(event)">
+          <div class="uk-margin">
+            <label class="uk-form-label" for="username"
+              >Nombre de usuario:</label
+            >
+            <div class="uk-form-controls">
+              <input
+                class="uk-input"
+                id="username"
+                type="text"
+                placeholder="Ingresa tu nombre de usuario"
+                required
+              />
+            </div>
+          </div>
+          <div class="uk-margin">
+            <button
+              class="uk-button uk-button-primary uk-modal-close"
+              type="submit"
+            >
+              Iniciar Sesión
+            </button>
+            <button
+              class="uk-button uk-button-default uk-modal-close uk-margin-small-left"
+              type="button"
+            >
+              Cancelar
+            </button>
+          </div>
+        </form>
+      </div>
+    </div>
+
+    <!-- Main Content -->
+    <main
+      class="main-content uk-background-cover first-child-adjustment uk-height-viewport"
+      style="
+        background-image: url('../assets/img/fondo_6.jpg');
+        background-attachment: fixed;
+      "
+    >
+      <div class="uk-container uk-section">
+        <!-- Título de la página -->
+        <h1
+          class="uk-heading-line uk-text-center uk-margin-large-bottom"
+          style="color: white"
+        >
+          Explora APIs
+        </h1>
+
+        <!-- Acordeón de APIs -->
+        <ul class="uk-accordion" uk-accordion="multiple: true">
+          <!-- GitHub API -->
+          <li
+            class="uk-card uk-card-default uk-card-body uk-box-shadow-medium uk-border-rounded uk-background-default"
+          >
+            <a href="" class="uk-accordion-title uk-text-lead uk-text-bold">
+              <span uk-icon="icon: github; ratio: 2"></span> GitHub API
+            </a>
+            <div class="uk-accordion-content uk-padding-small">
+              <!-- Contenido GitHub API -->
+              <div id="github-api-content">
+                <div class="uk-margin">
+                  <h3 class="uk-heading-bullet">Buscar Usuario de GitHub</h3>
+                  <p class="uk-text-meta">
+                    Ingresa un nombre de usuario para obtener información de su
+                    perfil público.
+                  </p>
+                </div>
+
+                <form id="github-form" class="uk-grid-small" uk-grid>
+                  <div class="uk-width-expand">
+                    <input
+                      id="github-username"
+                      class="uk-input"
+                      type="text"
+                      placeholder="Ej: octocat"
+                      required
+                    />
+                  </div>
+                  <div class="uk-width-auto">
+                    <button class="uk-button uk-button-primary" type="submit">
+                      <span uk-icon="search"></span> Buscar
+                    </button>
+                  </div>
+                </form>
+
+                <!-- Loading -->
+                <div
+                  id="github-loading"
+                  class="uk-text-center uk-margin hidden"
+                >
+                  <div uk-spinner="ratio: 2"></div>
+                  <p>Buscando usuario...</p>
+                </div>
+
+                <!-- Error -->
+                <div
+                  id="github-error"
+                  class="uk-alert-danger uk-margin hidden"
+                  uk-alert
+                >
+                  <a class="uk-alert-close" uk-close></a>
+                  <p id="github-error-message">Error al buscar el usuario</p>
+                </div>
+
+                <!-- Results -->
+                <div id="github-results" class="uk-margin-large-top hidden">
+                  <div class="uk-card uk-card-default uk-card-body">
+                    <div class="uk-grid-medium uk-flex-middle" uk-grid>
+                      <div class="uk-width-auto">
+                        <img
+                          id="github-avatar"
+                          class="uk-border-circle"
+                          width="80"
+                          height="80"
+                          src=""
+                          alt="Avatar"
+                        />
+                      </div>
+                      <div class="uk-width-expand">
+                        <h3
+                          id="github-name"
+                          class="uk-card-title uk-margin-remove-bottom"
+                        ></h3>
+                        <p
+                          id="github-login"
+                          class="uk-text-meta uk-margin-remove-top"
+                        ></p>
+                        <p id="github-bio" class="uk-margin-small"></p>
+                      </div>
+                    </div>
+                    <div class="uk-grid-small uk-margin-top" uk-grid>
+                      <div class="uk-width-auto">
+                        <span class="uk-label uk-label-success">
+                          <span uk-icon="users"></span>
+                          <span id="github-followers">0</span> Seguidores
+                        </span>
+                      </div>
+                      <div class="uk-width-auto">
+                        <span class="uk-label uk-label-warning">
+                          <span uk-icon="heart"></span>
+                          <span id="github-following">0</span> Siguiendo
+                        </span>
+                      </div>
+                      <div class="uk-width-auto">
+                        <span class="uk-label">
+                          <span uk-icon="folder"></span>
+                          <span id="github-repos">0</span> Repositorios
+                        </span>
+                      </div>
+                    </div>
+                    <div class="uk-margin-top">
+                      <a
+                        id="github-profile-link"
+                        class="uk-button uk-button-default uk-button-small"
+                        target="_blank"
+                      >
+                        <span uk-icon="link"></span> Ver Perfil
+                      </a>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </li>
+
+          <!-- MangaDex API -->
+          <li
+            class="uk-card uk-card-default uk-card-body uk-box-shadow-medium uk-border-rounded uk-background-default"
+          >
+            <a href="" class="uk-accordion-title uk-text-lead uk-text-bold">
+              📚 MangaDex API
+            </a>
+            <div class="uk-accordion-content">
+              <!-- Contenido MangaDex API -->
+              <div id="mangadex-api-content">
+                <div class="uk-margin">
+                  <h3 class="uk-heading-bullet">Buscar Manga</h3>
+                  <p class="uk-text-meta">
+                    Busca tu manga favorito en la base de datos de MangaDex.
+                  </p>
+                </div>
+
+                <form id="mangadx-form" class="uk-grid-small" uk-grid>
+                  <div class="uk-width-expand">
+                    <input
+                      id="manga-title"
+                      class="uk-input"
+                      type="text"
+                      placeholder="Ej: One Piece"
+                      required
+                    />
+                  </div>
+                  <div class="uk-width-auto">
+                    <button class="uk-button uk-button-secondary" type="submit">
+                      <span uk-icon="search"></span> Buscar
+                    </button>
+                  </div>
+                </form>
+
+                <!-- Loading -->
+                <div id="manga-loading" class="uk-text-center uk-margin hidden">
+                  <div uk-spinner="ratio: 2"></div>
+                  <p>Buscando manga...</p>
+                </div>
+
+                <!-- Error -->
+                <div
+                  id="manga-error"
+                  class="uk-alert-danger uk-margin hidden"
+                  uk-alert
+                >
+                  <a class="uk-alert-close" uk-close></a>
+                  <p id="manga-error-message">Error al buscar el manga</p>
+                </div>
+
+                <!-- Results -->
+                <div id="manga-results" class="uk-margin-large-top hidden">
+                  <h4>Resultados de búsqueda:</h4>
+                  <div
+                    id="manga-grid"
+                    class="uk-grid-small uk-child-width-1-2@s uk-child-width-1-3@m uk-child-width-1-4@l"
+                    uk-grid
+                  >
+                    <!-- Los resultados se insertarán aquí dinámicamente -->
+                  </div>
+                </div>
+              </div>
+            </div>
+          </li>
+        </ul>
+      </div>
+    </main>
+
+    <style>
+      .first-child-adjustment {
+        padding-top: 0;
+      }
+
+      .hidden {
+        display: none !important;
+      }
+
+      .manga-card {
+        transition: transform 0.3s ease;
+      }
+
+      .manga-card:hover {
+        transform: translateY(-5px);
+      }
+
+      .manga-cover {
+        width: 100%;
+        height: 200px;
+        object-fit: cover;
+      }
+    </style>
+
+    <script>
+      // GitHub API Functionality
+      document
+        .getElementById("github-form")
+        .addEventListener("submit", async function (e) {
+          e.preventDefault();
+
+          const username = document
+            .getElementById("github-username")
+            .value.trim();
+          if (!username) return;
+
+          // Show loading
+          document.getElementById("github-loading").classList.remove("hidden");
+          document.getElementById("github-error").classList.add("hidden");
+          document.getElementById("github-results").classList.add("hidden");
+
+          try {
+            const response = await fetch(
+              `https://api.github.com/users/${username}`
+            );
+
+            if (!response.ok) {
+              throw new Error("Usuario no encontrado");
+            }
+
+            const userData = await response.json();
+
+            // Hide loading
+            document.getElementById("github-loading").classList.add("hidden");
+
+            // Populate results
+            document.getElementById("github-avatar").src = userData.avatar_url;
+            document.getElementById("github-name").textContent =
+              userData.name || userData.login;
+            document.getElementById(
+              "github-login"
+            ).textContent = `@${userData.login}`;
+            document.getElementById("github-bio").textContent =
+              userData.bio || "Sin biografía disponible";
+            document.getElementById("github-followers").textContent =
+              userData.followers;
+            document.getElementById("github-following").textContent =
+              userData.following;
+            document.getElementById("github-repos").textContent =
+              userData.public_repos;
+            document.getElementById("github-profile-link").href =
+              userData.html_url;
+
+            // Show results
+            document
+              .getElementById("github-results")
+              .classList.remove("hidden");
+          } catch (error) {
+            // Hide loading
+            document.getElementById("github-loading").classList.add("hidden");
+
+            // Show error
+            document.getElementById("github-error-message").textContent =
+              error.message;
+            document.getElementById("github-error").classList.remove("hidden");
+          }
+        });
+
+      // MangaDex API Functionality
+      document
+        .getElementById("mangadx-form")
+        .addEventListener("submit", async function (e) {
+          e.preventDefault();
+
+          const title = document.getElementById("manga-title").value.trim();
+          if (!title) return;
+
+          // Show loading
+          document.getElementById("manga-loading").classList.remove("hidden");
+          document.getElementById("manga-error").classList.add("hidden");
+          document.getElementById("manga-results").classList.add("hidden");
+
+          try {
+            const response = await fetch(
+              `https://api.mangadx.org/manga?title=${encodeURIComponent(
+                title
+              )}&limit=8&contentRating[]=safe&contentRating[]=suggestive`
+            );
+
+            if (!response.ok) {
+              throw new Error("Error al buscar manga");
+            }
+
+            const data = await response.json();
+
+            // Hide loading
+            document.getElementById("manga-loading").classList.add("hidden");
+
+            if (data.data && data.data.length > 0) {
+              const mangaGrid = document.getElementById("manga-grid");
+              mangaGrid.innerHTML = "";
+
+              data.data.forEach((manga) => {
+                const title =
+                  manga.attributes.title.en ||
+                  manga.attributes.title.ja ||
+                  Object.values(manga.attributes.title)[0] ||
+                  "Título desconocido";
+
+                const description =
+                  manga.attributes.description.en ||
+                  manga.attributes.description.ja ||
+                  Object.values(manga.attributes.description)[0] ||
+                  "Sin descripción disponible";
+
+                const year = manga.attributes.year || "N/A";
+                const status = manga.attributes.status || "N/A";
+
+                // Find cover relationship
+                const coverRel = manga.relationships.find(
+                  (rel) => rel.type === "cover_art"
+                );
+                const coverId = coverRel ? coverRel.id : null;
+                const coverUrl = coverId
+                  ? `https://uploads.mangadx.org/covers/${manga.id}/${coverId}.256.jpg`
+                  : "https://via.placeholder.com/200x250?text=No+Cover";
+
+                const mangaCard = `
+                    <div>
+                        <div class="uk-card uk-card-default uk-card-hover manga-card">
+                            <div class="uk-card-media-top">
+                                <img class="manga-cover" src="${coverUrl}" alt="${title}" onerror="this.src='https://via.placeholder.com/200x250?text=No+Cover'">
+                            </div>
+                            <div class="uk-card-body uk-padding-small">
+                                <h3 class="uk-card-title uk-text-truncate" title="${title}">${title}</h3>
+                                <p class="uk-text-small uk-text-muted">${year} • ${status}</p>
+                                <p class="uk-text-small" style="display: -webkit-box; -webkit-line-clamp: 3; -webkit-box-orient: vertical; overflow: hidden;">
+                                    ${
+                                      description.length > 100
+                                        ? description.substring(0, 100) + "..."
+                                        : description
+                                    }
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                `;
+
+                mangaGrid.innerHTML += mangaCard;
+              });
+
+              // Show results
+              document
+                .getElementById("manga-results")
+                .classList.remove("hidden");
+            } else {
+              throw new Error("No se encontraron resultados");
+            }
+          } catch (error) {
+            // Hide loading
+            document.getElementById("manga-loading").classList.add("hidden");
+
+            // Show error
+            document.getElementById("manga-error-message").textContent =
+              error.message;
+            document.getElementById("manga-error").classList.add("hidden");
+          }
+        });
+    </script>
+
+    <!-- Footer -->
+    <footer
+      class="uk-section uk-section-small"
+      style="background-color: #2f2c2c; width: 100%; z-index: 10"
+    >
+      <div class="uk-container">
+        <div
+          class="uk-flex uk-flex-between uk-flex-middle uk-grid-small"
+          uk-grid=""
+        >
+          <div>
+            <!-- Logo del café -->
+            <img
+              src="../assets/img/coffe-user-logo.svg"
+              alt="Chocolate Coffee Logo"
+              class="coffe-logo"
+            />
+          </div>
+
+          <div class="uk-text-top">
+            <span class="uk-text-small uk-text-muted">Síguenos</span>
+            <div class="uk-margin-small-top">
+              <a
+                href="https://www.x.com"
+                class="uk-icon-button"
+                uk-icon="icon: x"
+                target="_blank"
+              ></a>
+              <a
+                href="https://www.instagram.com"
+                class="uk-icon-button uk-margin-small-left"
+                uk-icon="icon: instagram"
+                target="_blank"
+              ></a>
+              <a
+                href="https://www.youtube.com"
+                class="uk-icon-button uk-margin-small-left"
+                uk-icon="icon: youtube"
+                target="_blank"
+              ></a>
+              <a
+                href="https://www.linkedin.com"
+                class="uk-icon-button uk-margin-small-left"
+                uk-icon="icon: linkedin"
+                target="_blank"
+              ></a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </footer>
+
+    <script>
+      // Estado global para simular la autenticación
+      let currentUser = null;
+
+      // Función para manejar el login/logout
+      function toggleAuth() {
+        if (currentUser) {
+          // Logout
+          currentUser = null;
+          updateAuthState();
+        } else {
+          // Abrir modal de login
+          UIkit.modal("#login-modal").show();
+        }
+      }
+
+      // Función para manejar el envío del formulario de login
+      function handleLogin(event) {
+        event.preventDefault();
+        const username = document.getElementById("username").value.trim();
+
+        if (username) {
+          currentUser = username;
+          updateAuthState();
+          document.getElementById("username").value = "";
+        }
+      }
+
+      // Función para actualizar la UI según el estado de autenticación
+      function updateAuthState() {
+        const authBtn = document.getElementById("auth-btn");
+        const mobileAuthBtn = document.getElementById("mobile-auth-btn");
+        const currentUserSpan = document.getElementById("current-user");
+
+        if (currentUser) {
+          // Usuario logueado
+          authBtn.textContent = "Cerrar Sesión";
+          mobileAuthBtn.textContent = "Cerrar Sesión";
+          currentUserSpan.textContent = currentUser;
+        } else {
+          // Usuario no logueado
+          authBtn.textContent = "Iniciar Sesión";
+          mobileAuthBtn.textContent = "Iniciar Sesión";
+          currentUserSpan.textContent = "Invitado";
+        }
+      }
+
+      // Función para marcar el enlace activo
+      function setActiveLink() {
+        const currentPath = window.location.pathname;
+        const navLinks = document.querySelectorAll(".nav-link");
+
+        navLinks.forEach((link) => {
+          link.classList.remove("active");
+          if (link.getAttribute("href") === currentPath) {
+            link.classList.add("active");
+          }
+        });
+      }
+
+      // Inicializar cuando se carga la página
+      document.addEventListener("DOMContentLoaded", function () {
+        updateAuthState();
+        setActiveLink();
+      });
+
+      // Actualizar enlaces activos cuando cambie la página (para SPAs futuras)
+      window.addEventListener("popstate", setActiveLink);
+    </script>
+  </body>
+</html>
