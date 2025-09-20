@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <link rel="icon" type="image/svg+xml" href="coffe.svg">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- UIkit CSS -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/uikit@3.23.1/dist/css/uikit.min.css">
+    <link rel="stylesheet" href="assets/index.css">
+    <link rel="stylesheet" href="assets/blog.css">
+    <title>API - Coffe Soft</title>
+</head>
+<body>
+    <!-- Navbar (mismo que index.html) -->
+    <div uk-sticky="sel-target: .uk-navbar-container; cls-active: uk-navbar-sticky">
+        <nav class="uk-navbar-container uk-navbar-transparent">
+            <div class="uk-container uk-width-1-1 background-opaque">
+                <div uk-navbar="mode: click" class="uk-flex">
+                    <div class="uk-navbar-left">
+                        <div class="uk-navbar-item uk-light">
+                            <a class="uk-flex uk-link-heading" href="index.html">
+                                <img src="assets/img/coffe-user-logo.svg" alt="Logo">
+                                <button class="uk-margin-left uk-text-capitalize uk-text-left uk-text-small uk-button uk-button-link">
+                                    <strong>
+                                        Chocolate<br><span id="navbar-username"></span>
+                                    </strong>
+                                </button>
+                            </a>
+                        </div>
+                    </div>
+                    <div class="uk-navbar-center uk-visible@l">
+                        <div class="uk-navbar-item uk-dark">
+                            <a class="uk-button uk-button-secondary uk-border-rounded" href="api.html">API</a>
+                        </div>
+                        <div class="uk-navbar-item uk-light">
+                            <a class="uk-text-capitalize uk-button uk-button-text uk-light" href="menu.html">Menú</a>
+                        </div>
+                        <div class="uk-navbar-item uk-light">
+                            <a class="uk-text-capitalize uk-button uk-button-text" href="recomendado.html">Recomendado</a>
+                        </div>
+                        <div class="uk-navbar-item uk-light">
+                            <a class="uk-text-capitalize uk-button uk-button-text uk-light" href="blog.html">Blog</a>
+                        </div>
+                        <div class="uk-navbar-item uk-light">
+                            <a class="uk-text-capitalize uk-button uk-button-text uk-light" href="nosotros.html">Nosotros</a>
+                        </div>
+                    </div>
+                    <div class="uk-navbar-right uk-visible@l">
+                        <div class="uk-navbar-item uk-light" id="auth-buttons">
+                            <!-- Los botones se insertan dinámicamente con JS -->
+                        </div>
+                        <div class="uk-navbar-item uk-dark">
+                            <a class="uk-text-capitalize uk-button uk-button-secondary uk-border-rounded" href="#">Registrarse</a>
+                        </div>
+                    </div>
+                    <!-- Menú hamburguesa -->
+                    <div class="uk-hidden@l uk-navbar-right">
+                        <a class="uk-navbar-toggle" uk-navbar-toggle-icon="true" uk-toggle="target: #burger-menu"></a>
+                        <div id="burger-menu" uk-offcanvas="overlay: true; flip: true">
+                            <div class="uk-offcanvas-bar">
+                                <button class="uk-offcanvas-close" type="button" uk-close="true"></button>
+                                <div class="uk-flex uk-flex-column uk-grid-row-small uk-margin-medium-top" uk-grid="true">
+                                    <div class="uk-flex-left">
+                                        <a class="uk-button uk-button-secondary uk-border-rounded" href="api.html"><strong>API</strong></a>
+                                    </div>
+                                    <div class="uk-flex-left uk-margin-small-left">
+                                        <a class="uk-text-capitalize uk-button uk-button-text uk-light" href="menu.html">Menú</a>
+                                    </div>
+                                    <div class="uk-flex-left uk-margin-small-left">
+                                        <a class="uk-text-capitalize uk-button uk-button-text" href="recomendado.html">Recomendado</a>
+                                    </div>
+                                    <div class="uk-flex-left uk-margin-small-left">
+                                        <a class="uk-text-capitalize uk-button uk-button-text uk-light" href="blog.html">Blog</a>
+                                    </div>
+                                    <div class="uk-flex-left uk-margin-small-left">
+                                        <a class="uk-text-capitalize uk-button uk-button-text uk-light" href="nosotros.html">Nosotros</a>
+                                    </div>
+                                    <hr class="uk-divider-icon">
+                                    <div class="uk-light">
+                                        <a class="uk-text-capitalize uk-text-normal uk-button uk-button-secondary uk-border-rounded uk-width-1-1" href="#">Iniciar Sesión</a>
+                                    </div>
+                                    <div class="uk-dark">
+                                        <a class="uk-text-capitalize uk-text-normal uk-button uk-button-secondary uk-border-rounded uk-width-1-1" href="#">Registrarse</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </nav>
+    </div>
+
+    <!-- Login Modal -->
+    <div id="login-modal" uk-modal class="uk-modal">
+        <div class="uk-modal-dialog uk-modal-body blog-login-container">
+            <button class="uk-modal-close-default color-text-black" type="button" data-uk-close></button>
+            <h2 class="uk-modal-title color-text-black" id="modal-title">Iniciar Sesión</h2>
+            <form class="uk-form-stacked" id="login-form">
+                <div class="uk-margin">
+                    <label class="uk-form-label color-text-black">Usuario</label>
+                    <input class="uk-input blog-login-input" type="text" id="username-input" required>
+                </div>
+                <div class="uk-margin">
+                    <label class="uk-form-label color-text-black">Contraseña</label>
+                    <input class="uk-input blog-login-input" type="password" id="password-input" required>
+                </div>
+                <div class="uk-flex uk-flex-between">
+                    <button class="uk-button uk-button-primary blog-container-round" type="submit" id="submit-btn">Iniciar Sesión</button>
+                    <button class="uk-button uk-button-link" type="button" id="toggle-register">¿No tienes cuenta?</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- API Content -->
+    <div class="uk-background-cover first-child-adjustment uk-height-viewport"
+        style="background-image: url('assets/img/fondo_6.jpg'); background-attachment: fixed">
+        <div class="uk-container uk-section">
+            <h1 class="uk-heading-line uk-text-center uk-margin-large-bottom" style="color: white">Explora APIs</h1>
+            
+            <!-- Acordeón de APIs -->
+            <ul class="uk-accordion" uk-accordion="multiple: true">
+                <!-- GitHub API -->
+                <li class="uk-card uk-card-default uk-card-body uk-box-shadow-medium uk-border-rounded uk-background-default">
+                    <a href="" class="uk-accordion-title uk-text-lead uk-text-bold">
+                        <span uk-icon="icon: github; ratio: 2"></span> GitHub API
+                    </a>
+                    <div class="uk-accordion-content uk-padding-small">
+                        <p>Búsqueda de usuarios de GitHub</p>
+                        <!-- Buscador GitHub -->
+                        <form class="uk-search uk-search-default uk-margin" id="github-search-form">
+                            <input type="text" placeholder="Buscar un usuario (ej: midudev)..." 
+                                   class="uk-search-input" id="github-search-input">
+                            <button type="submit" class="uk-search-icon-flip" uk-search-icon=""></button>
+                        </form>
+                        <div id="github-error" style="display: none;">
+                            <div class="uk-alert-danger uk-text-center uk-margin" uk-alert="true">
+                                Hubo un error al consultar la API
+                            </div>
+                        </div>
+                        <div id="github-loading" style="display: none;">
+                            <p class="uk-text-center">Cargando...</p>
+                        </div>
+                        <div id="github-results"></div>
+                    </div>
+                </li>
+                
+                <!-- MangaDex API -->
+                <li class="uk-card uk-card-default uk-card-body uk-box-shadow-medium uk-border-rounded uk-background-default">
+                    <a href="" class="uk-accordion-title uk-text-lead uk-text-bold">📚 MangaDex API</a>
+                    <div class="uk-accordion-content">
+                        <p>Búsqueda de mangas de MangaDex</p>
+                        <!-- Buscador MangaDex -->
+                        <form class="uk-search uk-search-default uk-margin" id="manga-search-form">
+                            <input type="text" placeholder="Buscar un manga (ej: Bleach)..." 
+                                   class="uk-search-input" id="manga-search-input">
+                            <button type="submit" class="uk-search-icon-flip" uk-search-icon=""></button>
+                        </form>
+                        <div id="manga-error" style="display: none;">
+                            <div class="uk-alert-danger uk-text-center uk-margin" uk-alert="true">
+                                Hubo un error al consultar la API
+                            </div>
+                        </div>
+                        <div id="manga-loading" style="display: none;">
+                            <p class="uk-text-center">Cargando...</p>
+                        </div>
+                        <div id="manga-results"></div>
+                    </div>
+                </li>
+            </ul>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="uk-section uk-section-small" style="background-color: #2f2c2c; width: 100%; z-index: 10">
+        <div class="uk-container">
+            <div class="uk-flex uk-flex-between uk-flex-middle uk-grid-small" uk-grid="">
+                <div>
+                    <img src="assets/img/coffe-user-logo.svg" alt="Logo">
+                </div>
+                <div class="uk-text-top">
+                    <span class="uk-text-small uk-text-muted">Síguenos</span>
+                    <div class="uk-margin-small-top">
+                        <a href="https://www.x.com" class="uk-icon-button" uk-icon="icon: x" target="_blank"></a>
+                        <a href="https://www.instagram.com" class="uk-icon-button uk-margin-small-left" uk-icon="icon: instagram" target="_blank"></a>
+                        <a href="https://www.youtube.com" class="uk-icon-button uk-margin-small-left" uk-icon="icon: youtube" target="_blank"></a>
+                        <a href="https://www.linkedin.com" class="uk-icon-button uk-margin-small-left" uk-icon="icon: linkedin" target="_blank"></a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- UIkit JS -->
+    <script src="https://cdn.jsdelivr.net/npm/uikit@3.23.1/dist/js/uikit.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/uikit@3.23.1/dist/js/uikit-icons.min.js"></script>
+    <!-- Auth System -->
+    <script src="js/auth.js"></script>
+    <!-- API System -->
+    <script src="js/api.js"></script>
+</body>
+</html>
