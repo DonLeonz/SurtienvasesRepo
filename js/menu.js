@@ -15,47 +15,39 @@ class MenuSystem {
         menuGrid.innerHTML = coffeeItems.map((item, index) => `
             <div>
                 <!-- Card del producto -->
-                <div class="uk-card uk-card-default uk-card-hover uk-flex uk-flex-column uk-height-1-1"
-                    style="background-color: #2c2c2c; border: 1px solid rgba(212, 167, 98, 0.1); border-radius: 8px; padding: 15px">
+                <div class="uk-card uk-card-default uk-card-hover uk-flex uk-flex-column uk-height-1-1 coffee-card-dark">
                     
                     <div class="uk-flex uk-flex-middle uk-flex-wrap uk-child-width-expand@m uk-grid-small" data-uk-grid>
                         <!-- Imagen -->
                         <div class="uk-flex uk-flex-center uk-width-1-3@s uk-width-1-4@m">
-                            <div class="uk-border-circle uk-overflow-hidden"
-                                style="width: 100px; height: 100px; min-width: 80px; border: 2px solid #d4a762; box-shadow: 0 2px 4px rgba(0,0,0,0.2)">
-                                <img src="${item.img}" alt="${item.title}" class="uk-cover"
-                                    style="width: 100%; height: 100%; object-fit: cover; object-position: center">
+                            <div class="uk-border-circle uk-overflow-hidden coffee-image-circle">
+                                <img src="${item.img}" alt="${item.title}" class="uk-cover coffee-image-cover">
                             </div>
                         </div>
                         
                         <!-- Información básica -->
-                        <div style="flex-grow: 1">
+                        <div class="coffee-flex-grow">
                             <div class="uk-flex uk-flex-between uk-flex-middle">
-                                <h3 class="uk-card-title uk-margin-remove-bottom"
-                                    style="color: #f5f5f5; font-size: 1.2rem">
+                                <h3 class="uk-card-title uk-margin-remove-bottom coffee-title-white">
                                     ${item.title}
                                 </h3>
-                                <span class="uk-label"
-                                    style="background-color: rgba(212, 167, 98, 0.9); color: #2c1608; padding: 3px 10px; border-radius: 12px; font-weight: bold; font-size: 0.9rem">
+                                <span class="uk-label coffee-price-badge">
                                     ${item.price}
                                 </span>
                             </div>
                             
-                            <div class="uk-margin-small-top">
-                                <span class="uk-badge"
-                                    style="background-color: rgba(94, 43, 22, 0.7); color: #f5f5f5; font-size: 0.7rem; padding: 2px 8px; margin-right: 8px">
+                            <div class="coffee-margin-small-top">
+                                <span class="coffee-menu-origin">
                                     ${item.origin}
                                 </span>
                                 ${item.isPopular ? `
-                                    <span class="uk-badge"
-                                        style="background-color: rgba(165, 42, 42, 0.7); color: white; font-size: 0.7rem; padding: 2px 8px">
+                                    <span class="uk-badge coffee-badge-popular">
                                         ★ Bestseller
                                     </span>
                                 ` : ''}
                             </div>
                             
-                            <p class="uk-margin-small-top"
-                                style="color: rgba(245, 245, 245, 0.8); font-size: 0.85rem; line-height: 1.5">
+                            <p class="coffee-margin-small-top coffee-text-white-muted">
                                 ${item.description}
                             </p>
                         </div>
@@ -63,8 +55,7 @@ class MenuSystem {
                     
                     <!-- Botón para abrir modal -->
                     <div class="uk-text-center uk-padding-small">
-                        <button class="uk-button uk-button-default"
-                            style="color: #d4a762; background-color: transparent; border: 1px solid rgba(212, 167, 98, 0.5); border-radius: 6px; padding: 3px 15px; font-size: 0.85rem; transition: all 0.3s"
+                        <button class="uk-button uk-button-default coffee-button-outline"
                             onclick="menuSystem.showModal(${index})">
                             Ver más detalles
                         </button>
@@ -73,45 +64,40 @@ class MenuSystem {
                 
                 <!-- Modal para este producto -->
                 <div id="modal-${index}" class="uk-modal-container uk-modal" data-uk-modal>
-                    <div class="uk-modal-dialog uk-modal-body uk-light"
-                        style="background-color: #2c2c2c; border-radius: 8px">
+                    <div class="uk-modal-dialog uk-modal-body uk-light coffee-modal-dark">
                         
-                        <button class="uk-modal-close-default" type="button" data-uk-close
-                            style="color: #d4a762"></button>
+                        <button class="uk-modal-close-default" type="button" data-uk-close></button>
                         
                         <div class="uk-grid-collapse" data-uk-grid>
                             <!-- Columna de imagen en modal -->
                             <div class="uk-width-1-3@m uk-width-1-1@s">
                                 <div class="uk-padding uk-flex uk-flex-center">
-                                    <div class="uk-border-circle uk-overflow-hidden"
-                                        style="width: 300px; height: 300px; border: 3px solid #d4a762; box-shadow: 0 4px 8px rgba(0,0,0,0.3)">
-                                        <img src="${item.img}" alt="${item.title}" class="uk-cover"
-                                            style="width: 100%; height: 100%; object-fit: cover; object-position: center">
+                                    <div class="uk-border-circle uk-overflow-hidden coffee-image-circle-large">
+                                        <img src="${item.img}" alt="${item.title}" class="uk-cover coffee-image-cover">
                                     </div>
                                 </div>
                             </div>
                             
                             <!-- Columna de contenido en modal -->
-                            <div class="uk-width-2-3@m uk-width-1-1@s uk-padding-large">
-                                <h2 class="uk-modal-title"
-                                    style="color: #d4a762; border-bottom: 1px solid rgba(212, 167, 98, 0.3); padding-bottom: 10px">
+                            <div class="uk-width-2-3@m uk-width-1-1@s coffee-padding-large">
+                                <h2 class="uk-modal-title coffee-title-gold-border">
                                     ${item.title}
                                 </h2>
                                 
                                 <div class="uk-margin-medium-top">
-                                    <h3 style="color: #f5f5f5; font-size: 1.2rem; margin-bottom: 15px">
+                                    <h3 class="coffee-modal-ingredients-title">
                                         Ingredientes:
                                     </h3>
-                                    <ul class="uk-list uk-list-bullet" style="color: rgba(245, 245, 245, 0.8)">
+                                    <ul class="uk-list uk-list-bullet coffee-modal-ingredients-list">
                                         ${(item.ingredients || []).map(ing => `<li>${ing}</li>`).join('')}
                                     </ul>
                                 </div>
                                 
                                 <div class="uk-margin-medium-top">
-                                    <h3 style="color: #f5f5f5; font-size: 1.2rem; margin-bottom: 15px">
+                                    <h3 class="coffee-modal-ingredients-title">
                                         Preparación:
                                     </h3>
-                                    <p style="color: rgba(245, 245, 245, 0.8); line-height: 1.6">
+                                    <p class="coffee-modal-preparation-text">
                                         ${item.preparation || "Información no disponible."}
                                     </p>
                                 </div>
@@ -119,14 +105,12 @@ class MenuSystem {
                                 <div class="uk-margin-medium-top">
                                     <div class="uk-grid-small" data-uk-grid>
                                         <div>
-                                            <span class="uk-label"
-                                                style="background-color: rgba(212, 167, 98, 0.15); color: #d4a762; font-size: 0.9rem; padding: 5px 10px">
+                                            <span class="uk-label coffee-label-transparent">
                                                 Tostado: ${item.roastLevel}
                                             </span>
                                         </div>
                                         <div>
-                                            <span class="uk-label"
-                                                style="background-color: rgba(212, 167, 98, 0.15); color: #d4a762; font-size: 0.9rem; padding: 5px 10px">
+                                            <span class="uk-label coffee-label-transparent">
                                                 Sabor: ${item.flavorProfile}
                                             </span>
                                         </div>
