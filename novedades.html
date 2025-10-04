@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta
       name="description"
-      content="SurtiEnvases - Tu proveedor de confianza en envases de vidrio, plástico y complementos en Neiva, Huila"
+      content="Novedades y noticias de SurtiEnvases - Artículos sobre envases y empaque"
     />
     <link rel="icon" type="image/svg+xml" href="coffe.svg" />
 
@@ -17,8 +17,9 @@
 
     <link rel="stylesheet" href="assets/index.css" />
     <link rel="stylesheet" href="assets/surtienvases-styles.css" />
+    <link rel="stylesheet" href="assets/blog.css" />
 
-    <title>SurtiEnvases - Tu Proveedor de Envases de Confianza</title>
+    <title>Novedades - SurtiEnvases</title>
   </head>
   <body>
     <!-- ========================================
@@ -212,68 +213,69 @@
     <!-- ============================================
        CONTENIDO PRINCIPAL
        ============================================ -->
-    <div
-      class="uk-background-cover uk-height-viewport uk-light first-child-adjustment uk-flex uk-position-relative"
-      style="background-image: url('assets/img/coffe-soft-header.svg')"
-    >
-      <div class="uk-container uk-margin-large-top uk-height-1-1">
+    <div class="uk-section first-child-adjustment uk-dark blog-background">
+      <div class="uk-container uk-text-default">
+        <!-- Formulario para agregar nueva noticia -->
         <div
-          class="uk-position-center-right uk-position-medium uk-width-1-2@m uk-padding"
+          class="uk-card uk-card-default uk-card-body uk-margin-bottom blog-container-round color-text-black blog-form-spacing"
         >
-          <h1 class="uk-heading-large">SurtiEnvases</h1>
-          <div class="uk-overlay uk-overlay-primary uk-padding-small">
-            <p>
-              Bienvenido a <strong>SurtiEnvases</strong>, tu aliado estratégico
-              en soluciones de empaque. Ofrecemos la más amplia variedad de
-              envases de vidrio, plástico y complementos para todas las
-              industrias: alimentos, farmacéutica, cosmética e industrial.
-              Calidad garantizada y entregas puntuales en Neiva y el Huila.
-            </p>
-          </div>
+          <h3 class="uk-card-title">Publicar Artículo</h3>
+          <form class="uk-grid-small" uk-grid id="news-form">
+            <div class="uk-width-1-2@s">
+              <input
+                class="uk-input blog-login-input"
+                type="text"
+                placeholder="Título del artículo"
+                id="news-title"
+                required
+              />
+            </div>
+            <div class="uk-width-1-2@s">
+              <input
+                class="uk-input blog-login-input"
+                type="text"
+                placeholder="Autor"
+                id="news-author"
+                value="Usuario Invitado"
+                required
+              />
+            </div>
+            <div class="uk-width-1-1">
+              <textarea
+                class="uk-textarea blog-login-input"
+                rows="3"
+                placeholder="Resumen o introducción del artículo"
+                id="news-excerpt"
+                required
+              ></textarea>
+            </div>
+            <div class="uk-width-1-1">
+              <input
+                type="file"
+                accept="image/*"
+                id="news-image"
+                class="uk-input blog-login-input"
+              />
+            </div>
+            <div class="uk-width-1-1">
+              <button
+                type="submit"
+                class="uk-button uk-button-secondary blog-container-round"
+              >
+                Publicar artículo
+              </button>
+            </div>
+          </form>
         </div>
-      </div>
-    </div>
 
-    <!-- Sección de características -->
-    <div class="uk-section uk-section-muted">
-      <div class="uk-container">
-        <h2 class="uk-heading-line uk-text-center">
-          <span>¿Por qué elegir SurtiEnvases?</span>
-        </h2>
-        <div class="uk-child-width-1-3@m uk-grid-match" uk-grid>
-          <div>
-            <div class="uk-card uk-card-default uk-card-body uk-text-center">
-              <span uk-icon="icon: cart; ratio: 3" class="icon-verde"></span>
-              <h3 class="uk-card-title">Amplio Catálogo</h3>
-              <p>
-                Más de 5,000 referencias en envases de vidrio, plástico, tapas y
-                complementos para todas las industrias.
-              </p>
-            </div>
-          </div>
-          <div>
-            <div class="uk-card uk-card-default uk-card-body uk-text-center">
-              <span
-                uk-icon="icon: location; ratio: 3"
-                class="icon-verde"
-              ></span>
-              <h3 class="uk-card-title">Entrega en el Huila</h3>
-              <p>
-                Cobertura en Neiva y municipios cercanos con tiempos de entrega
-                de 24 a 72 horas.
-              </p>
-            </div>
-          </div>
-          <div>
-            <div class="uk-card uk-card-default uk-card-body uk-text-center">
-              <span uk-icon="icon: check; ratio: 3" class="icon-verde"></span>
-              <h3 class="uk-card-title">Calidad Certificada</h3>
-              <p>
-                Todos nuestros productos cumplen con las normas técnicas
-                colombianas e internacionales.
-              </p>
-            </div>
-          </div>
+        <!-- Contenedor de artículos -->
+        <div
+          class="uk-child-width-1-2@s"
+          uk-grid="masonry: pack"
+          uk-grid
+          id="news-container"
+        >
+          <!-- Los artículos se cargan dinámicamente con JavaScript -->
         </div>
       </div>
     </div>
@@ -407,17 +409,15 @@
     <!-- ============================================
        SCRIPTS
        ============================================ -->
-    <!-- UIkit -->
+    <!-- UIkit primero -->
     <script src="https://cdn.jsdelivr.net/npm/uikit@3.21.13/dist/js/uikit.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/uikit@3.21.13/dist/js/uikit-icons.min.js"></script>
-
     <!-- Datos de productos -->
     <script src="js/productItems.js"></script>
-
-    <!-- Carrito universal -->
+    <!-- Carrito universal (en todas las páginas) -->
     <script src="js/surtienvases-cart.js"></script>
-
-    <!-- Navbar init -->
     <script src="js/navbar-init.js"></script>
+    <!-- Después de los scripts comunes -->
+    <script src="js/novedades-fixed.js"></script>
   </body>
 </html>
