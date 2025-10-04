@@ -1,0 +1,771 @@
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta
+      name="description"
+      content="Preguntas Frecuentes - SurtiEnvases. Encuentra respuestas sobre nuestros productos y servicios"
+    />
+    <link rel="icon" type="image/svg+xml" href="coffe.svg" />
+
+    <!-- UIkit CSS -->
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/uikit@3.23.1/dist/css/uikit.min.css"
+    />
+
+    <link rel="stylesheet" href="assets/index.css" />
+    <link rel="stylesheet" href="assets/surtienvases-styles.css" />
+
+    <title>Preguntas Frecuentes - SurtiEnvases</title>
+  </head>
+  <body>
+    <!-- ========================================
+         NAVBAR
+         ======================================== -->
+    <div
+      uk-sticky="sel-target: .uk-navbar-container; cls-active: uk-navbar-sticky"
+    >
+      <nav class="uk-navbar-container uk-navbar-transparent">
+        <div class="uk-container uk-width-1-1 background-opaque">
+          <div uk-navbar="mode: click" class="uk-flex">
+            <!-- Logo -->
+            <div class="uk-navbar-left">
+              <div class="uk-navbar-item uk-light">
+                <a class="uk-flex uk-link-heading" href="index.html">
+                  <img src="assets/img/coffe-user-logo.svg" alt="Logo" />
+                  <button
+                    class="uk-margin-left uk-text-capitalize uk-text-left uk-text-small uk-button uk-button-link"
+                  >
+                    <strong>SurtiEnvases</strong>
+                  </button>
+                </a>
+              </div>
+            </div>
+
+            <!-- Menú Desktop -->
+            <div class="uk-navbar-center uk-visible@l">
+              <div class="uk-navbar-item uk-dark">
+                <a
+                  class="uk-button uk-button-secondary uk-border-rounded"
+                  href="catalogo.html"
+                >
+                  Catálogo
+                </a>
+              </div>
+              <div class="uk-navbar-item uk-light">
+                <a
+                  class="uk-text-capitalize uk-button uk-button-text uk-light"
+                  href="productos.html"
+                >
+                  Productos
+                </a>
+              </div>
+              <div class="uk-navbar-item uk-light">
+                <a
+                  class="uk-text-capitalize uk-button uk-button-text uk-light"
+                  href="novedades.html"
+                >
+                  Novedades
+                </a>
+              </div>
+              <div class="uk-navbar-item uk-light">
+                <a
+                  class="uk-text-capitalize uk-button uk-button-text uk-light"
+                  href="nosotros.html"
+                >
+                  Nosotros
+                </a>
+              </div>
+              <div class="uk-navbar-item uk-light">
+                <a
+                  class="uk-text-capitalize uk-button uk-button-text uk-light"
+                  href="contacto.html"
+                >
+                  Contacto
+                </a>
+              </div>
+              <div class="uk-navbar-item uk-light">
+                <a
+                  class="uk-text-capitalize uk-button uk-button-text uk-light"
+                  href="preguntas-frecuentes.html"
+                >
+                  FAQ
+                </a>
+              </div>
+            </div>
+
+            <!-- Botón Cotizar Desktop -->
+            <div class="uk-navbar-right uk-visible@l">
+              <div class="uk-navbar-item uk-dark">
+                <button
+                  class="uk-button uk-button-secondary uk-border-rounded"
+                  id="navbar-quote-btn"
+                  style="position: relative"
+                >
+                  <span uk-icon="cart"></span> Cotizar
+                  <span
+                    class="cart-badge"
+                    id="cart-count-navbar"
+                    style="display: none"
+                    >0</span
+                  >
+                </button>
+              </div>
+            </div>
+
+            <!-- Menú Hamburguesa -->
+            <div class="uk-hidden@l uk-navbar-right">
+              <a
+                class="uk-navbar-toggle"
+                uk-navbar-toggle-icon
+                uk-toggle="target: #burger-menu"
+              ></a>
+
+              <div
+                id="burger-menu"
+                uk-offcanvas="mode: slide; overlay: true; flip: true"
+              >
+                <div class="uk-offcanvas-bar">
+                  <button
+                    class="burger-menu-close"
+                    type="button"
+                    onclick="UIkit.offcanvas('#burger-menu').hide()"
+                    aria-label="Cerrar menú"
+                  ></button>
+
+                  <div class="uk-margin-large-top">
+                    <div class="uk-margin">
+                      <a
+                        class="uk-button uk-button-secondary uk-border-rounded uk-width-1-1"
+                        href="catalogo.html"
+                      >
+                        <strong>Catálogo</strong>
+                      </a>
+                    </div>
+
+                    <div class="uk-margin-small">
+                      <a
+                        class="uk-button uk-button-text uk-width-1-1"
+                        href="productos.html"
+                      >
+                        Productos
+                      </a>
+                    </div>
+
+                    <div class="uk-margin-small">
+                      <a
+                        class="uk-button uk-button-text uk-width-1-1"
+                        href="novedades.html"
+                      >
+                        Novedades
+                      </a>
+                    </div>
+
+                    <div class="uk-margin-small">
+                      <a
+                        class="uk-button uk-button-text uk-width-1-1"
+                        href="nosotros.html"
+                      >
+                        Nosotros
+                      </a>
+                    </div>
+
+                    <div class="uk-margin-small">
+                      <a
+                        class="uk-button uk-button-text uk-width-1-1"
+                        href="contacto.html"
+                      >
+                        Contacto
+                      </a>
+                    </div>
+
+                    <div class="uk-margin-small">
+                      <a
+                        class="uk-button uk-button-text uk-width-1-1"
+                        href="preguntas-frecuentes.html"
+                      >
+                        FAQ
+                      </a>
+                    </div>
+
+                    <hr class="uk-divider-icon" />
+
+                    <div class="uk-margin">
+                      <button
+                        class="uk-button uk-button-secondary uk-border-rounded uk-width-1-1"
+                        id="mobile-cart-btn"
+                      >
+                        <span uk-icon="cart"></span> Ver Carrito
+                      </button>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </nav>
+    </div>
+
+    <!-- ============================================
+       CONTENIDO PRINCIPAL
+       ============================================ -->
+    <div class="first-child-adjustment uk-section coffee-section-gradient">
+      <div class="uk-container uk-container-large uk-padding uk-light">
+        <!-- Título -->
+        <div class="uk-text-center uk-margin-large-bottom">
+          <h2 class="uk-heading-small uk-text-uppercase">
+            <span
+              class="uk-display-inline-block uk-padding-small coffee-section-title-gold"
+            >
+              Preguntas Frecuentes
+            </span>
+          </h2>
+          <p class="uk-text-lead coffee-title-gold">
+            Encuentra respuestas a tus dudas sobre nuestros productos y
+            servicios
+          </p>
+        </div>
+
+        <!-- Categorías de preguntas -->
+        <div class="uk-margin-large">
+          <ul class="uk-subnav uk-subnav-pill uk-flex-center" uk-switcher>
+            <li><a href="#">General</a></li>
+            <li><a href="#">Pedidos y Envíos</a></li>
+            <li><a href="#">Productos</a></li>
+            <li><a href="#">Pagos</a></li>
+            <li><a href="#">Devoluciones</a></li>
+          </ul>
+
+          <ul class="uk-switcher uk-margin">
+            <!-- Preguntas Generales -->
+            <li>
+              <ul class="uk-accordion" uk-accordion>
+                <li
+                  class="uk-card uk-card-default uk-card-body uk-box-shadow-medium uk-border-rounded uk-margin-small coffee-card-dark-border"
+                >
+                  <a href="#" class="uk-accordion-title coffee-title-gold">
+                    ¿Qué es SurtiEnvases?
+                  </a>
+                  <div class="uk-accordion-content">
+                    <p class="coffee-text-white">
+                      SurtiEnvases es una empresa líder en la distribución de
+                      envases para todas las industrias en Colombia. Contamos
+                      con más de 15 años de experiencia ofreciendo soluciones de
+                      empaque en vidrio, plástico, y complementos para sectores
+                      como alimentos, farmacéutica, cosmética e industrial.
+                    </p>
+                  </div>
+                </li>
+                <li
+                  class="uk-card uk-card-default uk-card-body uk-box-shadow-medium uk-border-rounded uk-margin-small coffee-card-dark-border"
+                >
+                  <a href="#" class="uk-accordion-title coffee-title-gold">
+                    ¿Trabajan con empresas pequeñas?
+                  </a>
+                  <div class="uk-accordion-content">
+                    <p class="coffee-text-white">
+                      ¡Por supuesto! Atendemos desde emprendedores y pequeñas
+                      empresas hasta grandes industrias. Nuestros pedidos
+                      mínimos están diseñados para ser accesibles a todos los
+                      tamaños de negocio.
+                    </p>
+                  </div>
+                </li>
+                <li
+                  class="uk-card uk-card-default uk-card-body uk-box-shadow-medium uk-border-rounded uk-margin-small coffee-card-dark-border"
+                >
+                  <a href="#" class="uk-accordion-title coffee-title-gold">
+                    ¿Dónde están ubicados?
+                  </a>
+                  <div class="uk-accordion-content">
+                    <p class="coffee-text-white">
+                      Tenemos dos sedes en Neiva, Huila: Sede 1 en Calle 10
+                      #2-58 y Sede 2 en Calle 10 #1G-41. Esto nos permite hacer
+                      entregas rápidas en toda la región del Huila.
+                    </p>
+                  </div>
+                </li>
+                <li
+                  class="uk-card uk-card-default uk-card-body uk-box-shadow-medium uk-border-rounded uk-margin-small coffee-card-dark-border"
+                >
+                  <a href="#" class="uk-accordion-title coffee-title-gold">
+                    ¿Puedo solicitar muestras?
+                  </a>
+                  <div class="uk-accordion-content">
+                    <p class="coffee-text-white">
+                      Sí, ofrecemos muestras de nuestros productos. Para
+                      solicitarlas, contáctanos por WhatsApp o correo
+                      electrónico indicando los productos de tu interés y te
+                      enviaremos información sobre disponibilidad y costos de
+                      envío.
+                    </p>
+                  </div>
+                </li>
+              </ul>
+            </li>
+
+            <!-- Pedidos y Envíos -->
+            <li>
+              <ul class="uk-accordion" uk-accordion>
+                <li
+                  class="uk-card uk-card-default uk-card-body uk-box-shadow-medium uk-border-rounded uk-margin-small coffee-card-dark-border"
+                >
+                  <a href="#" class="uk-accordion-title coffee-title-gold">
+                    ¿Cuál es el pedido mínimo?
+                  </a>
+                  <div class="uk-accordion-content">
+                    <p class="coffee-text-white">
+                      El pedido mínimo varía según el producto. Generalmente
+                      manejamos cajas completas que pueden contener desde 24
+                      hasta 100 unidades dependiendo del tipo de envase.
+                      Consulta cada producto para conocer su cantidad mínima
+                      específica.
+                    </p>
+                  </div>
+                </li>
+                <li
+                  class="uk-card uk-card-default uk-card-body uk-box-shadow-medium uk-border-rounded uk-margin-small coffee-card-dark-border"
+                >
+                  <a href="#" class="uk-accordion-title coffee-title-gold">
+                    ¿Cuánto tarda la entrega?
+                  </a>
+                  <div class="uk-accordion-content">
+                    <p class="coffee-text-white">
+                      Los tiempos de entrega en Neiva son de 24-48 horas. Para
+                      municipios cercanos del Huila, el tiempo puede extenderse
+                      a 2-3 días hábiles. Para productos por encargo o
+                      importados, el tiempo puede extenderse a 15-30 días.
+                    </p>
+                  </div>
+                </li>
+                <li
+                  class="uk-card uk-card-default uk-card-body uk-box-shadow-medium uk-border-rounded uk-margin-small coffee-card-dark-border"
+                >
+                  <a href="#" class="uk-accordion-title coffee-title-gold">
+                    ¿Cuál es el costo del envío?
+                  </a>
+                  <div class="uk-accordion-content">
+                    <p class="coffee-text-white">
+                      El costo de envío depende del peso, volumen y destino.
+                      Ofrecemos envío gratis en pedidos superiores a $500.000
+                      dentro de Neiva. Para otros casos, el costo se calcula al
+                      momento de la cotización.
+                    </p>
+                  </div>
+                </li>
+                <li
+                  class="uk-card uk-card-default uk-card-body uk-box-shadow-medium uk-border-rounded uk-margin-small coffee-card-dark-border"
+                >
+                  <a href="#" class="uk-accordion-title coffee-title-gold">
+                    ¿Hacen envíos fuera del Huila?
+                  </a>
+                  <div class="uk-accordion-content">
+                    <p class="coffee-text-white">
+                      Nuestra cobertura principal es en Neiva y municipios
+                      cercanos del Huila. Para envíos a otras ciudades,
+                      contáctanos para evaluar disponibilidad y costos.
+                    </p>
+                  </div>
+                </li>
+              </ul>
+            </li>
+
+            <!-- Productos -->
+            <li>
+              <ul class="uk-accordion" uk-accordion>
+                <li
+                  class="uk-card uk-card-default uk-card-body uk-box-shadow-medium uk-border-rounded uk-margin-small coffee-card-dark-border"
+                >
+                  <a href="#" class="uk-accordion-title coffee-title-gold">
+                    ¿Los productos son aptos para alimentos?
+                  </a>
+                  <div class="uk-accordion-content">
+                    <p class="coffee-text-white">
+                      Sí, todos nuestros envases destinados a la industria
+                      alimentaria cuentan con certificaciones FDA y cumplen con
+                      las normas sanitarias colombianas. Cada producto indica
+                      claramente su aptitud para contacto con alimentos.
+                    </p>
+                  </div>
+                </li>
+                <li
+                  class="uk-card uk-card-default uk-card-body uk-box-shadow-medium uk-border-rounded uk-margin-small coffee-card-dark-border"
+                >
+                  <a href="#" class="uk-accordion-title coffee-title-gold">
+                    ¿Puedo personalizar los envases?
+                  </a>
+                  <div class="uk-accordion-content">
+                    <p class="coffee-text-white">
+                      Ofrecemos servicios de personalización como serigrafía,
+                      etiquetado y tampografía. Los pedidos mínimos para
+                      personalización comienzan desde 1,000 unidades.
+                      Contáctanos para conocer las opciones disponibles para tu
+                      producto.
+                    </p>
+                  </div>
+                </li>
+                <li
+                  class="uk-card uk-card-default uk-card-body uk-box-shadow-medium uk-border-rounded uk-margin-small coffee-card-dark-border"
+                >
+                  <a href="#" class="uk-accordion-title coffee-title-gold">
+                    ¿Tienen productos ecológicos?
+                  </a>
+                  <div class="uk-accordion-content">
+                    <p class="coffee-text-white">
+                      Sí, contamos con una línea eco-friendly que incluye
+                      envases biodegradables, compostables y fabricados con
+                      materiales reciclados. Busca el sello verde en nuestro
+                      catálogo.
+                    </p>
+                  </div>
+                </li>
+                <li
+                  class="uk-card uk-card-default uk-card-body uk-box-shadow-medium uk-border-rounded uk-margin-small coffee-card-dark-border"
+                >
+                  <a href="#" class="uk-accordion-title coffee-title-gold">
+                    ¿Qué garantía tienen los productos?
+                  </a>
+                  <div class="uk-accordion-content">
+                    <p class="coffee-text-white">
+                      Todos nuestros productos tienen garantía contra defectos
+                      de fabricación. Si recibes un producto defectuoso, tienes
+                      30 días para reportarlo y procederemos con el cambio o
+                      reembolso según corresponda.
+                    </p>
+                  </div>
+                </li>
+              </ul>
+            </li>
+
+            <!-- Pagos -->
+            <li>
+              <ul class="uk-accordion" uk-accordion>
+                <li
+                  class="uk-card uk-card-default uk-card-body uk-box-shadow-medium uk-border-rounded uk-margin-small coffee-card-dark-border"
+                >
+                  <a href="#" class="uk-accordion-title coffee-title-gold">
+                    ¿Qué métodos de pago aceptan?
+                  </a>
+                  <div class="uk-accordion-content">
+                    <p class="coffee-text-white">
+                      Aceptamos: Transferencia bancaria, PSE, tarjetas de
+                      crédito y débito, efectivo (contra entrega en Neiva), y
+                      crédito directo para clientes frecuentes (sujeto a
+                      aprobación).
+                    </p>
+                  </div>
+                </li>
+                <li
+                  class="uk-card uk-card-default uk-card-body uk-box-shadow-medium uk-border-rounded uk-margin-small coffee-card-dark-border"
+                >
+                  <a href="#" class="uk-accordion-title coffee-title-gold">
+                    ¿Ofrecen crédito?
+                  </a>
+                  <div class="uk-accordion-content">
+                    <p class="coffee-text-white">
+                      Sí, ofrecemos crédito a 30, 60 y 90 días para empresas
+                      establecidas. Requiere documentación empresarial,
+                      referencias comerciales y aprobación crediticia.
+                      Contáctanos para más información.
+                    </p>
+                  </div>
+                </li>
+                <li
+                  class="uk-card uk-card-default uk-card-body uk-box-shadow-medium uk-border-rounded uk-margin-small coffee-card-dark-border"
+                >
+                  <a href="#" class="uk-accordion-title coffee-title-gold">
+                    ¿Emiten factura electrónica?
+                  </a>
+                  <div class="uk-accordion-content">
+                    <p class="coffee-text-white">
+                      Sí, emitimos factura electrónica validada por la DIAN. La
+                      recibirás en tu correo electrónico inmediatamente después
+                      de confirmar tu pedido.
+                    </p>
+                  </div>
+                </li>
+                <li
+                  class="uk-card uk-card-default uk-card-body uk-box-shadow-medium uk-border-rounded uk-margin-small coffee-card-dark-border"
+                >
+                  <a href="#" class="uk-accordion-title coffee-title-gold">
+                    ¿Hay descuentos por volumen?
+                  </a>
+                  <div class="uk-accordion-content">
+                    <p class="coffee-text-white">
+                      Sí, manejamos precios especiales para compras por volumen.
+                      Los descuentos comienzan desde el 5% para pedidos
+                      superiores a $1,000,000 y pueden llegar hasta el 20% en
+                      grandes volúmenes.
+                    </p>
+                  </div>
+                </li>
+              </ul>
+            </li>
+
+            <!-- Devoluciones -->
+            <li>
+              <ul class="uk-accordion" uk-accordion>
+                <li
+                  class="uk-card uk-card-default uk-card-body uk-box-shadow-medium uk-border-rounded uk-margin-small coffee-card-dark-border"
+                >
+                  <a href="#" class="uk-accordion-title coffee-title-gold">
+                    ¿Cuál es la política de devoluciones?
+                  </a>
+                  <div class="uk-accordion-content">
+                    <p class="coffee-text-white">
+                      Aceptamos devoluciones dentro de los 30 días posteriores a
+                      la entrega, siempre que los productos estén en su empaque
+                      original y sin usar. Los gastos de envío de la devolución
+                      corren por cuenta del cliente, excepto en caso de error
+                      nuestro.
+                    </p>
+                  </div>
+                </li>
+                <li
+                  class="uk-card uk-card-default uk-card-body uk-box-shadow-medium uk-border-rounded uk-margin-small coffee-card-dark-border"
+                >
+                  <a href="#" class="uk-accordion-title coffee-title-gold">
+                    ¿Qué hacer si llega un producto dañado?
+                  </a>
+                  <div class="uk-accordion-content">
+                    <p class="coffee-text-white">
+                      Si recibes productos dañados, toma fotografías
+                      inmediatamente y contáctanos dentro de las 48 horas
+                      siguientes. Procederemos con el reemplazo sin costo
+                      adicional o el reembolso según prefieras.
+                    </p>
+                  </div>
+                </li>
+                <li
+                  class="uk-card uk-card-default uk-card-body uk-box-shadow-medium uk-border-rounded uk-margin-small coffee-card-dark-border"
+                >
+                  <a href="#" class="uk-accordion-title coffee-title-gold">
+                    ¿Puedo cancelar mi pedido?
+                  </a>
+                  <div class="uk-accordion-content">
+                    <p class="coffee-text-white">
+                      Puedes cancelar tu pedido sin costo hasta 24 horas después
+                      de realizarlo. Si el pedido ya fue despachado, aplicarán
+                      cargos de envío y reposición del 10% del valor total.
+                    </p>
+                  </div>
+                </li>
+                <li
+                  class="uk-card uk-card-default uk-card-body uk-box-shadow-medium uk-border-rounded uk-margin-small coffee-card-dark-border"
+                >
+                  <a href="#" class="uk-accordion-title coffee-title-gold">
+                    ¿Cómo se procesan los reembolsos?
+                  </a>
+                  <div class="uk-accordion-content">
+                    <p class="coffee-text-white">
+                      Los reembolsos se procesan en 5-10 días hábiles después de
+                      recibir y verificar los productos devueltos. El dinero se
+                      devuelve por el mismo método de pago utilizado en la
+                      compra original.
+                    </p>
+                  </div>
+                </li>
+              </ul>
+            </li>
+          </ul>
+        </div>
+
+        <!-- Sección de contacto adicional -->
+        <div class="uk-margin-large-top">
+          <div
+            class="uk-card uk-card-default uk-card-body coffee-card-dark-border"
+          >
+            <div class="uk-text-center">
+              <h3 class="coffee-title-gold">
+                ¿No encontraste lo que buscabas?
+              </h3>
+              <p class="coffee-text-white">
+                Nuestro equipo está listo para ayudarte
+              </p>
+              <div
+                class="uk-child-width-1-3@m uk-grid-small uk-margin-top"
+                uk-grid
+              >
+                <div>
+                  <a
+                    href="https://wa.me/573163209967"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    class="uk-button uk-button-primary whatsapp-button uk-width-1-1 uk-border-rounded"
+                  >
+                    <span uk-icon="whatsapp"></span> WhatsApp Sede 1
+                  </a>
+                </div>
+                <div>
+                  <a
+                    href="https://wa.me/573153957275"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    class="uk-button uk-button-primary whatsapp-button uk-width-1-1 uk-border-rounded"
+                  >
+                    <span uk-icon="whatsapp"></span> WhatsApp Sede 2
+                  </a>
+                </div>
+                <div>
+                  <a
+                    href="https://www.instagram.com/envases_surtienvases"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    class="uk-button uk-button-primary whatsapp-button uk-width-1-1 uk-border-rounded"
+                  >
+                    <span uk-icon="instagram"></span> Instagram
+                  </a>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ========================================
+         FOOTER
+         ======================================== -->
+    <footer class="uk-section uk-section-small footer-main">
+      <div class="uk-container">
+        <div
+          class="uk-grid-medium uk-child-width-1-4@m uk-child-width-1-2@s"
+          uk-grid
+        >
+          <!-- Columna 1: Logo y descripción -->
+          <div>
+            <img
+              src="assets/img/coffe-user-logo.svg"
+              alt="SurtiEnvases Logo"
+              class="uk-margin-small-bottom"
+            />
+            <p class="uk-text-small uk-text-muted">
+              Distribuidora de soluciones en empaque con amplia gama de envases
+              en plástico y vidrio.
+            </p>
+          </div>
+
+          <!-- Columna 2: Enlaces rápidos -->
+          <div>
+            <h4 class="footer-title">Enlaces Rápidos</h4>
+            <ul class="uk-list uk-list-divider">
+              <li>
+                <a href="catalogo.html" class="uk-link-muted">Catálogo</a>
+              </li>
+              <li>
+                <a href="productos.html" class="uk-link-muted">Productos</a>
+              </li>
+              <li>
+                <a href="nosotros.html" class="uk-link-muted">Quiénes Somos</a>
+              </li>
+              <li>
+                <a href="contacto.html" class="uk-link-muted">Contacto</a>
+              </li>
+            </ul>
+          </div>
+
+          <!-- Columna 3: Información -->
+          <div>
+            <h4 class="footer-title">Información</h4>
+            <ul class="uk-list uk-list-divider">
+              <li>
+                <a href="preguntas-frecuentes.html" class="uk-link-muted"
+                  >Preguntas Frecuentes</a
+                >
+              </li>
+              <li>
+                <a href="novedades.html" class="uk-link-muted">Novedades</a>
+              </li>
+            </ul>
+          </div>
+
+          <!-- Columna 4: Redes y contacto -->
+          <div>
+            <h4 class="footer-title">Síguenos</h4>
+            <div class="uk-margin-small-top">
+              <a
+                href="https://www.facebook.com/surtienvasesneiva"
+                class="uk-icon-button"
+                uk-icon="icon: facebook"
+                target="_blank"
+                rel="noopener noreferrer"
+              ></a>
+              <a
+                href="https://www.instagram.com/envases_surtienvases"
+                class="uk-icon-button uk-margin-small-left"
+                uk-icon="icon: instagram"
+                target="_blank"
+                rel="noopener noreferrer"
+              ></a>
+            </div>
+
+            <div class="uk-margin-top">
+              <h4 class="footer-title uk-margin-small-top">Contacto</h4>
+              <p class="uk-text-small uk-text-muted">
+                <span uk-icon="icon: mail"></span> surtienvasesn@gmail.com<br />
+                <span uk-icon="icon: location"></span> Neiva, Huila
+              </p>
+
+              <div class="uk-grid-small uk-child-width-expand@s" uk-grid>
+                <div>
+                  <p class="uk-text-small uk-text-muted">
+                    <strong>Sede 1:</strong><br />
+                    <span uk-icon="icon: location"></span> Calle 10 #2-58<br />
+                    <span uk-icon="icon: phone"></span> 3163209967<br />
+                    <span uk-icon="icon: receiver"></span> 8672555
+                  </p>
+                </div>
+                <div>
+                  <p class="uk-text-small uk-text-muted">
+                    <strong>Sede 2:</strong><br />
+                    <span uk-icon="icon: location"></span> Calle 10 #1G-41<br />
+                    <span uk-icon="icon: phone"></span> 3153957275<br />
+                    <span uk-icon="icon: receiver"></span> 8673132
+                  </p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <hr class="uk-divider-icon footer-divider" />
+
+        <div class="uk-text-center uk-text-small uk-text-muted">
+          <p>© 2025 SurtiEnvases Neiva. Todos los derechos reservados.</p>
+        </div>
+      </div>
+    </footer>
+
+    <!-- WhatsApp Flotante -->
+    <a
+      href="https://wa.me/573153957275"
+      class="whatsapp-floating"
+      target="_blank"
+      rel="noopener noreferrer"
+      aria-label="Contactar por WhatsApp"
+    >
+      <div class="whatsapp-button-circle">
+        <span uk-icon="icon: whatsapp; ratio: 1.5" style="color: white"></span>
+      </div>
+    </a>
+
+    <!-- ============================================
+       SCRIPTS
+       ============================================ -->
+    <!-- UIkit -->
+    <script src="https://cdn.jsdelivr.net/npm/uikit@3.21.13/dist/js/uikit.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/uikit@3.21.13/dist/js/uikit-icons.min.js"></script>
+
+    <!-- Datos de productos -->
+    <script src="js/productItems.js"></script>
+
+    <!-- Carrito universal -->
+    <script src="js/surtienvases-cart.js"></script>
+
+    <!-- Navbar init -->
+    <script src="js/navbar-init.js"></script>
+  </body>
+</html>
