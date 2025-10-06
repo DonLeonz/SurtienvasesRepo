@@ -170,27 +170,25 @@ class CatalogoSystem {
   createProductCard(product) {
     return `
       <div>
-        <div class="uk-card uk-card-default uk-card-body uk-text-center coffee-card-dark">
+        <div class="uk-card uk-card-default uk-card-body uk-text-center card-degradado-morado-borde-naranja">
           <img src="${product.img}" alt="${product.title}"
-              class="product-image-medium uk-margin-bottom">
-          <h3 class="uk-card-title uk-text-truncate coffee-title-white">
+              class="imagen-producto-altura-120 uk-margin-bottom">
+          <h3 class="uk-card-title uk-text-truncate titulo-blanco-sombra">
             ${product.title}
           </h3>
-          <p class="uk-text-meta coffee-text-white-muted">${
-            product.category
-          }</p>
-          <p class="uk-text-small coffee-text-white">
+          <p class="uk-text-meta texto-verde-muted">${product.category}</p>
+          <p class="uk-text-small texto-blanco">
             ${product.minimumOrder || "Consultar"}
           </p>
           <div class="uk-grid-small uk-child-width-1-2" uk-grid>
             <div>
-              <button class="uk-button uk-button-primary whatsapp-button uk-button-small uk-width-1-1 uk-border-rounded" 
+              <button class="uk-button uk-button-primary boton-whatsapp uk-button-small uk-width-1-1 uk-border-rounded" 
                       onclick="catalogoSystem.addToCart(${product.id})">
                 <span uk-icon="cart"></span> Agregar
               </button>
             </div>
             <div>
-              <button class="uk-button uk-button-primary whatsapp-button uk-button-small uk-width-1-1 uk-border-rounded"
+              <button class="uk-button uk-button-primary boton-whatsapp uk-button-small uk-width-1-1 uk-border-rounded"
                       onclick="catalogoSystem.contactWhatsApp('${encodeURIComponent(
                         product.title
                       )}')">
@@ -207,7 +205,9 @@ class CatalogoSystem {
   // FILTROS POR INDUSTRIA
   // ========================================
   setupIndustryFilters() {
-    const buttons = document.querySelectorAll(".industry-filter");
+    const buttons = document.querySelectorAll(
+      ".boton-filtro-categoria-industria"
+    );
 
     buttons.forEach((button) => {
       button.addEventListener("click", (e) => {
@@ -291,7 +291,7 @@ class CatalogoSystem {
     container.innerHTML = cart
       .map(
         (item) => `
-      <div class="cart-item">
+      <div class="carrito-item">
         <div class="uk-grid-small uk-flex-middle" uk-grid>
           <div class="uk-width-expand">
             <h4 class="uk-margin-remove">${item.title}</h4>

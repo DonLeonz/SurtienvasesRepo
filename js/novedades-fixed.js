@@ -152,11 +152,11 @@ class NovedadesSystem {
 
     return `
       <div>
-        <div class="uk-card uk-card-default uk-card-hover blog-container-round color-text-black">
-          <div class="uk-card-media-top blog-image-container">
+        <div class="uk-card uk-card-default uk-card-hover contenedor-redondeado texto-negro">
+          <div class="uk-card-media-top contenedor-imagen-altura-350">
             <button type="button" 
                     onclick="novedadesSystem.showImageModal(${article.id})"
-                    class="image-button-transparent">
+                    class="boton-imagen-transparente">
               <img src="${article.imageUrl}" alt="${article.title}">
             </button>
             
@@ -164,7 +164,7 @@ class NovedadesSystem {
               article.id
             }" class="uk-flex-top" uk-modal>
   <div class="uk-modal-dialog uk-width-auto uk-margin-auto-vertical" style="position: relative;">
-    <button class="image-modal-close" type="button" 
+    <button class="boton-cerrar-modal-imagen" type="button" 
             onclick="UIkit.modal('#modal-media-image-${article.id}').hide()"
             aria-label="Cerrar imagen"></button>
     <img src="${article.imageUrl}" alt="${article.title}">
@@ -205,7 +205,7 @@ class NovedadesSystem {
           <span class="uk-margin-left">Usuario Invitado</span>
         </div>
         
-        <textarea class="uk-textarea blog-login-input" rows="3"
+        <textarea class="uk-textarea input-fondo-gris-claro" rows="3"
                   placeholder="Escribe tu comentario..." 
                   id="comment-input-${newsId}"></textarea>
         
@@ -223,11 +223,11 @@ class NovedadesSystem {
                    src="assets/img/avatars/default.jpg"
                    width="40" height="40" alt="${comment.author}">
               <div class="uk-margin-small-left">
-                <h4 class="uk-comment-title uk-margin-remove color-text-black">
+                <h4 class="uk-comment-title uk-margin-remove texto-negro">
                   ${comment.author}
                 </h4>
                 <ul class="uk-comment-meta uk-subnav uk-subnav-divider uk-margin-remove-top">
-                  <li><span class="color-text-black">${this.getTimeAgo(
+                  <li><span class="texto-negro">${this.getTimeAgo(
                     comment.timestamp
                   )}</span></li>
                 </ul>
