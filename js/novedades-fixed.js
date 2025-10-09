@@ -1,6 +1,6 @@
 // ========================================
-// SISTEMA DE NOVEDADES - VERSIÓN CORREGIDA
-// Mantiene funcionalidad original + mejoras
+// SISTEMA DE NOVEDADES - SINCRONIZADO CON ADMIN
+// Lee artículos de localStorage (sin botones de eliminar)
 // ========================================
 
 class NovedadesSystem {
@@ -13,8 +13,23 @@ class NovedadesSystem {
 
   loadNews() {
     try {
+      // Primero intentar cargar desde allNews (que usa admin)
+      const storedAll = localStorage.getItem("allNews");
+      if (storedAll) {
+        console.log("✓ Artículos cargados desde allNews (admin)");
+        return JSON.parse(storedAll);
+      }
+
+      // Si no existe, cargar desde news (legacy)
       const stored = localStorage.getItem("news");
-      return stored ? JSON.parse(stored) : this.getInitialNews();
+      if (stored) {
+        console.log("✓ Artículos cargados desde news (legacy)");
+        return JSON.parse(stored);
+      }
+
+      // Si no hay nada, cargar defaults
+      console.log("✓ Cargando artículos por defecto");
+      return this.getInitialNews();
     } catch (e) {
       console.error("Error al cargar noticias:", e);
       return this.getInitialNews();
@@ -65,7 +80,9 @@ class NovedadesSystem {
 
   saveNews() {
     try {
+      // Guardar en ambos lugares para compatibilidad
       localStorage.setItem("news", JSON.stringify(this.news));
+      localStorage.setItem("allNews", JSON.stringify(this.news));
     } catch (e) {
       console.error("Error al guardar noticias:", e);
     }
@@ -115,8 +132,9 @@ class NovedadesSystem {
       imageUrl = URL.createObjectURL(imageInput.files[0]);
     }
 
+    const maxId = this.news.reduce((max, n) => Math.max(max, n.id), 0);
     const newArticle = {
-      id: Date.now(),
+      id: maxId + 1,
       title: title,
       author: author,
       excerpt: excerpt,
@@ -142,6 +160,15 @@ class NovedadesSystem {
     const container = document.getElementById("news-container");
     if (!container) return;
 
+    if (this.news.length === 0) {
+      container.innerHTML = `
+        <div class="uk-width-1-1 uk-text-center uk-padding">
+          <p class="uk-text-muted">No hay artículos publicados</p>
+        </div>
+      `;
+      return;
+    }
+
     container.innerHTML = this.news
       .map((article) => this.createArticleCard(article))
       .join("");
@@ -163,13 +190,15 @@ class NovedadesSystem {
             <div id="modal-media-image-${
               article.id
             }" class="uk-flex-top" uk-modal>
-  <div class="uk-modal-dialog uk-width-auto uk-margin-auto-vertical" style="position: relative;">
-    <button class="boton-cerrar-modal-imagen" type="button" 
-            onclick="UIkit.modal('#modal-media-image-${article.id}').hide()"
-            aria-label="Cerrar imagen"></button>
-    <img src="${article.imageUrl}" alt="${article.title}">
-  </div>
-</div>
+              <div class="uk-modal-dialog uk-width-auto uk-margin-auto-vertical" style="position: relative;">
+                <button class="boton-cerrar-modal-imagen" type="button" 
+                        onclick="UIkit.modal('#modal-media-image-${
+                          article.id
+                        }').hide()"
+                        aria-label="Cerrar imagen"></button>
+                <img src="${article.imageUrl}" alt="${article.title}">
+              </div>
+            </div>
           </div>
           
           <div class="uk-card-body">
@@ -213,6 +242,16 @@ class NovedadesSystem {
                 onclick="novedadesSystem.handleCommentSubmit(${newsId})">
           Comentar
         </button>
+        
+        ${
+          newsComments.length > 0
+            ? `
+          <div class="uk-margin-top">
+            <h4 class="uk-heading-line"><span>Comentarios</span></h4>
+          </div>
+        `
+            : ""
+        }
         
         ${newsComments
           .map(
@@ -300,4 +339,4 @@ class NovedadesSystem {
 
 // Inicialización
 const novedadesSystem = new NovedadesSystem();
-console.log("✓ Sistema de novedades inicializado");
+console.log("✓ Sistema de novedades sincronizado con admin");

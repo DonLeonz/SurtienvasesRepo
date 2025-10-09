@@ -1,20 +1,131 @@
 // ========================================
-// SISTEMA DE PRODUCTOS - VERSIÓN MEJORADA
-// Con badges rediseñados y botones de cerrar funcionales
+// SISTEMA DE PRODUCTOS - SINCRONIZADO CON ADMIN
+// Lee productos y categorías de localStorage dinámicamente
 // ========================================
 
 class ProductsSystem {
   constructor() {
-    this.products = window.productItems || [];
+    this.products = [];
+    this.categories = [];
     this.cart = JSON.parse(localStorage.getItem("cart")) || [];
     this.currentCategory = "todos";
     this.init();
   }
 
   init() {
+    this.loadProducts();
+    this.loadCategories();
+    this.updateCategoryButtons();
     this.renderProducts();
     this.setupCategoryFilters();
     this.updateCartCount();
+  }
+
+  loadProducts() {
+    try {
+      const stored = localStorage.getItem("allProducts");
+      if (stored) {
+        this.products = JSON.parse(stored);
+        console.log(
+          `✓ Productos cargados desde localStorage: ${this.products.length}`
+        );
+      } else if (window.productItems) {
+        this.products = window.productItems;
+        console.log(
+          `✓ Productos cargados desde productItems.js: ${this.products.length}`
+        );
+      } else {
+        this.products = [];
+        console.warn("⚠ No se encontraron productos");
+      }
+    } catch (e) {
+      console.error("Error al cargar productos:", e);
+      this.products = window.productItems || [];
+    }
+  }
+
+  loadCategories() {
+    try {
+      const stored = localStorage.getItem("allCategories");
+      if (stored) {
+        this.categories = JSON.parse(stored);
+        console.log(`✓ Categorías cargadas: ${this.categories.length}`);
+      } else {
+        // Categorías por defecto
+        this.categories = [
+          { id: 1, name: "Envases de Vidrio", key: "vidrio", icon: "🫙" },
+          { id: 2, name: "Envases Plásticos", key: "plastico", icon: "🧴" },
+          { id: 3, name: "Tapas y Complementos", key: "tapas", icon: "🔧" },
+          { id: 4, name: "Envases Cosméticos", key: "cosmetico", icon: "💄" },
+          {
+            id: 5,
+            name: "Envases Farmacéuticos",
+            key: "farmaceutico",
+            icon: "💊",
+          },
+          {
+            id: 6,
+            name: "Envases Industriales",
+            key: "industrial",
+            icon: "🏗️",
+          },
+        ];
+      }
+    } catch (e) {
+      console.error("Error al cargar categorías:", e);
+      this.categories = [];
+    }
+  }
+
+  // ========================================
+  // ACTUALIZACIÓN DINÁMICA DE BOTONES
+  // ========================================
+  updateCategoryButtons() {
+    const container =
+      document.querySelector("[data-category]")?.parentElement?.parentElement;
+    if (!container) {
+      console.warn("⚠ No se encontró el contenedor de botones de categoría");
+      return;
+    }
+
+    // Botón "Todos"
+    let buttonsHTML = `
+      <div>
+        <button
+          class="uk-button uk-button-default uk-width-1-1 boton-filtro-categoria-industria ${
+            this.currentCategory === "todos" ? "active" : ""
+          }"
+          data-category="todos">
+          📦 Todos
+        </button>
+      </div>
+    `;
+
+    // Botones de categorías dinámicas
+    this.categories.forEach((cat) => {
+      // Remover "Envases" del nombre para mostrar
+      const displayName = cat.name.replace("Envases ", "");
+
+      buttonsHTML += `
+        <div>
+          <button
+            class="uk-button uk-button-default uk-width-1-1 boton-filtro-categoria-industria ${
+              this.currentCategory === cat.key ? "active" : ""
+            }"
+            data-category="${cat.key}">
+            ${cat.icon} ${displayName}
+          </button>
+        </div>
+      `;
+    });
+
+    container.innerHTML = buttonsHTML;
+
+    console.log(
+      `✓ Botones de categoría actualizados: ${
+        this.categories.length + 1
+      } botones`
+    );
   }
 
   // ========================================
@@ -43,25 +154,24 @@ class ProductsSystem {
     }
 
     return this.products.filter((product) => {
-      const cat = this.currentCategory.toLowerCase();
+      if (!product.category) return false;
+
       const productCat = product.category.toLowerCase();
 
-      if (cat === "vidrio") return productCat.includes("vidrio");
-      if (cat === "plastico")
+      // Buscar la categoría seleccionada
+      const selectedCategory = this.categories.find(
+        (c) => c.key === this.currentCategory
+      );
+
+      if (selectedCategory) {
+        // Buscar coincidencias en el nombre de la categoría del producto
         return (
-          productCat.includes("plástico") || productCat.includes("plastico")
-        );
-      if (cat === "farmaceutico")
-        return (
-          productCat.includes("farmacéut") || productCat.includes("farmaceut")
-        );
-      if (cat === "complementos") {
-        return (
-          productCat.includes("tapas") || productCat.includes("complemento")
+          productCat.includes(selectedCategory.name.toLowerCase()) ||
+          productCat.includes(selectedCategory.key.toLowerCase())
         );
       }
 
-      return true;
+      return false;
     });
   }
 
@@ -77,7 +187,7 @@ class ProductsSystem {
     if (filteredProducts.length === 0) {
       productsGrid.innerHTML = `
         <div class="uk-width-1-1 uk-text-center uk-padding">
-          <p class="uk-text-lead texto-blanco">
+          <p class="uk-text-lead texto-negro">
             No se encontraron productos en esta categoría
           </p>
         </div>
@@ -158,7 +268,6 @@ class ProductsSystem {
       <div id="modal-${index}" class="uk-modal-container uk-modal" data-uk-modal>
         <div class="uk-modal-dialog uk-modal-body uk-light modal-degradado-morado">
           
-          <!-- Botón de cerrar mejorado -->
           <button class="boton-cerrar-modal-producto" type="button" 
                   onclick="UIkit.modal('#modal-${index}').hide()"
                   aria-label="Cerrar modal"></button>
@@ -416,6 +525,17 @@ class ProductsSystem {
       timeout: 2000,
     });
   }
+
+  // ========================================
+  // MÉTODO PÚBLICO PARA ACTUALIZAR DESDE ADMIN
+  // ========================================
+  refreshCategories() {
+    console.log("🔄 Actualizando categorías en página de productos...");
+    this.loadCategories();
+    this.updateCategoryButtons();
+    this.setupCategoryFilters();
+    console.log("✓ Categorías actualizadas correctamente");
+  }
 }
 
 // ========================================
@@ -424,7 +544,6 @@ class ProductsSystem {
 window.surtienvases = window.surtienvases || {};
 window.surtienvases.products = new ProductsSystem();
 
-// Alias global para compatibilidad
 window.productsSystem = window.surtienvases.products;
 
-console.log("✓ Sistema de productos inicializado con estilos mejorados");
+console.log("✓ Sistema de productos sincronizado con admin");
