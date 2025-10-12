@@ -97,15 +97,13 @@
             <div class="uk-navbar-right uk-visible@l">
               <div class="uk-navbar-item uk-dark">
                 <button
-                  class="uk-button uk-button-secondary uk-border-rounded"
+                  class="uk-button uk-button-secondary uk-border-rounded position-relative"
                   id="navbar-quote-btn"
-                  style="position: relative"
                 >
                   <span uk-icon="cart"></span> Cotizar
                   <span
-                    class="carrito-badge-contador"
+                    class="carrito-badge-contador uk-hidden"
                     id="cart-count-navbar"
-                    style="display: none"
                     >0</span
                   >
                 </button>
@@ -362,11 +360,10 @@
         id="floating-cart-btn"
         aria-label="Ver carrito"
       >
-        <span uk-icon="icon: cart; ratio: 1.5" style="color: white"></span>
+        <span uk-icon="icon: cart; ratio: 1.5" class="texto-blanco"></span>
         <span
-          class="carrito-badge-contador"
+          class="carrito-badge-contador uk-hidden"
           id="cart-count-floating"
-          style="display: none"
           >0</span
         >
       </button>
@@ -380,7 +377,7 @@
       rel="noopener noreferrer"
     >
       <div class="whatsapp-boton-circular">
-        <span uk-icon="icon: whatsapp; ratio: 1.5" style="color: white"></span>
+        <span uk-icon="icon: whatsapp; ratio: 1.5" class="texto-blanco"></span>
       </div>
     </a>
 
