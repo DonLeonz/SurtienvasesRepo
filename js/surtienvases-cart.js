@@ -66,7 +66,7 @@ class SurtiEnvasesCart {
       <!-- Carrito Flotante -->
       <div id="cart-floating-container" class="carrito-flotante">
         <button class="carrito-boton-circular" id="toggle-cart-btn" aria-label="Ver carrito">
-          <span uk-icon="icon: cart; ratio: 1.5" style="color: white"></span>
+          <span uk-icon="icon: cart; ratio: 1.5" class="texto-blanco"></span>
           <span class="carrito-badge-contador" id="cart-count" style="display: none;">0</span>
         </button>
       </div>

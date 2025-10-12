@@ -1,6 +1,6 @@
 /* ========================================
-   SURTIENVASES - SISTEMA DE ESTILOS PROFESIONAL
-   Versión 3.2 - Correcciones Definitivas
+   SURTIENVASES - SISTEMA DE ESTILOS OPTIMIZADO
+   Versión 4.0 - Reorganizado y Optimizado
    ======================================== */
 
 /* ========================================
@@ -9,7 +9,7 @@
 @import url("https://fonts.googleapis.com/css2?family=Lexend+Deca:wght@100..900&display=swap");
 
 /* ========================================
-   2. VARIABLES DE COLOR
+   2. VARIABLES DE COLOR Y UTILIDADES
    ======================================== */
 :root {
   /* Colores principales de marca */
@@ -38,6 +38,15 @@
   --naranja-transparente: rgba(238, 118, 34, 0.1);
   --verde-transparente: rgba(183, 206, 56, 0.1);
   --morado-transparente: rgba(144, 65, 145, 0.1);
+
+  /* NUEVAS VARIABLES DE UTILIDAD */
+  --border-radius-default: 12px;
+  --border-radius-card: 8px;
+  --border-radius-button: 6px;
+  --box-shadow-card: 0 4px 15px rgba(0, 0, 0, 0.1);
+  --box-shadow-hover: 0 10px 30px rgba(238, 118, 34, 0.2);
+  --transition-default: all 0.3s ease;
+  --transition-smooth: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 /* ========================================
@@ -55,17 +64,13 @@ body {
   color: var(--surtienvases-negro) !important;
 }
 
-/* Ajuste para páginas normales (NO index) */
-.seccion-fondo-blanco.navbar-ajuste-primer-hijo,
-.seccion-fondo-gris.navbar-ajuste-primer-hijo,
-.seccion-con-imagen.navbar-ajuste-primer-hijo,
-div.navbar-ajuste-primer-hijo:not(.hero-principal) {
-  padding-top: 100px !important;
-}
-
-/* Hero principal mantiene su propio padding */
-.hero-principal.navbar-ajuste-primer-hijo {
-  padding-top: 0 !important;
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  color: var(--surtienvases-morado) !important;
 }
 
 /* ========================================
@@ -87,10 +92,6 @@ div.navbar-ajuste-primer-hijo:not(.hero-principal) {
   color: var(--surtienvases-verde) !important;
 }
 
-.texto-naranja {
-  color: var(--surtienvases-naranja) !important;
-}
-
 .texto-morado {
   color: var(--surtienvases-morado) !important;
 }
@@ -102,7 +103,7 @@ div.navbar-ajuste-primer-hijo:not(.hero-principal) {
 }
 
 /* ========================================
-   5. NAVBAR
+   5. NAVBAR Y MENÚ
    ======================================== */
 .navbar-fondo-degradado {
   background: linear-gradient(
@@ -122,7 +123,7 @@ div.navbar-ajuste-primer-hijo:not(.hero-principal) {
 .imagen-logo-300 {
   max-width: 300px;
   height: auto;
-  transition: all 0.3s ease !important;
+  transition: var(--transition-default) !important;
   filter: drop-shadow(0 2px 8px rgba(0, 0, 0, 0.2));
 }
 
@@ -145,7 +146,7 @@ div.navbar-ajuste-primer-hijo:not(.hero-principal) {
   color: var(--surtienvases-negro) !important;
   border: none !important;
   font-weight: 600 !important;
-  transition: all 0.3s ease !important;
+  transition: var(--transition-default) !important;
 }
 
 .uk-navbar-item .uk-button-secondary:hover {
@@ -156,7 +157,7 @@ div.navbar-ajuste-primer-hijo:not(.hero-principal) {
 
 .uk-navbar-item .uk-button-text {
   color: var(--surtienvases-blanco) !important;
-  transition: all 0.3s ease !important;
+  transition: var(--transition-default) !important;
 }
 
 .uk-navbar-item .uk-button-text:hover {
@@ -178,8 +179,170 @@ div.navbar-ajuste-primer-hijo:not(.hero-principal) {
   width: 100%;
 }
 
+/* Ajuste para páginas normales (NO index) */
+.seccion-fondo-blanco.navbar-ajuste-primer-hijo,
+.seccion-fondo-gris.navbar-ajuste-primer-hijo,
+div.navbar-ajuste-primer-hijo:not(.hero-principal) {
+  padding-top: 100px !important;
+}
+
+.hero-principal.navbar-ajuste-primer-hijo {
+  padding-top: 0 !important;
+}
+
 /* ========================================
-   6. HERO SECTION - MANTENIDO DE INDEX
+   INDICADOR DE PÁGINA ACTIVA EN NAVBAR
+   ======================================== */
+
+/* Estilo para enlace activo en navbar desktop */
+.uk-navbar-center .uk-button-secondary.active,
+.uk-navbar-center .uk-button-text.active {
+  position: relative;
+}
+
+/* Indicador visual para botón secundario activo (Catálogo) */
+.uk-navbar-center .uk-button-secondary.active {
+  background-color: var(--verde-oscuro) !important;
+  box-shadow: 0 0 0 3px rgba(183, 206, 56, 0.3) !important;
+  transform: scale(1.05) !important;
+}
+
+/* Indicador visual para enlaces de texto activos */
+.uk-navbar-center .uk-button-text.active {
+  color: var(--surtienvases-verde) !important;
+  font-weight: 700 !important;
+}
+
+/* Línea inferior para enlace activo */
+.uk-navbar-center .uk-button-text.active::after {
+  content: "" !important;
+  position: absolute !important;
+  bottom: -5px !important;
+  left: 0 !important;
+  width: 100% !important;
+  height: 3px !important;
+  background-color: var(--surtienvases-verde) !important;
+  border-radius: 2px !important;
+  box-shadow: 0 2px 8px rgba(183, 206, 56, 0.5) !important;
+}
+
+/* Estilo para enlace activo en menú móvil */
+#burger-menu .uk-button-secondary.active {
+  background-color: var(--verde-oscuro) !important;
+  box-shadow: 0 0 0 3px rgba(183, 206, 56, 0.3) inset !important;
+  font-weight: bold !important;
+}
+
+#burger-menu .uk-button-text.active {
+  color: var(--surtienvases-verde) !important;
+  font-weight: bold !important;
+  background: rgba(183, 206, 56, 0.1) !important;
+  border-radius: 6px !important;
+  padding: 8px 12px !important;
+}
+
+/* ========================================
+   6. MENÚ HAMBURGUESA
+   ======================================== */
+.uk-navbar-toggle {
+  color: var(--surtienvases-blanco) !important;
+  min-height: 40px !important;
+  z-index: 1001 !important;
+}
+
+#burger-menu.uk-offcanvas {
+  position: fixed !important;
+  z-index: 99999 !important;
+  display: none !important;
+}
+
+#burger-menu.uk-offcanvas.uk-open {
+  display: block !important;
+}
+
+#burger-menu.uk-offcanvas::before {
+  content: "" !important;
+  position: fixed !important;
+  top: 0 !important;
+  left: 0 !important;
+  right: 0 !important;
+  bottom: 0 !important;
+  background: rgba(0, 0, 0, 0.7) !important;
+  z-index: 99998 !important;
+  width: 100vw !important;
+  height: 100vh !important;
+}
+
+#burger-menu .uk-offcanvas-bar {
+  position: fixed !important;
+  top: 0 !important;
+  right: 0 !important;
+  width: 320px !important;
+  max-width: 85vw !important;
+  height: 100vh !important;
+  background: linear-gradient(
+    180deg,
+    rgba(144, 65, 145, 0.98),
+    rgba(238, 118, 34, 0.98)
+  ) !important;
+  backdrop-filter: blur(10px) !important;
+  padding: 40px 20px !important;
+  z-index: 99999 !important;
+  overflow-y: auto !important;
+  transform: translateX(100%) !important;
+  transition: transform 0.3s ease !important;
+}
+
+#burger-menu.uk-open .uk-offcanvas-bar {
+  transform: translateX(0) !important;
+}
+
+#burger-menu .uk-offcanvas-close {
+  display: none !important;
+}
+
+.boton-cerrar-menu {
+  position: absolute !important;
+  top: 20px !important;
+  right: 20px !important;
+  width: 44px !important;
+  height: 44px !important;
+  background: rgba(238, 118, 34, 0.9) !important;
+  border: 2px solid rgba(255, 255, 255, 0.3) !important;
+  border-radius: 50% !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  cursor: pointer !important;
+  transition: var(--transition-default) !important;
+  z-index: 1001 !important;
+}
+
+.boton-cerrar-menu:hover {
+  background: var(--surtienvases-verde) !important;
+  transform: rotate(90deg) scale(1.1) !important;
+}
+
+.boton-cerrar-menu::before,
+.boton-cerrar-menu::after {
+  content: "" !important;
+  position: absolute !important;
+  width: 20px !important;
+  height: 3px !important;
+  background: white !important;
+  border-radius: 3px !important;
+}
+
+.boton-cerrar-menu::before {
+  transform: rotate(45deg) !important;
+}
+
+.boton-cerrar-menu::after {
+  transform: rotate(-45deg) !important;
+}
+
+/* ========================================
+   7. HERO SECTION
    ======================================== */
 .hero-principal {
   position: relative;
@@ -230,11 +393,11 @@ div.navbar-ajuste-primer-hijo:not(.hero-principal) {
     rgba(255, 255, 255, 0.9)
   ) !important;
   border-left: 5px solid var(--surtienvases-naranja) !important;
-  border-radius: 12px !important;
+  border-radius: var(--border-radius-default) !important;
   padding: 2rem !important;
-  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15) !important;
+  box-shadow: var(--box-shadow-card) !important;
   backdrop-filter: blur(10px);
-  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1) !important;
+  transition: var(--transition-smooth) !important;
 }
 
 .hero-tarjeta-texto:hover {
@@ -254,11 +417,15 @@ div.navbar-ajuste-primer-hijo:not(.hero-principal) {
 
 .hero-video-container {
   position: relative;
-  border-radius: 12px;
+  border-radius: var(--border-radius-default);
   overflow: hidden;
   box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
   border: 3px solid var(--surtienvases-verde);
   transition: all 0.4s ease;
+  width: fit-content !important;
+  height: auto !important;
+  max-width: 100% !important;
+  margin: 0 auto !important;
 }
 
 .hero-video-container:hover {
@@ -266,8 +433,15 @@ div.navbar-ajuste-primer-hijo:not(.hero-principal) {
   box-shadow: 0 20px 50px rgba(183, 206, 56, 0.4);
 }
 
+.hero-video-container video {
+  width: 100% !important;
+  height: auto !important;
+  display: block !important;
+  object-fit: contain !important;
+}
+
 /* ========================================
-   7. SECCIONES PROFESIONALES
+   8. SECCIONES
    ======================================== */
 .seccion-fondo-blanco {
   background-color: var(--blanco-puro) !important;
@@ -277,28 +451,6 @@ div.navbar-ajuste-primer-hijo:not(.hero-principal) {
 .seccion-fondo-gris {
   background-color: var(--gris-fondo) !important;
   padding: 60px 0 !important;
-}
-
-.seccion-con-imagen {
-  position: relative;
-  background-color: var(--blanco-puro);
-  padding: 60px 0 !important;
-}
-
-.seccion-imagen-fondo {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  opacity: 0.05;
-  z-index: 0;
-}
-
-.seccion-contenido {
-  position: relative;
-  z-index: 1;
 }
 
 .seccion-fondo-degradado-morado {
@@ -311,109 +463,110 @@ div.navbar-ajuste-primer-hijo:not(.hero-principal) {
 }
 
 /* ========================================
-   8. MENÚ HAMBURGUESA
+   9. BOTONES
    ======================================== */
-.uk-navbar-toggle {
+.uk-button-primary,
+.boton-whatsapp {
+  background-color: #25d366 !important;
   color: var(--surtienvases-blanco) !important;
-  min-height: 40px !important;
-  z-index: 1001 !important;
+  border: none !important;
+  padding: 3px 15px !important;
+  font-size: 0.85rem !important;
+  font-weight: 600 !important;
+  transition: var(--transition-default) !important;
+  border-radius: var(--border-radius-button) !important;
 }
 
-#burger-menu.uk-offcanvas {
-  position: fixed !important;
-  z-index: 99999 !important;
-  display: none !important;
+.uk-button-primary:hover,
+.boton-whatsapp:hover {
+  background-color: #128c7e !important;
+  transform: translateY(-2px);
+  box-shadow: 0 5px 15px rgba(37, 211, 102, 0.4) !important;
 }
 
-#burger-menu.uk-offcanvas.uk-open {
-  display: block !important;
+.uk-button-default {
+  background-color: transparent !important;
+  color: var(--surtienvases-morado) !important;
+  border: 2px solid var(--surtienvases-morado) !important;
+  transition: var(--transition-default) !important;
 }
 
-/* Overlay oscuro que cubre toda la página */
-#burger-menu.uk-offcanvas::before {
-  content: "" !important;
-  position: fixed !important;
-  top: 0 !important;
-  left: 0 !important;
-  right: 0 !important;
-  bottom: 0 !important;
-  background: rgba(0, 0, 0, 0.7) !important;
-  z-index: 99998 !important;
-  width: 100vw !important;
-  height: 100vh !important;
+.uk-button-default:hover {
+  background-color: var(--surtienvases-morado) !important;
+  color: var(--surtienvases-blanco) !important;
 }
 
-/* Barra lateral del menú */
-#burger-menu .uk-offcanvas-bar {
-  position: fixed !important;
-  top: 0 !important;
-  right: 0 !important;
-  width: 320px !important;
-  max-width: 85vw !important;
-  height: 100vh !important;
-  background: linear-gradient(
-    180deg,
-    rgba(144, 65, 145, 0.98),
-    rgba(238, 118, 34, 0.98)
-  ) !important;
-  backdrop-filter: blur(10px) !important;
-  padding: 40px 20px !important;
-  z-index: 99999 !important;
-  overflow-y: auto !important;
-  transform: translateX(100%) !important;
-  transition: transform 0.3s ease !important;
+.uk-button-secondary {
+  background-color: var(--surtienvases-verde) !important;
+  color: var(--surtienvases-negro) !important;
+  border: 2px solid var(--surtienvases-naranja) !important;
+  font-weight: 600 !important;
+  transition: var(--transition-default) !important;
 }
 
-#burger-menu.uk-open .uk-offcanvas-bar {
-  transform: translateX(0) !important;
+.uk-button-secondary:hover {
+  background-color: var(--surtienvases-naranja) !important;
+  color: var(--surtienvases-blanco) !important;
+  transform: translateY(-2px) !important;
+  box-shadow: 0 4px 12px rgba(238, 118, 34, 0.4) !important;
 }
 
-#burger-menu .uk-offcanvas-close {
-  display: none !important;
+.boton-outline-verde-borde-naranja {
+  color: var(--surtienvases-negro) !important;
+  background-color: var(--surtienvases-verde) !important;
+  border: 2px solid var(--surtienvases-naranja) !important;
+  border-radius: var(--border-radius-button) !important;
+  padding: 3px 15px !important;
+  font-size: 0.85rem !important;
+  font-weight: 600 !important;
+  transition: var(--transition-default) !important;
 }
 
-.boton-cerrar-menu {
-  position: absolute !important;
-  top: 20px !important;
-  right: 20px !important;
-  width: 44px !important;
-  height: 44px !important;
-  background: rgba(238, 118, 34, 0.9) !important;
-  border: 2px solid rgba(255, 255, 255, 0.3) !important;
-  border-radius: 50% !important;
+.boton-outline-verde-borde-naranja:hover {
+  background-color: var(--surtienvases-naranja) !important;
+  color: var(--surtienvases-blanco) !important;
+  transform: translateY(-2px) !important;
+}
+
+.boton-filtro-categoria-industria {
+  background-color: rgba(255, 255, 255, 0.9) !important;
+  color: var(--surtienvases-morado) !important;
+  border: 2px solid var(--surtienvases-naranja) !important;
+  font-weight: 600 !important;
+  min-height: 50px !important;
   display: flex !important;
   align-items: center !important;
   justify-content: center !important;
+  transition: var(--transition-default) !important;
+  border-radius: var(--border-radius-button) !important;
+  line-height: 1.3 !important;
+  padding: 10px 12px !important;
+  white-space: normal !important;
+  text-align: center !important;
+}
+
+.boton-filtro-categoria-industria:hover {
+  background-color: var(--surtienvases-naranja) !important;
+  color: white !important;
+  transform: translateY(-2px) !important;
+}
+
+.boton-filtro-categoria-industria.active {
+  background-color: var(--surtienvases-verde) !important;
+  color: var(--surtienvases-negro) !important;
+  border-color: var(--surtienvases-verde) !important;
+  font-weight: bold !important;
+}
+
+.boton-imagen-transparente {
+  border: none !important;
+  background: transparent !important;
+  padding: 0 !important;
   cursor: pointer !important;
-  transition: all 0.3s ease !important;
-  z-index: 1001 !important;
-}
-
-.boton-cerrar-menu:hover {
-  background: var(--surtienvases-verde) !important;
-  transform: rotate(90deg) scale(1.1) !important;
-}
-
-.boton-cerrar-menu::before,
-.boton-cerrar-menu::after {
-  content: "" !important;
-  position: absolute !important;
-  width: 20px !important;
-  height: 3px !important;
-  background: white !important;
-  border-radius: 3px !important;
-}
-
-.boton-cerrar-menu::before {
-  transform: rotate(45deg) !important;
-}
-
-.boton-cerrar-menu::after {
-  transform: rotate(-45deg) !important;
 }
 
 /* ========================================
-   9. BOTONES DE CERRAR MODALES
+   10. BOTONES DE CERRAR MODALES
    ======================================== */
 .boton-cerrar-modal-producto,
 .boton-cerrar-modal-carrito {
@@ -429,7 +582,7 @@ div.navbar-ajuste-primer-hijo:not(.hero-principal) {
   align-items: center !important;
   justify-content: center !important;
   cursor: pointer !important;
-  transition: all 0.3s ease !important;
+  transition: var(--transition-default) !important;
   z-index: 100 !important;
 }
 
@@ -474,7 +627,7 @@ div.navbar-ajuste-primer-hijo:not(.hero-principal) {
   align-items: center !important;
   justify-content: center !important;
   cursor: pointer !important;
-  transition: all 0.3s ease !important;
+  transition: var(--transition-default) !important;
   z-index: 100 !important;
 }
 
@@ -502,8 +655,9 @@ div.navbar-ajuste-primer-hijo:not(.hero-principal) {
 }
 
 /* ========================================
-   BOTONES DE ELIMINAR PARA ADMIN
+   11. BOTONES DE ELIMINAR (CONSOLIDADO)
    ======================================== */
+.boton-eliminar,
 .boton-eliminar-producto,
 .boton-eliminar-categoria,
 .boton-eliminar-novedad,
@@ -520,12 +674,13 @@ div.navbar-ajuste-primer-hijo:not(.hero-principal) {
   align-items: center !important;
   justify-content: center !important;
   cursor: pointer !important;
-  transition: all 0.3s ease !important;
+  transition: var(--transition-default) !important;
   z-index: 10 !important;
   padding: 0 !important;
   outline: none !important;
 }
 
+.boton-eliminar:hover,
 .boton-eliminar-producto:hover,
 .boton-eliminar-categoria:hover,
 .boton-eliminar-novedad:hover,
@@ -535,6 +690,8 @@ div.navbar-ajuste-primer-hijo:not(.hero-principal) {
   box-shadow: 0 4px 12px rgba(220, 38, 38, 0.5) !important;
 }
 
+.boton-eliminar::before,
+.boton-eliminar::after,
 .boton-eliminar-producto::before,
 .boton-eliminar-producto::after,
 .boton-eliminar-categoria::before,
@@ -551,6 +708,7 @@ div.navbar-ajuste-primer-hijo:not(.hero-principal) {
   border-radius: 2px !important;
 }
 
+.boton-eliminar::before,
 .boton-eliminar-producto::before,
 .boton-eliminar-categoria::before,
 .boton-eliminar-novedad::before,
@@ -558,6 +716,7 @@ div.navbar-ajuste-primer-hijo:not(.hero-principal) {
   transform: rotate(45deg) !important;
 }
 
+.boton-eliminar::after,
 .boton-eliminar-producto::after,
 .boton-eliminar-categoria::after,
 .boton-eliminar-novedad::after,
@@ -566,149 +725,46 @@ div.navbar-ajuste-primer-hijo:not(.hero-principal) {
 }
 
 /* ========================================
-   10. BOTONES GENERALES
-   ======================================== */
-.uk-button-primary,
-.boton-whatsapp {
-  background-color: #25d366 !important;
-  color: var(--surtienvases-blanco) !important;
-  border: none !important;
-  padding: 3px 15px !important;
-  font-size: 0.85rem !important;
-  font-weight: 600 !important;
-  transition: all 0.3s ease !important;
-  border-radius: 6px !important;
-}
-
-.uk-button-primary:hover,
-.boton-whatsapp:hover {
-  background-color: #128c7e !important;
-  transform: translateY(-2px);
-  box-shadow: 0 5px 15px rgba(37, 211, 102, 0.4) !important;
-}
-
-.uk-button-default {
-  background-color: transparent !important;
-  color: var(--surtienvases-morado) !important;
-  border: 2px solid var(--surtienvases-morado) !important;
-  transition: all 0.3s ease !important;
-}
-
-.uk-button-default:hover {
-  background-color: var(--surtienvases-morado) !important;
-  color: var(--surtienvases-blanco) !important;
-}
-
-.uk-button-secondary {
-  background-color: var(--surtienvases-verde) !important;
-  color: var(--surtienvases-negro) !important;
-  border: 2px solid var(--surtienvases-naranja) !important;
-  font-weight: 600 !important;
-  transition: all 0.3s ease !important;
-}
-
-.uk-button-secondary:hover {
-  background-color: var(--surtienvases-naranja) !important;
-  color: var(--surtienvases-blanco) !important;
-  transform: translateY(-2px) !important;
-  box-shadow: 0 4px 12px rgba(238, 118, 34, 0.4) !important;
-}
-
-.boton-outline-verde-borde-naranja {
-  color: var(--surtienvases-negro) !important;
-  background-color: var(--surtienvases-verde) !important;
-  border: 2px solid var(--surtienvases-naranja) !important;
-  border-radius: 6px !important;
-  padding: 3px 15px !important;
-  font-size: 0.85rem !important;
-  font-weight: 600 !important;
-  transition: all 0.3s !important;
-}
-
-.boton-outline-verde-borde-naranja:hover {
-  background-color: var(--surtienvases-naranja) !important;
-  color: var(--surtienvases-blanco) !important;
-  transform: translateY(-2px) !important;
-}
-
-.boton-filtro-categoria-industria {
-  background-color: rgba(255, 255, 255, 0.9) !important;
-  color: var(--surtienvases-morado) !important;
-  border: 2px solid var(--surtienvases-naranja) !important;
-  font-weight: 600 !important;
-  min-height: 50px !important;
-  display: flex !important;
-  align-items: center !important;
-  justify-content: center !important;
-  transition: all 0.3s ease !important;
-  border-radius: 6px !important;
-  line-height: 1.3 !important;
-  padding: 10px 12px !important;
-  white-space: normal !important;
-  text-align: center !important;
-}
-
-.boton-filtro-categoria-industria:hover {
-  background-color: var(--surtienvases-naranja) !important;
-  color: white !important;
-  transform: translateY(-2px) !important;
-}
-
-.boton-filtro-categoria-industria.active {
-  background-color: var(--surtienvases-verde) !important;
-  color: var(--surtienvases-negro) !important;
-  border-color: var(--surtienvases-verde) !important;
-  font-weight: bold !important;
-}
-
-.boton-imagen-transparente {
-  border: none !important;
-  background: transparent !important;
-  padding: 0 !important;
-  cursor: pointer !important;
-}
-
-/* ========================================
-   11. CARDS PROFESIONALES
+   12. CARDS
    ======================================== */
 .uk-card-default {
   background-color: var(--blanco-puro) !important;
   border: 1px solid var(--gris-claro) !important;
-  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.08) !important;
-  transition: all 0.3s ease !important;
+  box-shadow: var(--box-shadow-card) !important;
+  transition: var(--transition-default) !important;
   color: var(--surtienvases-negro) !important;
 }
 
 .uk-card-default:hover {
   transform: translateY(-5px);
-  box-shadow: 0 10px 30px rgba(238, 118, 34, 0.2) !important;
+  box-shadow: var(--box-shadow-hover) !important;
 }
 
 .card-borde-naranja {
   background: var(--blanco-puro) !important;
   border-left: 5px solid var(--surtienvases-naranja) !important;
-  border-radius: 8px !important;
+  border-radius: var(--border-radius-card) !important;
   padding: 20px !important;
-  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1) !important;
-  transition: all 0.3s ease !important;
+  box-shadow: var(--box-shadow-card) !important;
+  transition: var(--transition-default) !important;
 }
 
 .card-borde-verde {
   background: var(--blanco-puro) !important;
   border-left: 5px solid var(--surtienvases-verde) !important;
-  border-radius: 8px !important;
+  border-radius: var(--border-radius-card) !important;
   padding: 20px !important;
-  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1) !important;
-  transition: all 0.3s ease !important;
+  box-shadow: var(--box-shadow-card) !important;
+  transition: var(--transition-default) !important;
 }
 
 .card-borde-morado {
   background: var(--blanco-puro) !important;
   border-left: 5px solid var(--surtienvases-morado) !important;
-  border-radius: 8px !important;
+  border-radius: var(--border-radius-card) !important;
   padding: 20px !important;
-  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1) !important;
-  transition: all 0.3s ease !important;
+  box-shadow: var(--box-shadow-card) !important;
+  transition: var(--transition-default) !important;
 }
 
 .card-degradado-morado-borde-naranja,
@@ -720,10 +776,10 @@ div.navbar-ajuste-primer-hijo:not(.hero-principal) {
     var(--morado-oscuro)
   ) !important;
   border: 2px solid var(--surtienvases-naranja) !important;
-  border-radius: 8px !important;
+  border-radius: var(--border-radius-card) !important;
   padding: 15px !important;
   box-shadow: 0 4px 15px rgba(144, 65, 145, 0.3) !important;
-  transition: all 0.3s ease !important;
+  transition: var(--transition-default) !important;
   color: var(--surtienvases-blanco) !important;
 }
 
@@ -732,12 +788,12 @@ div.navbar-ajuste-primer-hijo:not(.hero-principal) {
 }
 
 .contenedor-redondeado {
-  border-radius: 12px !important;
+  border-radius: var(--border-radius-default) !important;
   overflow: hidden !important;
 }
 
 /* ========================================
-   12. BADGES Y LABELS
+   13. BADGES Y LABELS
    ======================================== */
 .uk-label {
   background-color: var(--surtienvases-naranja) !important;
@@ -765,7 +821,7 @@ div.navbar-ajuste-primer-hijo:not(.hero-principal) {
   border: 2px solid rgba(183, 206, 56, 0.3) !important;
   font-weight: 600 !important;
   padding: 6px 14px !important;
-  border-radius: 8px !important;
+  border-radius: var(--border-radius-card) !important;
   box-shadow: 0 3px 8px rgba(144, 65, 145, 0.3) !important;
   font-size: 0.85rem !important;
   display: inline-flex !important;
@@ -779,7 +835,7 @@ div.navbar-ajuste-primer-hijo:not(.hero-principal) {
   border: none !important;
   font-weight: 600 !important;
   padding: 6px 14px !important;
-  border-radius: 8px !important;
+  border-radius: var(--border-radius-card) !important;
   box-shadow: 0 3px 8px rgba(238, 118, 34, 0.3) !important;
   font-size: 0.85rem !important;
   display: inline-flex !important;
@@ -811,23 +867,13 @@ div.navbar-ajuste-primer-hijo:not(.hero-principal) {
 }
 
 /* ========================================
-   13. TÍTULOS Y TEXTOS
+   14. TÍTULOS
    ======================================== */
-h1,
-h2,
-h3,
-h4,
-h5,
-h6 {
-  color: var(--surtienvases-morado) !important;
-}
-
 .titulo-blanco-sombra {
   color: var(--surtienvases-blanco) !important;
   text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.3) !important;
 }
 
-/* Títulos dentro de cards con fondo morado */
 .card-degradado-morado-borde-naranja .titulo-blanco-sombra,
 .card-degradado-morado-borde-naranja h3,
 .card-degradado-morado-borde-verde .titulo-blanco-sombra,
@@ -847,20 +893,6 @@ h6 {
   border-bottom: 2px solid var(--surtienvases-naranja) !important;
   padding-bottom: 10px !important;
   text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.3) !important;
-}
-
-.titulo-seccion-decorado-verde {
-  border-bottom: 3px solid var(--surtienvases-naranja) !important;
-  color: var(--surtienvases-verde) !important;
-  letter-spacing: 3px !important;
-  font-weight: 300 !important;
-  margin-bottom: 10px !important;
-  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3) !important;
-}
-
-.titulo-blanco-borde-verde {
-  border-bottom: 3px solid var(--surtienvases-verde) !important;
-  color: var(--surtienvases-blanco) !important;
 }
 
 .titulo-profesional {
@@ -896,7 +928,7 @@ h6 {
 }
 
 /* ========================================
-   14. IMÁGENES
+   15. IMÁGENES Y CONTENEDORES
    ======================================== */
 .imagen-circular-100 {
   width: 100px !important;
@@ -925,15 +957,6 @@ h6 {
   width: 100% !important;
 }
 
-.contenedor-imagen-altura-300 {
-  height: 300px;
-  overflow: hidden;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  position: relative;
-}
-
 .contenedor-imagen-altura-350 {
   height: 350px;
   overflow: hidden;
@@ -941,7 +964,7 @@ h6 {
   justify-content: center;
   align-items: center;
   position: relative;
-  border-radius: 12px;
+  border-radius: var(--border-radius-default);
 }
 
 .placeholder-imagen {
@@ -952,7 +975,7 @@ h6 {
   color: var(--gris-medio);
   font-size: 1.2rem;
   font-weight: 600;
-  border-radius: 12px;
+  border-radius: var(--border-radius-default);
   min-height: 300px;
 }
 
@@ -968,13 +991,13 @@ h6 {
   color: var(--surtienvases-morado);
   font-size: 1.2rem;
   font-weight: 600;
-  border-radius: 12px;
+  border-radius: var(--border-radius-default);
   min-height: 400px;
   border: 3px dashed var(--surtienvases-verde);
 }
 
 /* ========================================
-   15. FORMULARIOS
+   16. FORMULARIOS
    ======================================== */
 .uk-input,
 .uk-textarea,
@@ -982,7 +1005,7 @@ h6 {
   border: 2px solid var(--gris-claro) !important;
   background-color: var(--surtienvases-blanco) !important;
   color: var(--surtienvases-negro) !important;
-  transition: all 0.3s ease !important;
+  transition: var(--transition-default) !important;
 }
 
 .uk-input:focus,
@@ -1010,7 +1033,7 @@ h6 {
 }
 
 /* ========================================
-   16. CARRITO FLOTANTE
+   17. CARRITO Y WHATSAPP FLOTANTES
    ======================================== */
 .carrito-flotante {
   position: fixed !important;
@@ -1028,7 +1051,7 @@ h6 {
   align-items: center !important;
   justify-content: center !important;
   box-shadow: 0 4px 12px rgba(144, 65, 145, 0.5) !important;
-  transition: all 0.3s ease !important;
+  transition: var(--transition-default) !important;
   border: none !important;
   cursor: pointer !important;
 }
@@ -1066,9 +1089,6 @@ h6 {
   border-bottom: none !important;
 }
 
-/* ========================================
-   17. WHATSAPP FLOTANTE
-   ======================================== */
 .whatsapp-flotante {
   position: fixed !important;
   bottom: 30px !important;
@@ -1085,7 +1105,7 @@ h6 {
   align-items: center !important;
   justify-content: center !important;
   box-shadow: 0 4px 12px rgba(37, 211, 102, 0.5) !important;
-  transition: all 0.3s ease !important;
+  transition: var(--transition-default) !important;
 }
 
 .whatsapp-boton-circular:hover {
@@ -1099,7 +1119,7 @@ h6 {
    ======================================== */
 .uk-modal-dialog {
   background-color: var(--surtienvases-blanco) !important;
-  border-radius: 12px !important;
+  border-radius: var(--border-radius-default) !important;
   box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3) !important;
 }
 
@@ -1138,7 +1158,7 @@ footer .uk-icon-button {
   background-color: rgba(255, 255, 255, 0.1) !important;
   color: var(--surtienvases-blanco) !important;
   border: 1px solid rgba(255, 255, 255, 0.2) !important;
-  transition: all 0.3s ease !important;
+  transition: var(--transition-default) !important;
 }
 
 footer .uk-icon-button:hover {
@@ -1147,27 +1167,29 @@ footer .uk-icon-button:hover {
   transform: translateY(-3px);
 }
 
-/* Estilos para redes sociales - Facebook e Instagram */
-footer a[href*="facebook"] .uk-icon-button,
-footer a[href*="facebook"].uk-icon-button,
+/* ========================================
+   ESTILOS GLOBALES PARA REDES SOCIALES
+   (Funciona en footer Y en cualquier parte)
+   ======================================== */
+
+/* FACEBOOK - En todas partes */
 a[href*="facebook"] .uk-icon-button,
 a[href*="facebook"].uk-icon-button {
   background-color: #1877f2 !important;
   border-color: #1877f2 !important;
+  color: white !important;
 }
 
-footer a[href*="facebook"] .uk-icon-button:hover,
-footer a[href*="facebook"].uk-icon-button:hover,
 a[href*="facebook"] .uk-icon-button:hover,
 a[href*="facebook"].uk-icon-button:hover {
   background-color: #145dbf !important;
   border-color: #145dbf !important;
   color: white !important;
-  transform: translateY(-3px);
+  transform: translateY(-3px) !important;
+  box-shadow: 0 4px 12px rgba(24, 119, 242, 0.5) !important;
 }
 
-footer a[href*="instagram"] .uk-icon-button,
-footer a[href*="instagram"].uk-icon-button,
+/* INSTAGRAM - En todas partes */
 a[href*="instagram"] .uk-icon-button,
 a[href*="instagram"].uk-icon-button {
   background: linear-gradient(
@@ -1179,10 +1201,9 @@ a[href*="instagram"].uk-icon-button {
     #bc1888 100%
   ) !important;
   border: none !important;
+  color: white !important;
 }
 
-footer a[href*="instagram"] .uk-icon-button:hover,
-footer a[href*="instagram"].uk-icon-button:hover,
 a[href*="instagram"] .uk-icon-button:hover,
 a[href*="instagram"].uk-icon-button:hover {
   background: linear-gradient(
@@ -1194,7 +1215,8 @@ a[href*="instagram"].uk-icon-button:hover {
     #9a1475 100%
   ) !important;
   color: white !important;
-  transform: translateY(-3px);
+  transform: translateY(-3px) !important;
+  box-shadow: 0 4px 12px rgba(188, 24, 136, 0.5) !important;
 }
 
 /* ========================================
@@ -1208,8 +1230,8 @@ a[href*="instagram"].uk-icon-button:hover {
     transparent
   ) !important;
   padding: 15px !important;
-  border-radius: 8px !important;
-  transition: all 0.3s ease !important;
+  border-radius: var(--border-radius-card) !important;
+  transition: var(--transition-default) !important;
   font-weight: 600 !important;
   font-size: 1.1rem !important;
   border: 2px solid transparent !important;
@@ -1238,11 +1260,11 @@ a[href*="instagram"].uk-icon-button:hover {
   color: var(--surtienvases-negro) !important;
   padding: 20px !important;
   background-color: rgba(255, 255, 255, 0.5) !important;
-  border-radius: 0 0 8px 8px !important;
+  border-radius: 0 0 var(--border-radius-card) var(--border-radius-card) !important;
 }
 
 /* ========================================
-   21. UTILIDADES
+   21. UTILIDADES GENERALES
    ======================================== */
 .icono-verde {
   color: var(--surtienvases-verde) !important;
@@ -1256,10 +1278,6 @@ a[href*="instagram"].uk-icon-button:hover {
   margin-top: 0.5rem !important;
 }
 
-.margen-superior-80 {
-  margin-top: 80px !important;
-}
-
 .padding-grande {
   padding: 2rem !important;
 }
@@ -1268,6 +1286,15 @@ a[href*="instagram"].uk-icon-button:hover {
   font-size: 2.5rem !important;
   margin: 0 !important;
   font-weight: bold !important;
+}
+
+/* NUEVAS UTILIDADES */
+.position-relative {
+  position: relative !important;
+}
+
+.iframe-sin-borde {
+  border: 0 !important;
 }
 
 /* ========================================
@@ -1291,7 +1318,6 @@ a[href*="instagram"].uk-icon-button:hover {
 
 /* Tablet y menores - Menú hamburguesa desde 1260px */
 @media (max-width: 1260px) {
-  /* Ocultar menú desktop y mostrar hamburguesa */
   .uk-navbar-center,
   .uk-navbar-right.uk-visible\@l {
     display: none !important;
@@ -1301,7 +1327,6 @@ a[href*="instagram"].uk-icon-button:hover {
     display: flex !important;
   }
 
-  /* Ajuste para páginas normales */
   .seccion-fondo-blanco.navbar-ajuste-primer-hijo,
   .seccion-fondo-gris.navbar-ajuste-primer-hijo,
   div.navbar-ajuste-primer-hijo:not(.hero-principal) {
@@ -1310,7 +1335,6 @@ a[href*="instagram"].uk-icon-button:hover {
 }
 
 @media (min-width: 1261px) {
-  /* Mostrar menú desktop y ocultar hamburguesa */
   .uk-navbar-center,
   .uk-navbar-right.uk-visible\@l {
     display: flex !important;
@@ -1318,6 +1342,29 @@ a[href*="instagram"].uk-icon-button:hover {
 
   .uk-hidden\@l.uk-navbar-right {
     display: none !important;
+  }
+}
+
+/* Desktop y tablets grandes - video más grande */
+@media (min-width: 961px) {
+  .hero-video-container {
+    max-width: 100% !important;
+  }
+
+  .hero-video-container video {
+    max-height: 500px !important;
+  }
+}
+
+/* Tablets medianas */
+@media (max-width: 960px) and (min-width: 641px) {
+  .hero-video-container video {
+    max-height: 400px !important;
+  }
+
+  .hero-imagen-fondo {
+    object-position: center center !important;
+    opacity: 0.2 !important;
   }
 }
 
@@ -1327,14 +1374,14 @@ a[href*="instagram"].uk-icon-button:hover {
     max-width: 200px;
   }
 
-  /* Hero ajustes */
   .hero-principal {
     min-height: auto;
-    padding: 60px 0 20px 0;
+    padding: 100px 0 20px 0 !important;
   }
 
   .hero-imagen-fondo {
-    opacity: 0.2;
+    opacity: 0.15 !important;
+    object-position: 60% center !important;
   }
 
   .hero-tarjeta-texto {
@@ -1346,26 +1393,26 @@ a[href*="instagram"].uk-icon-button:hover {
     font-size: 1.8rem !important;
   }
 
-  /* Video centrado con espacio */
   .hero-video-container {
     margin: 0 1rem 2rem 1rem !important;
     padding: 0 !important;
-    border-radius: 8px !important;
+    border-radius: var(--border-radius-card) !important;
   }
 
-  /* Contenedor principal sin padding en hero */
+  .hero-video-container video {
+    max-height: 300px !important;
+  }
+
   .hero-principal .uk-container {
     padding-left: 0 !important;
     padding-right: 0 !important;
     max-width: 100% !important;
   }
 
-  /* Grid con mejor espaciado */
   .hero-contenido .uk-grid-medium > div {
     padding: 0 !important;
   }
 
-  /* Flotantes */
   .carrito-flotante {
     bottom: 100px !important;
     right: 15px !important;
@@ -1382,14 +1429,12 @@ a[href*="instagram"].uk-icon-button:hover {
     height: 52px !important;
   }
 
-  /* Ajuste para páginas normales */
   .seccion-fondo-blanco.navbar-ajuste-primer-hijo,
   .seccion-fondo-gris.navbar-ajuste-primer-hijo,
   div.navbar-ajuste-primer-hijo:not(.hero-principal) {
     padding-top: 80px !important;
   }
 
-  /* Botones más compactos */
   .boton-filtro-categoria-industria {
     font-size: 0.85rem !important;
     min-height: 45px !important;
@@ -1433,7 +1478,7 @@ a[href*="instagram"].uk-icon-button:hover {
 @media (max-height: 500px) and (orientation: landscape) {
   .hero-principal {
     min-height: auto !important;
-    padding: 60px 0 20px 0 !important;
+    padding: 80px 0 20px 0 !important;
   }
 
   .carrito-flotante {
@@ -1446,142 +1491,5 @@ a[href*="instagram"].uk-icon-button:hover {
 }
 
 /* ========================================
-   MEJORAS PARA HERO VIDEO RESPONSIVE
-   Agregar al final del archivo CSS
-   ======================================== */
-
-/* Contenedor ajustado al video */
-.hero-video-container {
-  width: fit-content !important;
-  height: auto !important;
-  max-width: 100% !important;
-  margin: 0 auto !important;
-}
-
-/* Video centrado y responsive */
-.hero-video-container video {
-  width: 100% !important;
-  height: auto !important;
-  display: block !important;
-  object-fit: contain !important;
-}
-
-/* Desktop y tablets grandes - video más grande */
-@media (min-width: 961px) {
-  .hero-video-container {
-    max-width: 100% !important;
-  }
-
-  .hero-video-container video {
-    max-height: 500px !important;
-  }
-}
-
-/* Tablets medianas */
-@media (max-width: 960px) and (min-width: 641px) {
-  .hero-video-container video {
-    max-height: 400px !important;
-  }
-}
-
-/* Móviles - más espacio arriba del hero */
-@media (max-width: 640px) {
-  .hero-principal {
-    padding-top: 100px !important;
-  }
-
-  .hero-tarjeta-texto {
-    margin-top: 0 !important;
-  }
-
-  .hero-video-container video {
-    max-height: 300px !important;
-  }
-}
-
-/* Landscape móviles - padding reducido */
-@media (max-height: 500px) and (orientation: landscape) {
-  .hero-principal {
-    padding-top: 80px !important;
-  }
-}
-
-/* ========================================
-   IMAGEN DE FONDO HERO RESPONSIVE
-   ======================================== */
-
-/* Imagen de fondo más visible y responsive */
-.hero-imagen-fondo {
-  opacity: 0.25 !important;
-}
-
-/* En tablets y móviles, ajustar la posición de la imagen */
-@media (max-width: 960px) {
-  .hero-imagen-fondo {
-    object-position: center center !important;
-    opacity: 0.2 !important;
-  }
-}
-
-@media (max-width: 640px) {
-  .hero-imagen-fondo {
-    object-position: 60% center !important;
-    opacity: 0.15 !important;
-  }
-}
-
-/* ========================================
-   ICONOS DE REDES SOCIALES - COLORES VIBRANTES
-   ======================================== */
-
-/* Iconos de redes en TODAS las secciones (no solo footer) */
-a[href*="facebook"] .uk-icon-button,
-a[href*="facebook"].uk-icon-button {
-  background-color: #1877f2 !important;
-  border-color: #1877f2 !important;
-  color: white !important;
-}
-
-a[href*="facebook"] .uk-icon-button:hover,
-a[href*="facebook"].uk-icon-button:hover {
-  background-color: #145dbf !important;
-  border-color: #145dbf !important;
-  color: white !important;
-  transform: translateY(-3px);
-}
-
-a[href*="instagram"] .uk-icon-button,
-a[href*="instagram"].uk-icon-button {
-  background: linear-gradient(
-    45deg,
-    #f09433 0%,
-    #e6683c 25%,
-    #dc2743 50%,
-    #cc2366 75%,
-    #bc1888 100%
-  ) !important;
-  border: none !important;
-  color: white !important;
-}
-
-a[href*="instagram"] .uk-icon-button:hover,
-a[href*="instagram"].uk-icon-button:hover {
-  background: linear-gradient(
-    45deg,
-    #d07e2c 0%,
-    #c55a33 25%,
-    #b8213a 50%,
-    #a81d5a 75%,
-    #9a1475 100%
-  ) !important;
-  color: white !important;
-  transform: translateY(-3px);
-}
-
-/* ========================================
-   FIN DE MEJORAS
-   ======================================== */
-
-/* ========================================
-   FIN DEL ARCHIVO
+   FIN DEL ARCHIVO OPTIMIZADO
    ======================================== */
