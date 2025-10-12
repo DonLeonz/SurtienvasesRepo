@@ -24,7 +24,7 @@
     <title>Nosotros - SurtiEnvases</title>
   </head>
   <body>
-    <!-- NAVBAR (sin cambios) -->
+    <!-- NAVBAR -->
     <div
       uk-sticky="sel-target: .uk-navbar-container; cls-active: uk-navbar-sticky"
     >
@@ -208,19 +208,18 @@
           </p>
         </div>
 
-        <!-- Placeholder para video/imagen principal -->
-        <div class="uk-margin-large-top">
-          <div class="placeholder-video contenedor-redondeado">
-            <div class="uk-text-center">
-              <span uk-icon="icon: video-camera; ratio: 3"></span>
-              <p class="uk-margin-small-top">
-                Video institucional de SurtiEnvases
-              </p>
-              <p class="uk-text-small">
-                (Aquí irá tu video o imagen principal)
-              </p>
-            </div>
-          </div>
+        <!-- Video/Imagen institucional -->
+        <div
+          class="uk-margin-large-top contenedor-redondeado"
+          style="overflow: hidden"
+        >
+          <img
+            src="https://images.unsplash.com/photo-1586528116311-ad8dd3c8310d?w=1200&h=600&fit=crop"
+            alt="Instalaciones SurtiEnvases - Cambia esta imagen"
+            class="uk-width-1-1"
+            style="height: 400px; object-fit: cover"
+            uk-img
+          />
         </div>
       </div>
     </section>
@@ -269,14 +268,18 @@
           <!-- Sede 1 -->
           <div>
             <div class="uk-card uk-card-default uk-card-body uk-card-hover">
-              <!-- Placeholder imagen sede 1 -->
+              <!-- Imagen sede 1 -->
               <div
-                class="placeholder-imagen contenedor-redondeado uk-margin-bottom"
+                class="contenedor-redondeado uk-margin-bottom"
+                style="overflow: hidden"
               >
-                <div class="uk-text-center">
-                  <span uk-icon="icon: image; ratio: 2.5"></span>
-                  <p>Foto Sede 1</p>
-                </div>
+                <img
+                  src="https://images.unsplash.com/photo-1497366216548-37526070297c?w=800&h=500&fit=crop"
+                  alt="Sede 1 SurtiEnvases - Cambia esta imagen"
+                  class="uk-width-1-1"
+                  style="height: 300px; object-fit: cover"
+                  uk-img
+                />
               </div>
 
               <h3 class="titulo-profesional">🏢 Sede 1 - Centro</h3>
@@ -323,14 +326,18 @@
           <!-- Sede 2 -->
           <div>
             <div class="uk-card uk-card-default uk-card-body uk-card-hover">
-              <!-- Placeholder imagen sede 2 -->
+              <!-- Imagen sede 2 -->
               <div
-                class="placeholder-imagen contenedor-redondeado uk-margin-bottom"
+                class="contenedor-redondeado uk-margin-bottom"
+                style="overflow: hidden"
               >
-                <div class="uk-text-center">
-                  <span uk-icon="icon: image; ratio: 2.5"></span>
-                  <p>Foto Sede 2</p>
-                </div>
+                <img
+                  src="https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?w=800&h=500&fit=crop"
+                  alt="Sede 2 SurtiEnvases - Cambia esta imagen"
+                  class="uk-width-1-1"
+                  style="height: 300px; object-fit: cover"
+                  uk-img
+                />
               </div>
 
               <h3 class="titulo-profesional">🏪 Sede 2 - Centro</h3>
@@ -452,7 +459,7 @@
       </div>
     </section>
 
-    <!-- FOOTER (sin cambios) -->
+    <!-- FOOTER -->
     <footer class="uk-section uk-section-small footer-principal">
       <div class="uk-container">
         <div
