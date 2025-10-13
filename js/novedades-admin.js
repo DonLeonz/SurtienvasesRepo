@@ -27,7 +27,7 @@ class NovedadesSystem {
         id: 1,
         title: "Cómo Reutilizar Envases Plásticos de Forma Segura",
         author: "Equipo SurtiEnvases",
-        imageUrl: "assets/img/surtienvases/imagenes/SurtiImagen (4).png",
+        imageUrl: "assets/img/blog/blog-example1.jpg",
         avatarUrl: "assets/img/surtienvases/avatars/default.jpg",
         excerpt:
           "Aprende las mejores prácticas para darle una segunda vida a tus envases plásticos sin comprometer la seguridad alimentaria.",
