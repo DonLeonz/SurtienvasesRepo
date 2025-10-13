@@ -1,6 +1,6 @@
 /* ========================================
-   SURTIENVASES - SISTEMA DE ESTILOS OPTIMIZADO
-   Versión 4.0 - Reorganizado y Optimizado
+   SURTIENVASES - SISTEMA DE ESTILOS
+   Versión 4.0
    ======================================== */
 
 /* ========================================
@@ -179,7 +179,6 @@ h6 {
   width: 100%;
 }
 
-/* Ajuste para páginas normales (NO index) */
 .seccion-fondo-blanco.navbar-ajuste-primer-hijo,
 .seccion-fondo-gris.navbar-ajuste-primer-hijo,
 div.navbar-ajuste-primer-hijo:not(.hero-principal) {
@@ -194,26 +193,22 @@ div.navbar-ajuste-primer-hijo:not(.hero-principal) {
    INDICADOR DE PÁGINA ACTIVA EN NAVBAR
    ======================================== */
 
-/* Estilo para enlace activo en navbar desktop */
 .uk-navbar-center .uk-button-secondary.active,
 .uk-navbar-center .uk-button-text.active {
   position: relative;
 }
 
-/* Indicador visual para botón secundario activo (Catálogo) */
 .uk-navbar-center .uk-button-secondary.active {
   background-color: var(--verde-oscuro) !important;
   box-shadow: 0 0 0 3px rgba(183, 206, 56, 0.3) !important;
   transform: scale(1.05) !important;
 }
 
-/* Indicador visual para enlaces de texto activos */
 .uk-navbar-center .uk-button-text.active {
   color: var(--surtienvases-verde) !important;
   font-weight: 700 !important;
 }
 
-/* Línea inferior para enlace activo */
 .uk-navbar-center .uk-button-text.active::after {
   content: "" !important;
   position: absolute !important;
@@ -226,7 +221,6 @@ div.navbar-ajuste-primer-hijo:not(.hero-principal) {
   box-shadow: 0 2px 8px rgba(183, 206, 56, 0.5) !important;
 }
 
-/* Estilo para enlace activo en menú móvil */
 #burger-menu .uk-button-secondary.active {
   background-color: var(--verde-oscuro) !important;
   box-shadow: 0 0 0 3px rgba(183, 206, 56, 0.3) inset !important;
@@ -1167,12 +1161,6 @@ footer .uk-icon-button:hover {
   transform: translateY(-3px);
 }
 
-/* ========================================
-   ESTILOS GLOBALES PARA REDES SOCIALES
-   (Funciona en footer Y en cualquier parte)
-   ======================================== */
-
-/* FACEBOOK - En todas partes */
 a[href*="facebook"] .uk-icon-button,
 a[href*="facebook"].uk-icon-button {
   background-color: #1877f2 !important;
@@ -1189,7 +1177,6 @@ a[href*="facebook"].uk-icon-button:hover {
   box-shadow: 0 4px 12px rgba(24, 119, 242, 0.5) !important;
 }
 
-/* INSTAGRAM - En todas partes */
 a[href*="instagram"] .uk-icon-button,
 a[href*="instagram"].uk-icon-button {
   background: linear-gradient(
@@ -1288,7 +1275,6 @@ a[href*="instagram"].uk-icon-button:hover {
   font-weight: bold !important;
 }
 
-/* NUEVAS UTILIDADES */
 .position-relative {
   position: relative !important;
 }
@@ -1316,7 +1302,6 @@ a[href*="instagram"].uk-icon-button:hover {
    23. RESPONSIVE
    ======================================== */
 
-/* Tablet y menores - Menú hamburguesa desde 1260px */
 @media (max-width: 1260px) {
   .uk-navbar-center,
   .uk-navbar-right.uk-visible\@l {
@@ -1345,7 +1330,6 @@ a[href*="instagram"].uk-icon-button:hover {
   }
 }
 
-/* Desktop y tablets grandes - video más grande */
 @media (min-width: 961px) {
   .hero-video-container {
     max-width: 100% !important;
@@ -1356,7 +1340,6 @@ a[href*="instagram"].uk-icon-button:hover {
   }
 }
 
-/* Tablets medianas */
 @media (max-width: 960px) and (min-width: 641px) {
   .hero-video-container video {
     max-height: 400px !important;
@@ -1368,7 +1351,6 @@ a[href*="instagram"].uk-icon-button:hover {
   }
 }
 
-/* Móviles */
 @media (max-width: 640px) {
   .imagen-logo-300 {
     max-width: 200px;
@@ -1442,7 +1424,6 @@ a[href*="instagram"].uk-icon-button:hover {
   }
 }
 
-/* Móviles pequeños */
 @media (max-width: 480px) {
   .imagen-logo-300 {
     max-width: 180px;
@@ -1474,7 +1455,6 @@ a[href*="instagram"].uk-icon-button:hover {
   }
 }
 
-/* Landscape móviles */
 @media (max-height: 500px) and (orientation: landscape) {
   .hero-principal {
     min-height: auto !important;
@@ -1491,5 +1471,5 @@ a[href*="instagram"].uk-icon-button:hover {
 }
 
 /* ========================================
-   FIN DEL ARCHIVO OPTIMIZADO
+   FIN DEL ARCHIVO
    ======================================== */
